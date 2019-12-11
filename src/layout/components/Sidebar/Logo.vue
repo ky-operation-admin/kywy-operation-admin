@@ -7,7 +7,7 @@
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 class="sidebar-title">{{ title }} </h1>
+        <!-- <h1 class="sidebar-title">{{ title }} </h1> -->
       </router-link>
     </transition>
   </div>
@@ -22,10 +22,10 @@ export default {
       required: true
     }
   },
-  data() {
+  data () {
     return {
-      title: 'Vue Admin Template',
-      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      title: '康养无忧后台管理系统',
+      logo: require('@/assets/logo1.png')
     }
   }
 }
@@ -44,7 +44,7 @@ export default {
 .sidebar-logo-container {
   position: relative;
   width: 100%;
-  height: 50px;
+  height: 150px;
   line-height: 50px;
   background: #2b2f3a;
   text-align: center;
@@ -55,19 +55,26 @@ export default {
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
+      width: 100%;
+      height: 100%;
+
       vertical-align: middle;
-      margin-right: 12px;
+      //   margin-right: 12px;
     }
 
     & .sidebar-title {
       display: inline-block;
+      width: 100%;
+      text-align: center;
+
       margin: 0;
-      color: #fff;
+      position: absolute;
+      bottom: 10px;
+      left: 0;
+      color: rgba(29, 10, 10, 0.856);
       font-weight: 600;
-      line-height: 50px;
-      font-size: 14px;
+      line-height: 18px;
+      font-size: 18px;
       font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
       vertical-align: middle;
     }

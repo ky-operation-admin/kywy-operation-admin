@@ -1,18 +1,27 @@
 import request from '@/utils/request'
-
+// 登入
 export function login(data) {
   return request({
-    url: '/user/login',
+    url: '/web/loginByAccount',
     method: 'post',
     data
   })
 }
-
+// 获取用户信息
+// export function getInfo(token) {
+//     var data = ('bearer'+token)
+//   return request({
+//     url: '/user/info',
+//     method: 'get',
+//     params: { token },
+//     headers:{'Authorization':data}
+//   })
+// }
 export function getInfo(token) {
   return request({
-    url: '/user/info',
-    method: 'get',
-    params: { token }
+    url: '/web/loginByAccount',
+    method: 'post',
+    token
   })
 }
 

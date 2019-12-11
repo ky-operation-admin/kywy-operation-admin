@@ -34,7 +34,7 @@
     }
 
     .el-scrollbar {
-      height: 100%;
+      height: calc(100% - 150px);
     }
 
     &.has-logo {

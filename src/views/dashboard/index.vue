@@ -1,18 +1,21 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">name: {{ name }}</div>
+ 
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-
+import {getName} from '@/utils/auth'
 export default {
   name: 'Dashboard',
   computed: {
     ...mapGetters([
       'name'
-    ])
+    ]),
+    getUserName(){
+        return getName()
+    }
   }
 }
 </script>
@@ -22,7 +25,7 @@ export default {
   &-container {
     margin: 30px;
   }
-  &-text {
+  &-text,&-h2{
     font-size: 30px;
     line-height: 46px;
   }

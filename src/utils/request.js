@@ -1,16 +1,23 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import {
+  MessageBox,
+  Message
+} from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import {
+  getToken
+} from '@/utils/auth'
 
 // create an axios instance
+// 设置默认请求地址，所有请求从这里发起
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  //   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  baseURL: 'http://120.25.214.5:8081',
   // withCredentials: true, // send cookies when cross-domain requests
-  timeout: 5000 // request timeout
+  timeout: 3000 // request timeout
 })
 
-// request interceptor
+// 请求拦截
 service.interceptors.request.use(
   config => {
     // do something before request is sent
@@ -25,36 +32,39 @@ service.interceptors.request.use(
   },
   error => {
     // do something with request error
-    console.log(error) // for debug
+    console.log('111', error) // for debug
     return Promise.reject(error)
   }
 )
 
-// response interceptor
+// 响应拦截
 service.interceptors.response.use(
   /**
-   * If you want to get http information such as headers or status
-   * Please return  response => response
-  */
+   * 如果想获得http信息， 如头信息或状态信息
+   *  return  response => response
+   */
 
   /**
-   * Determine the request status by custom code
-   * Here is just an example
-   * You can also judge the status by HTTP Status Code
+   * 通过自定义代码确定请求状态
+   * 通过HTTP状态码来判断状态
    */
   response => {
     const res = response.data
 
-    // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    // 如果返回的不是1，就提示error
+    window.console.log('res', res, 'res.code', res.code);
+    if (!res.code){
+        return res
+    }
+    if (res.code != 1) {
       Message({
-        message: res.message || 'Error',
+        message: res.msg || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
-      if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
+      if (res.code == 401 || res.code == 403 || res.code == 404) {
         // to re-login
         MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
           confirmButtonText: 'Re-Login',
@@ -66,8 +76,14 @@ service.interceptors.response.use(
           })
         })
       }
+
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
+      Message({
+        message: '登陆成功！',
+        type: 'success',
+        duration: 2 * 1000
+      })
       return res
     }
   },

@@ -1,63 +1,229 @@
 <template>
   <div id="org" class="app-container">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="使用分析" name="first" class="onsale">
-        <el-table :data="onsaleData">
-          <el-table-column prop="org_name" label="机构名称" width="260" align='center'></el-table-column>
-          <el-table-column prop="xinyong" label="上架记录" width="260" align='center'></el-table-column>
-          <el-table-column prop="pingji" label="招聘记录" width="260" align='center'></el-table-column>
-          <el-table-column prop="res_name" align="center" label="发布记录"></el-table-column>
-          <el-table-column align="center" label="操作" width="200">
-            <template>
-              <el-button type="primary" round size='mini' @click="dialogVisible = true">查看</el-button>
-            </template>
-          </el-table-column> 
-        </el-table>
-      </el-tab-pane>
-      <el-tab-pane label="交易分析" name="second" class="havebought">
-        <el-table :data="onsaleData0">
-          <el-table-column prop="org_name" label="机构名称" width="260"></el-table-column>
-          <el-table-column prop="res_name" align="center" label="交易记录"></el-table-column>
-          <el-table-column prop="org_stateText" align="center" label="状态">未审核</el-table-column>
-          <el-table-column align="center" label="操作" width="200">
-            <template>
-              <a href="#" class="underline">查看</a>
-            </template>
+    <el-tabs v-model="activeName">
+      <el-tab-pane label="浏览量统计与分析" name="first" class="onsale">
+        <el-table :data="data">
+          <el-table-column prop="org_name" label="机构名称" align='center'></el-table-column>
+          <!-- <template slot-scope="scope">
+            <el-table-column label="2019下半年浏览量统计（单位：kb）" align='center'>
+              <el-table-column 
+              v-for="item in scope.row.org_flow" 
+              :key="item.id" :label="item.id" 
+              :prop="item.quantity" align='center'>
+              </el-table-column>
+            </el-table-column>
+          </template> -->
+          <el-table-column label="2019下半年浏览量统计（单位：kb）" align='center'>
+            <el-table-column prop="org_flow[0].quantity" label="七月" align='center'>
+            </el-table-column>
+            <el-table-column prop="org_flow[1].quantity" label="八月" align='center'>
+            </el-table-column>
+            <el-table-column prop="org_flow[2].quantity" label="九月" align='center'>
+            </el-table-column>
+            <el-table-column prop="org_flow[3].quantity" label="十月" align='center'>
+            </el-table-column>
+            <el-table-column prop="org_flow[4].quantity" label="十一月" align='center'>
+            </el-table-column>
+            <el-table-column prop="org_flow[5].quantity" label="十二月" align='center'>
+            </el-table-column>
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="实时统计" name="thirdly" class="havebought">
-        <el-table :data="onsaleData3">
-          <el-table-column prop="org_name" label="机构名称" width="260"></el-table-column>
-          <el-table-column prop="res_name" align="center" label="实时数据"></el-table-column>
-          <el-table-column prop="org_stateText" align="center" label="实时交易"></el-table-column>
-          <el-table-column align="center" label="操作" width="200">
-            <template>
-              <a href="#" class="underline">查看</a>
-            </template>
+      <el-tab-pane label="用户数据统计与分析" name="six" class="onsale">
+      </el-tab-pane>
+      <el-tab-pane label="机构行为统计与分析" name="second" class="havebought">
+        <el-table :data="data" border>
+          <el-table-column prop="org_name" label="机构名称" align="center"></el-table-column>
+          <el-table-column align="center" label="行为记录">
+            <!-- <el-table-column prop="org_behavior[0].zhiwei" label="发布的职位" align='center'>
+                <el-table-column prop="org_behavior[0].zhiwei" label="职位名称" align='center'>
+                </el-table-column>
+                <el-table-column prop="org_behavior[0].zhiwei" label="发布时间" align='center'>
+                </el-table-column> -->
+            <!-- <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].zhiwei}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template> -->
+            <!-- </el-table-column> -->
+            <!-- <el-table-column prop="org_behavior[0].goods" label="上架服务" align='center'> -->
+            <!-- <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].goods}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template> -->
+            <!-- <el-table-column prop="org_behavior[0].zhiwei" label="服务名称" align='center'> -->
+            <!-- </el-table-column> -->
+            <!-- <el-table-column prop="org_behavior[0].zhiwei" label="行为时间" align='center'> -->
+            <!-- </el-table-column> -->
+            <!-- </el-table-column> -->
+            <!-- <el-table-column prop="org_behavior[0].guanggao" label="发布的广告" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].guanggao}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column> -->
+          </el-table-column>
+          <el-table-column align="center" label="行为类别"></el-table-column>
+          <el-table-column align="center" label="行为"></el-table-column>
+          <el-table-column align="center" label="行为时间"></el-table-column>
+        </el-table>
+      </el-tab-pane>
+      <el-tab-pane label="交易统计与分析" name="thirdly" class="havebought">
+        <el-table :data="data">
+          <el-table-column prop="org_name" label="机构名称" align="center"></el-table-column>
+          <el-table-column align="center" label="2019年交易记录">
+            <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].zhiwei}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].goods" label="十一月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].goods}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].guanggao" label="十二月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].guanggao}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
           </el-table-column>
         </el-table>
       </el-tab-pane>
-      <el-tab-pane label="自定义分析" name="fourthly" class="havebought">
-        <el-table :data="onsaleData1">
-          <el-table-column prop="org_name" label="机构名称" width="260"></el-table-column>
-          <el-table-column prop="res_name" align="center" label="自定义数据"></el-table-column>
-          <el-table-column prop="org_state" align="center" label="状态">
-            <template slot-scope="scope">
-              <div class="payShow">
-                <a v-if="scope.row.org_state==1" class="pass">
-                  <span>已通过</span>
-                </a>
-                <a class="notPass" v-else>
-                  <span>未通过</span>
-                </a>
-              </div>
-            </template>
+      <el-tab-pane label="实时统计与分析" name="fourthly" class="havebought">
+        <el-table :data="data">
+          <el-table-column prop="org_name" label="机构名称" align="center"></el-table-column>
+          <el-table-column align="center" label="实时统计">
+            <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].zhiwei}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].goods" label="十一月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].goods}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].guanggao" label="十二月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].guanggao}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
           </el-table-column>
-          <el-table-column align="center" label="操作" width="200">
-            <template>
-              <a href="#" class="underline">查看</a>
-            </template>
+          <el-table-column align="center" label="实时分析">
+            <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].zhiwei}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].goods" label="十一月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].goods}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].guanggao" label="十二月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].guanggao}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+          </el-table-column>
+        </el-table>
+      </el-tab-pane>
+      <el-tab-pane label="自定义统计与分析" name="five" class="havebought">
+        <el-table :data="data">
+          <el-table-column prop="org_name" label="机构名称" align="center"></el-table-column>
+          <el-table-column align="center" label="自定义统计">
+            <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].zhiwei}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].goods" label="十一月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].goods}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].guanggao" label="十二月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].guanggao}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column align="center" label="自定义分析">
+            <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].zhiwei}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].goods" label="十一月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].goods}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].guanggao" label="十二月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].guanggao}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+          </el-table-column>
+        </el-table>
+      </el-tab-pane>
+      <el-tab-pane label="数据可视化" name="seven" class="havebought">
+        <el-table :data="data">
+          <el-table-column prop="org_name" label="机构名称" align="center"></el-table-column>
+          <el-table-column align="center" label="自定义统计">
+            <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].zhiwei}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].goods" label="十一月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].goods}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].guanggao" label="十二月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].guanggao}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+          </el-table-column>
+          <el-table-column align="center" label="自定义分析">
+            <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].zhiwei}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].goods" label="十一月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].goods}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
+            <el-table-column prop="org_behavior[0].guanggao" label="十二月" align='center'>
+              <template slot-scope="scope">
+                <span class="num">{{scope.row.org_behavior[0].guanggao}}</span>
+                <a href="" class="blue">查看详情</a>
+              </template>
+            </el-table-column>
           </el-table-column>
         </el-table>
       </el-tab-pane>
@@ -66,81 +232,13 @@
 </template>
 
 <script>
+import data from '@/assets/js/mock'
 export default {
   data () {
     return {
-      dialogVisible: false,
-      activeName: 'first',
-      form: {
-        myprice: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      },
-      onsaleData1: [],//已审核的
-      onsaleData0: [],//未审核的
-      onsaleData3: [],//审核中的
-
       // 全部
-    //   onsaleData: [
-    //     {
-    //       org_id: 1,
-    //       org_name: '广东省广州市某某某某养老机构',
-    //       res_name: '张三1',
-    //       org_state: 1
-    //     }, {
-    //       org_id: 2,
-    //       org_name: '广东省广州市某某某某养老机构',
-    //       res_name: '张三2',
-    //       org_state: 0
-    //     }, {
-    //       org_id: 3,
-    //       org_name: '广东省广州市某某某某养老机构',
-    //       res_name: '张三3',
-    //       org_state: 2
-    //     }, {
-    //       org_id: 4,
-    //       org_name: '广东省广州市某某某某养老机构',
-    //       res_name: '张三4',
-    //       org_state: 2
-    //     }, {
-    //       org_id: 5,
-    //       org_name: '广东省广州市某某某某养老机构',
-    //       res_name: '张三5',
-    //       org_state: 0
-    //     }, {
-    //       org_id: 6,
-    //       org_name: '广东省广州市某某某某养老机构',
-    //       res_name: '张三6',
-    //       //   org_stateText: '已通过',
-    //       org_state: 1
-    //     },
-    //     {
-    //       org_id: 7,
-    //       org_name: '广东省广州市某某某某养老机构',
-    //       res_name: '张三7',
-    //       org_state: 1
-    //     }, {
-    //       org_id: 8,
-    //       org_name: '广东省广州市某某某某养老机构',
-    //       res_name: '张三8',
-    //       org_state: 0
-    //     }, {
-    //       org_id: 9,
-    //       org_name: '广东省广州市某某某某养老机构',
-    //       res_name: '张三9',
-    //       org_state: 2
-    //     }, {
-    //       org_id: 10,
-    //       org_name: '广东省广州市某某某某养老机构',
-    //       res_name: '张三10',
-    //       org_state: 2
-    //     }
-    //     ],
+      data: [],
+      activeName: 'first',
     }
   },
   components: {
@@ -152,37 +250,23 @@ export default {
   },
   methods: {
     initData () {
-      var temp1 = this.onsaleData.filter(item => item.org_state === 1)
-      var temp2 = this.onsaleData.filter(item => item.org_state === 2)
-      var temp0 = this.onsaleData.filter(item => item.org_state === 0)
-      this.onsaleData1 = [...temp1, ...temp2]
-      this.onsaleData0 = temp0
-    },
-    // 点击状态进行状态的切换
-    changStatus (idx) {
-      this.onsaleData[idx].org_state = this.onsaleData[idx].org_state + 1
-      window.console.log(this.onsaleData[idx].org_state);
-      if (this.onsaleData[idx].org_state > 2) this.onsaleData[idx].org_state = 0
-      this.initData()
-    },
-    handleClick (tab, event) {
-      window.console.log(tab, event)
-    },
-    addItem () {
-
-    },
-    handleClose (done) {
-      done()
-    },
-    // “我”高亮
-    setClass (i) {
-      return i ? 'isme' : ''
+      this.data = data.onsaleBigData
     }
   }
 }
 </script>
 
 <style scoped>
+.num {
+  display: inline-block;
+  width: 20px;
+  text-align: left;
+}
+.blue {
+  display: inline-block;
+  margin-left: 10px;
+  color: blue;
+}
 #org {
   height: 100%;
 }
@@ -280,11 +364,10 @@ body > .el-container {
 .el-dialog__body {
   padding: 10px 50px !important;
 }
-.payShow .pass{
-    color:#399ce9
+.payShow .pass {
+  color: #399ce9;
 }
-.payShow .notPass{
-    color: #e54e48;
+.payShow .notPass {
+  color: #e54e48;
 }
-
 </style>

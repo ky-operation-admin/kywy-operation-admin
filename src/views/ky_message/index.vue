@@ -1,6 +1,6 @@
 <template>
   <div id="message">
-    <el-row>
+    <el-row style="padding:20px">
       <el-button type="primary" plain icon='el-icon-plus' @click="dialogVisible = true">推送</el-button>
       <el-dialog :visible.sync="dialogVisible" width="600px" :before-close="handleClose">
         <el-form ref="form" :model="form" :rules="rules" label-width="100px">
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { deepClone } from '../utils'
+import { deepClone } from '../../utils'
 const defaultForm = {
   title: '',
   name: '',

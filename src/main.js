@@ -13,6 +13,12 @@ import store from './store'
 import router from './router'
 import axios from 'axios'
 
+
+// 引入大图查看器
+import VueDirectiveImagePreviewer from 'vue-directive-image-previewer'
+import 'vue-directive-image-previewer/dist/assets/style.css'
+Vue.use(VueDirectiveImagePreviewer)
+
 import '@/icons' // icon
 import '@/permission' // 拦截器
 

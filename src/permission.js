@@ -21,7 +21,7 @@ router.beforeEach(async(to, from, next) => {
 
   // 确定用户是否已登录
   const hasToken = getToken()
-  window.console.log('hasToken', hasToken)
+//   window.console.log('hasToken', hasToken)
   if (hasToken) {
     if (to.path === '/login') {
       //如果是进入登录页面 则不需要权限 直接进入

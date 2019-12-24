@@ -1,116 +1,18 @@
 <template>
   <div class="app-container">
-    <!-- <p class="add">
-      <el-button type="primary">消费者产品服务</el-button>
-    </p> -->
-
-    <!-- <el-table :data="tableData" style="width: 100%" border>
-      <el-table-column prop="name" label="社区居家" align="center"></el-table-column>
-      <el-table-column prop="alias" label="机构养老" align="center"></el-table-column>
-      <el-table-column prop="username" label="旅游养老" align="center"></el-table-column>
-      <el-table-column prop="yundong" label="社交" align="center"></el-table-column>
-      <el-table-column prop="shuimian" label="互助公益" align="center"></el-table-column>
-      <el-table-column prop="xinlv" label="求职招聘" align="center"></el-table-column>
-      <el-table-column prop="xueya" label="医疗" align="center"></el-table-column>
-      <el-table-column prop="tizhong" label="商城" align="center"></el-table-column>
-      <el-table-column>
-        <template>
-          <el-button size="mini" type="danger" class="button">查看</el-button>
-        </template>
-      </el-table-column>
-    </el-table> -->
   </div>
 </template>
 <script>
 // 用户管理
 export default {
   data () {
-    return {
-      dialogVisible: false,
-      form: {
-        username: '',
-        account: '',
-        accountType: [],
-        password: '',
-        section: ''
-      },
-      tableData: [
-        {
-          username: 'zengshui666',
-          name: '曾水',
-          alias: '阿水',
-          vip: '一级',
-          points: 0,
-          kycurrency: 0,
-          yue: 0,
-          yundong: '- -',
-          tiwen: '- -',
-          shuimian: '- -',
-          xinlv: '- -',
-          xueya: '- -',
-          tizhong: '59kg',
-          xuetang: '- -'
-        },
-        {
-          username: 'hanyan123',
-          name: '韩彦华',
-          alias: '花花',
-          vip: '一级',
-          points: 0,
-          kycurrency: 0,
-          yue: 0,
-          yundong: '- -',
-          tiwen: '- -',
-          shuimian: '- -',
-          xinlv: '- -',
-          xueya: '- -',
-          tizhong: '65kg',
-          xuetang: '- -'
-        },
-        {
-          username: 'hong4321',
-          name: '洪丽萍',
-          alias: 'ping3',
-          vip: '一级',
-          points: 0,
-          kycurrency: 0,
-          yue: 0,
-          yundong: '- -',
-          tiwen: '- -',
-          shuimian: '- -',
-          xinlv: '- -',
-          xueya: '- -',
-          tizhong: '53kg',
-          xuetang: '- -'
-        },
-        {
-          username: 'dongmei3',
-          name: '黄冬梅',
-          alias: '马冬梅',
-          vip: '一级',
-          points: 0,
-          kycurrency: 0,
-          yue: 0,
-          yundong: '- -',
-          tiwen: '- -',
-          shuimian: '- -',
-          shuimian: '- -',
-          xinlv: '- -',
-          xueya: '- -',
-          tizhong: '46kg',
-          xuetang: '- -'
-        }
-      ]
+    return {    
     }
   },
-  methods: {
-    handleEdit () {
-      this.dialogVisible = true
-    },
-    onSubmit () {
-      window.console.log('submit!')
-    }
-  }
+  components: {
+  },
+  created () {
+  },
 }
 </script>
 <style scoped>

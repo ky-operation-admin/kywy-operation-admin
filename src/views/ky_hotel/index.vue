@@ -42,10 +42,6 @@
         </el-table>
       </el-tab-pane>
       <el-tab-pane label="待审核" name="second" class="havebought">
-        <!-- <span slot="label">
-          <span>待审核</span>
-          <el-badge v-if="onsaleData0length" :value="onsaleData0length" size="mini" class="item"></el-badge>
-        </span> -->
         <el-table :data="onsaleData0" border v-loading="listLoading">
           <el-table-column prop="hotel_name" label="酒店名称" width="280" align='center'></el-table-column>
           <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
@@ -65,7 +61,7 @@
           <el-table-column prop="org_stateText" align="center" label="审核结果" width="250">
             <template slot-scope="scope">
               <el-button type="success" @click="pass(scope.$index)" size="mini">通过</el-button>
-              <el-button type="warning" @click="steppass(scope.$index)" size="mini">不通过</el-button>
+              <el-button type="warning" @click="steppass(scope.row)" size="mini">不通过</el-button>
               <el-dialog title="审核未通过" :visible.sync="dialogVisible" width="50%" :before-close="handleClose" :modal-append-to-body="false">
                 <el-form ref="form" :model="form" label-width="120px">
                   <el-form-item label="未通过理由">
@@ -78,7 +74,7 @@
                   </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
-                  <el-button type="primary" @click="nopass(scope.$index)">提交</el-button>
+                  <el-button type="primary" @click="nopass()">提交</el-button>
                 </span>
               </el-dialog>
             </template>
@@ -211,9 +207,9 @@
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果">
-            <template >
+            <template>
               <div class="payShow">
-                <a class="notPass" >
+                <a class="notPass">
                   <span>黑名单</span>
                 </a>
               </div>
@@ -232,20 +228,22 @@
 
 <script>
 import data from '@/assets/js/mock'
+import { deepClone } from '../../utils'
+const defaultForm = {
+  org_id: '',
+  content: '',
+  img: ''
+}
 export default {
   data () {
     return {
       dialogVisible: false,
       form: {
+        org_id: '',
         content: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        img: ''
       },
+      form2: Object.assign({}, defaultForm),
       listLoading: true,
       visible: false,
       activeName: 'first',
@@ -302,10 +300,18 @@ export default {
     // 未通过
     steppass (idx) {
       this.dialogVisible = true;
+      this.form2 = deepClone(idx)
     },
-    nopass (idx) {
-      this.onsaleData0[idx].org_state = 2
-      this.onsaleData0[idx].visible = false
+    nopass () {
+      for (const v of this.onsaleData0) {
+        for (let index = 0; index < this.onsaleData0.length; index++) {
+          if (this.onsaleData0[index].org_id === this.form2.org_id) {
+            this.onsaleData0[index].org_state = 2
+            this.onsaleData0[index].visible = false
+            break
+          }
+        }
+      }
       this.dialogVisible = false
       this.$message({
         type: "warning",

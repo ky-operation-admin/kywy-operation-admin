@@ -11,14 +11,14 @@ const state = {
 const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
-    window.console.log('token', state);
+    // window.console.log('token', state);
   },
   SET_NAME: (state, name) => {
     state.name = name
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
-    window.console.log('avatar', avatar);
+    // window.console.log('avatar', avatar);
     
   }
 }
@@ -32,14 +32,14 @@ const actions = {
       password
     } = userInfo
     let fd = new FormData()
-    fd.append('account', username)
-    fd.append('password', password)
+    fd.append('userName', username)
+    fd.append('passWord', password)
     return new Promise((resolve, reject) => {
       login(
           fd
         ).then(res => {
         // const { data } = response
-        window.console.log('data1',res);
+        // window.console.log('data1',res);
         // 设置保存token 
         commit('SET_TOKEN', res.token)
         setToken(res.token)

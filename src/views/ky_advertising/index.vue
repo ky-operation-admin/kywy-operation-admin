@@ -153,7 +153,7 @@ export default {
       }
       this.tableData.push(data)
       this.dialogVisible = false
-      window.console.log('111');
+    //   window.console.log('111');
     },
     handleClose (done) {
       done();

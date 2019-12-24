@@ -81,12 +81,6 @@
               </el-dialog>
             </template>
           </el-table-column>
-          <el-table-column align="center" label="操作" width="200">
-            <template slot-scope="scope">
-              <el-button size="mini" type="primary" @click="ignore(scope.$index)">忽略</el-button>
-              <el-button size="mini" type="danger" @click="blacklist(scope.$index,scope.row)">拉黑</el-button>
-            </template>
-          </el-table-column>
         </el-table>
       </el-tab-pane>
       <el-tab-pane label="已通过" name="thirdly" class="havebought">
@@ -135,56 +129,6 @@
                 </a>
                 <a class="notPass" v-else>
                   <span>未通过</span>
-                </a>
-              </div>
-            </template>
-          </el-table-column>
-
-        </el-table>
-      </el-tab-pane>
-      <el-tab-pane label="已忽略" name="fifth" class="havebought">
-        <el-table :data="onsaleData3" border>
-          <el-table-column prop="res_name" align="center" label="评论人"></el-table-column>
-          <el-table-column prop="hotel_name" label="评论的酒店" width="280" align='center'></el-table-column>
-          <el-table-column prop="content" label="评论内容" align='center'></el-table-column>
-          <el-table-column label="评论时间" align='center'>
-            2019/12/17 10：03
-          </el-table-column>
-          <el-table-column prop="busLicen" align="center" label="评论图片">
-            <template slot-scope="scope">
-              <img v-image-preview class="busLicen" :src="scope.row.plimg" alt style="height:6rem;" />
-            </template>
-          </el-table-column>
-          <el-table-column prop="org_stateText" align="center" label="审核结果">
-            <template>
-              <div class="payShow">
-                <a class="notPass">
-                  <span>已忽略</span>
-                </a>
-              </div>
-            </template>
-          </el-table-column>
-
-        </el-table>
-      </el-tab-pane>
-      <el-tab-pane label="黑名单" name="sixth" class="havebought">
-        <el-table :data="onsaleData4" border>
-          <el-table-column prop="res_name" align="center" label="评论人"></el-table-column>
-          <el-table-column prop="hotel_name" label="评论的酒店" width="280" align='center'></el-table-column>
-          <el-table-column prop="content" label="评论内容" align='center'></el-table-column>
-          <el-table-column label="评论时间" align='center'>
-            2019/12/17 10：03
-          </el-table-column>
-          <el-table-column prop="busLicen" align="center" label="评论图片">
-            <template slot-scope="scope">
-              <img v-image-preview class="busLicen" :src="scope.row.plimg" alt style="height:6rem;" />
-            </template>
-          </el-table-column>
-          <el-table-column prop="org_stateText" align="center" label="审核结果">
-            <template>
-              <div class="payShow">
-                <a class="notPass">
-                  <span>黑名单</span>
                 </a>
               </div>
             </template>
@@ -278,30 +222,6 @@ export default {
         message: "审核未通过，审核结果已推送给目标酒店!"
       });
       this.initData()
-    },
-    // 忽略和拉黑
-    ignore (idx) {
-      this.onsaleData0[idx].org_state = 3
-      this.$message({
-        type: "success",
-        message: "审核已被忽略，审核结果已推送给目标酒店!"
-      });
-      this.initData()
-    },
-    async blacklist (idx, row) {
-      this.$confirm("是否确定要拉黑" + row.hotel_name + ", 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(async () => {
-        this.onsaleData0[idx].org_state = 4
-        this.$message({
-          type: "success",
-          message: "拉黑成功!"
-        });
-        this.initData()
-      });
-
     },
     handleClose (done) {
       done()

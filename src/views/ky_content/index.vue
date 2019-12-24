@@ -18,7 +18,7 @@
         <el-table-column prop="tiwen" label="体温" align="center"></el-table-column>
         <el-table-column prop="xuetang" label="血糖" align="center"></el-table-column>
       <el-table-column prop="operation" width="200" align="center" label="操作">
-        <template slot-scope="scope">
+        <template>
           <!-- <el-button size="mini" type="danger" @click="handleEdit()" class="button">查看</el-button> -->
           <el-button size="mini" type="danger"  class="button">查看</el-button>
         </template>

@@ -52,7 +52,7 @@ service.interceptors.response.use(
     const res = response.data
 
     // 如果返回的不是1，就提示error
-    window.console.log('res', res, 'res.code', res.code);
+    // window.console.log('res', res, 'res.code', res.code);
     if (!res.code){
         return res
     }

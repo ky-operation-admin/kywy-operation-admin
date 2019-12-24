@@ -3,7 +3,7 @@
     <el-tabs v-model="activeName">
       <el-tab-pane label="浏览量统计与分析" name="first" class="onsale">
         <el-table :data="data">
-          <el-table-column prop="org_name" label="商家名称" align='center'></el-table-column>
+          <el-table-column prop="merchant_name" label="商家名称" align='center'></el-table-column>
           <!-- <template slot-scope="scope">
             <el-table-column label="2019下半年浏览量统计（单位：kb）" align='center'>
               <el-table-column 
@@ -33,34 +33,8 @@
       </el-tab-pane>
       <el-tab-pane label="商家行为统计与分析" name="second" class="havebought">
         <el-table :data="data" border>
-          <el-table-column prop="org_name" label="商家名称" align="center"></el-table-column>
+          <el-table-column prop="merchant_name" label="商家名称" align="center"></el-table-column>
           <el-table-column align="center" label="行为记录">
-            <!-- <el-table-column prop="org_behavior[0].zhiwei" label="发布的职位" align='center'>
-                <el-table-column prop="org_behavior[0].zhiwei" label="职位名称" align='center'>
-                </el-table-column>
-                <el-table-column prop="org_behavior[0].zhiwei" label="发布时间" align='center'>
-                </el-table-column> -->
-            <!-- <template slot-scope="scope">
-                <span class="num">{{scope.row.org_behavior[0].zhiwei}}</span>
-                <a href="" class="blue">查看详情</a>
-              </template> -->
-            <!-- </el-table-column> -->
-            <!-- <el-table-column prop="org_behavior[0].goods" label="上架服务" align='center'> -->
-            <!-- <template slot-scope="scope">
-                <span class="num">{{scope.row.org_behavior[0].goods}}</span>
-                <a href="" class="blue">查看详情</a>
-              </template> -->
-            <!-- <el-table-column prop="org_behavior[0].zhiwei" label="服务名称" align='center'> -->
-            <!-- </el-table-column> -->
-            <!-- <el-table-column prop="org_behavior[0].zhiwei" label="行为时间" align='center'> -->
-            <!-- </el-table-column> -->
-            <!-- </el-table-column> -->
-            <!-- <el-table-column prop="org_behavior[0].guanggao" label="发布的广告" align='center'>
-              <template slot-scope="scope">
-                <span class="num">{{scope.row.org_behavior[0].guanggao}}</span>
-                <a href="" class="blue">查看详情</a>
-              </template>
-            </el-table-column> -->
           </el-table-column>
           <el-table-column align="center" label="行为类别"></el-table-column>
           <el-table-column align="center" label="行为"></el-table-column>
@@ -69,7 +43,7 @@
       </el-tab-pane>
       <el-tab-pane label="交易统计与分析" name="thirdly" class="havebought">
         <el-table :data="data">
-          <el-table-column prop="org_name" label="商家名称" align="center"></el-table-column>
+          <el-table-column prop="merchant_name" label="商家名称" align="center"></el-table-column>
           <el-table-column align="center" label="2019年交易记录">
             <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
               <template slot-scope="scope">
@@ -94,7 +68,7 @@
       </el-tab-pane>
       <el-tab-pane label="实时统计与分析" name="fourthly" class="havebought">
         <el-table :data="data">
-          <el-table-column prop="org_name" label="商家名称" align="center"></el-table-column>
+          <el-table-column prop="merchant_name" label="商家名称" align="center"></el-table-column>
           <el-table-column align="center" label="实时统计">
             <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
               <template slot-scope="scope">
@@ -139,7 +113,7 @@
       </el-tab-pane>
       <el-tab-pane label="自定义统计与分析" name="five" class="havebought">
         <el-table :data="data">
-          <el-table-column prop="org_name" label="商家名称" align="center"></el-table-column>
+          <el-table-column prop="merchant_name" label="商家名称" align="center"></el-table-column>
           <el-table-column align="center" label="自定义统计">
             <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
               <template slot-scope="scope">
@@ -184,7 +158,7 @@
       </el-tab-pane>
       <el-tab-pane label="数据可视化" name="seven" class="havebought">
         <el-table :data="data">
-          <el-table-column prop="org_name" label="商家名称" align="center"></el-table-column>
+          <el-table-column prop="merchant_name" label="商家名称" align="center"></el-table-column>
           <el-table-column align="center" label="自定义统计">
             <el-table-column prop="org_behavior[0].zhiwei" label="十月" align='center'>
               <template slot-scope="scope">

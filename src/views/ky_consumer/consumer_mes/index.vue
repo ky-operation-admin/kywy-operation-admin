@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { deepClone } from '../../utils'
+import { deepClone } from '@/utils'
 const defaultForm = {
   title: '',
   name: '',

@@ -9,7 +9,8 @@ function random(min, max) {
 // 自定义数据
 let data = {
   // 养老机构数据
-  onsaleData: [{
+  onsaleData: [
+      {
       org_id: '1',
       xinyong: '良好',
       pingji: 'A',
@@ -19,6 +20,7 @@ let data = {
       merchant_name: '广州母婴坊',
       hotel_name: '希尔顿酒店',
       type: '民营企业',
+      order_state: 1,
       org_state: 0,
       res_name: '张三千',
       id: require('@/assets/timg.jpg'),
@@ -57,7 +59,7 @@ let data = {
       serve_name: '老人护理',
       serve_type: '护理',
       phone: '15201547851',
-      orderNum: 'KY20191217001',
+      orderNum: 'KY20191217002',
       formnum: 'D1901',
       orderTime: '2019-12-17',
       price: '198',
@@ -67,6 +69,7 @@ let data = {
       compensation: '10000~12000/月',
       address: '广州',
       content: '富强、民主、文明、和谐是国家层面的价值目标',
+      order_state: 1,
       org_state: 0,
       visible: false
     }, {
@@ -87,7 +90,7 @@ let data = {
       serve_name: '老人护理',
       serve_type: '护理',
       phone: '15301547852',
-      orderNum: 'KY20191217001',
+      orderNum: 'KY20191217003',
       formnum: 'D1901',
       orderTime: '2019-12-17',
       price: '198',
@@ -97,6 +100,7 @@ let data = {
       compensation: '10000~12000/月',
       address: '广州',
       content: '富强、民主、文明、和谐是国家层面的价值目标',
+      order_state: 1,
       org_state: 0,
       visible: false
     }, {
@@ -117,7 +121,7 @@ let data = {
       serve_name: '老人护理',
       serve_type: '护理',
       phone: '15501547853',
-      orderNum: 'KY20191217001',
+      orderNum: 'KY20191217004',
       formnum: 'D1901',
       orderTime: '2019-12-17',
       price: '198',
@@ -127,6 +131,7 @@ let data = {
       compensation: '10000~12000/月',
       address: '广州',
       content: '富强、民主、文明、和谐是国家层面的价值目标',
+      order_state: 1,
       org_state: 0,
       visible: false
     }, {
@@ -147,7 +152,7 @@ let data = {
       serve_name: '老人护理',
       serve_type: '护理',
       phone: '13501547854',
-      orderNum: 'KY20191217001',
+      orderNum: 'KY20191217005',
       formnum: 'D1901',
       orderTime: '2019-12-17',
       price: '198',
@@ -157,6 +162,7 @@ let data = {
       compensation: '10000~12000/月',
       address: '广州',
       content: '富强、民主、文明、和谐是国家层面的价值目标',
+      order_state: 1,
       org_state: 0,
       visible: false
     }, {
@@ -178,7 +184,7 @@ let data = {
       serve_name: '老人护理',
       serve_type: '护理',
       phone: '13601547855',
-      orderNum: 'KY20191217001',
+      orderNum: 'KY20191217006',
       formnum: 'D1901',
       orderTime: '2019-12-17',
       price: '198',
@@ -188,6 +194,7 @@ let data = {
       compensation: '10000~12000/月',
       address: '广州',
       content: '富强、民主、文明、和谐是国家层面的价值目标',
+      order_state: 1,
       org_state: 0,
       visible: false
     },
@@ -209,7 +216,7 @@ let data = {
       serve_name: '老人护理',
       serve_type: '护理',
       phone: '13801547856',
-      orderNum: 'KY20191217001',
+      orderNum: 'KY20191217007',
       formnum: 'D1901',
       orderTime: '2019-12-17',
       price: '198',
@@ -219,6 +226,7 @@ let data = {
       compensation: '10000~12000/月',
       address: '广州',
       content: '富强、民主、文明、和谐是国家层面的价值目标',
+      order_state: 1,
       org_state: 0,
       visible: false
     }, {
@@ -240,7 +248,7 @@ let data = {
       serve_name: '老人护理',
       serve_type: '护理',
       phone: '18901547857',
-      orderNum: 'KY20191217001',
+      orderNum: 'KY20191217008',
       formnum: 'D1901',
       orderTime: '2019-12-17',
       price: '198',
@@ -250,6 +258,7 @@ let data = {
       compensation: '10000~12000/月',
       address: '广州',
       content: '富强、民主、文明、和谐是国家层面的价值目标',
+      order_state: 1,
       org_state: 0,
       visible: false
     }, {
@@ -270,7 +279,7 @@ let data = {
       serve_name: '老人护理',
       serve_type: '护理',
       phone: '18701547858',
-      orderNum: 'KY20191217001',
+      orderNum: 'KY20191217009',
       formnum: 'D1901',
       orderTime: '2019-12-17',
       price: '198',
@@ -280,6 +289,7 @@ let data = {
       compensation: '10000~12000/月',
       address: '广州',
       content: '富强、民主、文明、和谐是国家层面的价值目标',
+      order_state: 1,
       org_state: 0,
       visible: false
     }, {
@@ -300,7 +310,7 @@ let data = {
       serve_name: '老人护理',
       serve_type: '护理',
       phone: '15901547859',
-      orderNum: 'KY20191217001',
+      orderNum: 'KY20191217010',
       formnum: 'D1901',
       orderTime: '2019-12-17',
       price: '198',
@@ -310,14 +320,17 @@ let data = {
       compensation: '10000~12000/月',
       address: '广州',
       content: '富强、民主、文明、和谐是国家层面的价值目标',
+      order_state:1,
       org_state: 0,
       visible: false
     }
   ],
   // 养老机构大数据统计
-  onsaleBigData: [{
+  onsaleBigData: [
+      {
       org_id: 1,
       org_name: '广州怡和养老',
+      merchant_name: '广州母婴坊',
       org_flow: [{
           id: '七月',
           quantity: randomn(8)
@@ -352,6 +365,7 @@ let data = {
     {
       org_id: 2,
       org_name: '广东省广州市夕阳红养老院',
+      merchant_name: '安安孕婴服装用品',
       org_flow: [{
           id: '七月',
           quantity: randomn(8)
@@ -385,6 +399,7 @@ let data = {
     }, {
       org_id: 3,
       org_name: '广东省广州市宏然养老机构',
+      merchant_name: '水无香淘衣坊',
       org_flow: [{
           id: '七月',
           quantity: randomn(8)
@@ -418,6 +433,7 @@ let data = {
     }, {
       org_id: 4,
       org_name: '广东省广州市鸿辉养老机构',
+      merchant_name: '天堂数字网游专卖',
       org_flow: [{
           id: '七月',
           quantity: randomn(8)
@@ -451,6 +467,7 @@ let data = {
     }, {
       org_id: 5,
       org_name: '广东省广州市利民养老机构',
+      merchant_name: '[紫紫美妆]百货店',
       org_flow: [{
           id: '七月',
           quantity: randomn(8)
@@ -484,6 +501,7 @@ let data = {
     }, {
       org_id: 6,
       org_name: '广东省广州市丽萍养老机构',
+      merchant_name: '创意家居生活',
       org_flow: [{
           id: '七月',
           quantity: randomn(8)
@@ -518,6 +536,7 @@ let data = {
     {
       org_id: 7,
       org_name: '广东省广州市世锦养老机构',
+      merchant_name: '内蒙古奶酪第一店',
       org_flow: [{
           id: '七月',
           quantity: randomn(8)
@@ -551,6 +570,7 @@ let data = {
     }, {
       org_id: 8,
       org_name: '广西雪广养老机构',
+      merchant_name: '瑞丽儿 日韩 女装',
       org_flow: [{
           id: '七月',
           quantity: randomn(8)
@@ -584,6 +604,7 @@ let data = {
     }, {
       org_id: 9,
       org_name: '广东省广州市国栋养老机构',
+      merchant_name: '虾兵蟹将美食铺子!',
       org_flow: [{
           id: '七月',
           quantity: randomn(8)
@@ -617,6 +638,7 @@ let data = {
     }, {
       org_id: 10,
       org_name: '广东省广州市君豪养老机构',
+      merchant_name: '衣神前传',
       org_flow: [{
           id: '七月',
           quantity: randomn(8)

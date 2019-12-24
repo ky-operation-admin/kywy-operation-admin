@@ -6,31 +6,47 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 
+/* 引入模块路由*/
+import merchantRouter from './modules/merchant'
+import hotelRouter from './modules/hotel'
+import organizationRouter from './modules/organization'
 /**
- * Note: sub-menu only appear when route children.length >= 1
- * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
- *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
- * alwaysShow: true               if set true, will always show the root menu
- *                                if not set alwaysShow, when item has more than one children route,
- *                                it will becomes nested mode, otherwise not show the root menu
- * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * name:'router-name'             the name is used by <keep-alive> (must set!!!)
- * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
-    title: 'title'               the name show in sidebar and breadcrumb (recommend set)
-    icon: 'svg-name'             the icon show in the sidebar
-    breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
-    activeMenu: '/example/list'  if set path, the sidebar will highlight the path you set
+ * 注意: 子菜单只在路由子菜单时出现。 长度 > = 1
+ * hidden: true如果设置为true， 项目将不会显示在侧栏中(默认为false) *
+   alwaysShow: true
+                如果设置为true， 将始终显示根菜单 *
+                如果不设置alwaysShow， 当项目有多个子路由时， *
+                它将成为嵌套模式， 否则不显示根菜单 *
+   redirect: noRedirect    如果设置noRedirect将不会在面包屑重定向 *
+   name: 'router-name'     这个名字被 < keep - alive > (必须设置!!)
+   meta: {
+     relos: ['admin'，'editor'] 控制页面角色(可以设置多个角色)
+     title: 'title'
+                侧栏和breadcrumb中显示的名称(推荐)
+     icon: 'svg-name'
+                图标显示在侧栏,如果设置为false， 则该项将隐藏在breadcrumb中(默认为true)
+     activeMenu: '/example/list'
+                如果设置了路径， 侧边栏将突出显示您设置的路径
+      affix: true
+                如果设置为true,则标记在tags-view视图中
   }
  */
-
 /**
  * constantRoutes
- * a base page that does not have permission requirements
- * all roles can be accessed
+ * 没有权限要求的页面，所有角色都可以访问
  */
-export const constantRoutes = [{
+export const constantRoutes = [
+  // 此路由用于刷新页面并且避免报错
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [{
+      path: '/redirect/:path*',
+      component: () => import('@/views/redirect/index')
+    }]
+  },
+  {
     path: '/login',
     component: () => import('@/views/ky_login/index'),
     hidden: true
@@ -52,7 +68,8 @@ export const constantRoutes = [{
       component: () => import('@/views/dashboard/index'),
       meta: {
         title: '管理首页',
-        icon: '首页'
+        icon: '首页',
+        affix: true
       }
     }]
   },
@@ -75,11 +92,19 @@ export const constantRoutes = [{
         }
       },
       {
+        path: 'consumer_mes',
+        name: 'account',
+        component: () => import('@/views/ky_consumer/consumer_mes'),
+        meta: {
+          title: '消费者消息管理',
+        }
+      },
+      {
         path: 'account',
         name: 'account',
         component: () => import('@/views/ky_consumer/consumerAcc/index'),
         meta: {
-          title: '消费者账号管理',
+          title: '消费者账户管理',
         }
       },
       {
@@ -109,224 +134,11 @@ export const constantRoutes = [{
     ]
   },
   // ........................养老机构管理............................
-  {
-    path: '/organization',
-    component: Layout,
-    redirect: '/organization/basicInfor',
-    name: 'tree',
-    meta: {
-      title: '养老机构管理',
-      icon: '机构'
-    },
-    children: [{
-        path: 'audit',
-        component: () => import('@/views/ky_organization/index'),
-        meta: {
-          title: '养老机构入驻审核',
-        }
-      },
-      {
-        path: 'basicInfor',
-        component: () => import('@/views/ky_organization/organizationInfor/index'),
-        meta: {
-          title: '养老机构基本信息',
-        }
-      },
-      {
-        path: 'message',
-        component: () => import('@/views/ky_organization/organizationMessage/index'),
-        meta: {
-          title: '养老机构消息管理',
-        }
-      },
-      {
-        path: 'bigdata',
-        component: () => import('@/views/ky_organization/organizationData/index'),
-        meta: {
-          title: '养老机构大数据',
-        }
-      },
-      {
-        path: 'organizationContent',
-        component: () => import('@/views/ky_organization/organizationContent/index'),
-        name: 'OrganizationContent',
-        meta: {
-          title: '养老机构内容审核'
-        },
-        children: [{
-          path: 'or_pl',
-          name: 'Or_pl',
-          component: () => import('@/views/ky_organization/organizationContent/org_conment_audit'),
-          meta: {
-            title: '养老机构评论审核',
-          }
-        }, {
-          path: 'or_serve',
-          name: 'Or_serve',
-          component: () => import('@/views/ky_organization/organizationContent/org_postserve_audit'),
-          meta: {
-            title: '养老机构上架服务审核',
-          }
-        }, {
-          path: 'or_postjob',
-          name: 'Or_postjob',
-          component: () => import('@/views/ky_organization/organizationContent/org_postjob_audit'),
-          meta: {
-            title: '养老机构发布职位审核',
-          }
-        }, ]
-      }
-
-    ]
-  },
-
+  organizationRouter,
   // ........................商城商家管理............................
-  {
-    path: '/merchant',
-    component: Layout,
-    redirect: '/merchant/basicInfor',
-    name: 'tree',
-    meta: {
-      title: '商城商家管理',
-      icon: 'shangcheng'
-    },
-    children: [{
-        path: 'audit',
-        name: 'audit',
-        component: () => import('@/views/ky_merchant/index'),
-        meta: {
-          title: '商家入驻审核',
-        }
-      },
-      {
-        path: 'basicInfor',
-        name: 'basicInfor',
-        component: () => import('@/views/ky_merchant/merchantInfor/index'),
-        meta: {
-          title: '商家基本信息',
-        }
-      }, {
-        path: 'bigdata',
-        name: 'bigdata',
-        component: () => import('@/views/ky_merchant/merchantData/index'),
-        meta: {
-          title: '商家大数据',
-        }
-      },
-      {
-        path: 'ts',
-        component: () => import('@/views/ky_merchant/merchantData/index'),
-        meta: {
-          title: '商家投诉管理',
-        }
-      },
-      {
-        path: 'user_complaint',
-        component: () => import('@/views/ky_merchant/user_complaint/index'),
-        meta: {
-          title: '消费者投诉',
-        }
-      },
-      {
-        path: 'jc',
-        component: () => import('@/views/ky_merchant/merchantData/index'),
-        meta: {
-          title: '市场行情监测',
-        }
-      },
-
-      {
-        path: 'merchantContent',
-        component: () => import('@/views/ky_merchant/merchantContent/index'),
-        name: 'merchantContent',
-        meta: {
-          title: '商家内容审核'
-        },
-        children: [{
-          path: 'mer_pl',
-          name: 'mer_pl',
-          component: () => import('@/views/ky_merchant/merchantContent/mer_conment_audit'),
-          meta: {
-            title: '商家评论审核',
-          }
-        }, {
-          path: 'mer_serve',
-          name: 'mer_serve',
-          component: () => import('@/views/ky_merchant/merchantContent/mer_postserve_audit'),
-          meta: {
-            title: '商家上架产品审核',
-          }
-        }, {
-          path: 'mer_postjob',
-          name: 'mer_postjob',
-          component: () => import('@/views/ky_merchant/merchantContent/mer_postjob_audit'),
-          meta: {
-            title: '商家发布职位审核',
-          }
-        }, ]
-      },
-
-      {
-        path: 'asset',
-        component: () => import('@/views/ky_merchant/merchantSuoervice/index'),
-        name: 'asset',
-        meta: {
-          title: '商家资产管理',
-        },
-        children: [{
-          path: 'merchantSuoervice',
-          component: () => import('@/views/ky_merchant/merchantSuoervice/merchant_jy'),
-          name: 'merchantSuoervice',
-          meta: {
-            title: '商家经营监测',
-          }
-        }, {
-          path: 'pay',
-          component: () => import('@/views/ky_merchant/merchantSuoervice/merchant_zf'),
-          meta: {
-            title: '商家支付管理',
-          }
-        }, {
-          path: 'fund',
-          component: () => import('@/views/ky_merchant/merchantSuoervice/merchant_zj'),
-          meta: {
-            title: '商家资金管理',
-          }
-        }, ]
-      },
-
-    ]
-
-  },
-  // ........................商家投诉管理............................
-  // {
-  //   path: '/conment1',
-  //   component: Layout,
-  //   children: [{
-  //     path: 'index',
-  //     name: 'conment',
-  //     component: () => import('@/views/ky_conment/index'),
-  //     meta: {
-  //       title: '商家投诉管理',
-  //       icon: 'pinglun'
-  //     }
-  //   }]
-  // },
-  // ........................消费者投诉管理............................
-  // {
-  //   path: '/conment2',
-  //   component: Layout,
-  //   children: [{
-  //     path: 'index',
-  //     name: 'conment',
-  //     component: () => import('@/views/ky_conment/index'),
-  //     meta: {
-  //       title: '消费者投诉管理',
-  //       icon: 'pinglun'
-  //     }
-  //   }]
-  // },
-
+  merchantRouter,
+  // ........................酒店管理............................
+  hotelRouter,
   // ........................社区管理............................
   {
     path: '/community',
@@ -362,77 +174,7 @@ export const constantRoutes = [{
       }
     ]
   },
-  // ........................酒店管理............................
-  {
-    path: '/hotel',
-    component: Layout,
-    redirect: '/hotel/basicInfor',
-    name: 'tree',
-    meta: {
-      title: '酒店管理',
-      icon: '酒店'
-    },
-    children: [{
-        path: 'audit',
-        component: () => import('@/views/ky_hotel/index'),
-        meta: {
-          title: '酒店入驻审核',
-        }
-      },
-      {
-        path: 'basicInfor',
-        component: () => import('@/views/ky_hotel/hotelInfor/index'),
-        meta: {
-          title: '酒店基本信息',
-        }
-      },
-      {
-        path: 'message',
-        component: () => import('@/views/ky_hotel/hotelMessage/index'),
-        meta: {
-          title: '酒店消息管理',
-        }
-      },
-      {
-        path: 'bigdata',
-        component: () => import('@/views/ky_hotel/hotelData/index'),
-        meta: {
-          title: '酒店大数据',
-        }
-      },
-      {
-        path: 'hotelContent',
-        component: () => import('@/views/ky_hotel/hotelContent/index'),
-        name: 'hotelContent',
-        meta: {
-          title: '酒店内容审核'
-        },
-        children: [{
-          path: 'hotel_comment',
-          name: 'hotel_comment',
-          component: () => import('@/views/ky_hotel/hotelContent/hotel_conment_audit'),
-          meta: {
-            title: '酒店评论审核',
-          }
-        }, {
-          path: 'hotel_serve',
-          name: 'hotel_serve',
-          component: () => import('@/views/ky_hotel/hotelContent/hotel_postserve_audit'),
-          meta: {
-            title: '酒店上架服务审核',
-          }
-        }, {
-          path: 'hotel_postjob',
-          name: 'hotel_postjob',
-          component: () => import('@/views/ky_hotel/hotelContent/hotel_postjob_audit'),
-          meta: {
-            title: '酒店发布职位审核',
-          }
-        }, ]
-      }
 
-    ]
-  },
 
   // ........................景点管理............................
   {
@@ -449,7 +191,7 @@ export const constantRoutes = [{
         name: 'audit',
         component: () => import('@/views/ky_organization/index'),
         meta: {
-          title: '入驻审核',
+          title: '景点入驻审核',
         }
       },
       {
@@ -457,14 +199,14 @@ export const constantRoutes = [{
         name: 'basicInfor',
         component: () => import('@/views/ky_organization/organizationInfor/index'),
         meta: {
-          title: '基本信息',
+          title: '景点基本信息',
         }
       }, {
         path: 'bigdata',
         name: 'bigdata',
         component: () => import('@/views/ky_organization/organizationData/index'),
         meta: {
-          title: '大数据',
+          title: '景点大数据',
         }
       }
     ]
@@ -484,7 +226,7 @@ export const constantRoutes = [{
         name: 'audit',
         component: () => import('@/views/ky_organization/index'),
         meta: {
-          title: '入驻审核',
+          title: '保险入驻审核',
         }
       },
       {
@@ -492,14 +234,14 @@ export const constantRoutes = [{
         name: 'basicInfor',
         component: () => import('@/views/ky_organization/organizationInfor/index'),
         meta: {
-          title: '基本信息',
+          title: '保险基本信息',
         }
       }, {
         path: 'bigdata',
         name: 'bigdata',
         component: () => import('@/views/ky_organization/organizationData/index'),
         meta: {
-          title: '大数据',
+          title: '保险大数据',
         }
       }
     ]
@@ -519,7 +261,7 @@ export const constantRoutes = [{
         name: 'audit',
         component: () => import('@/views/ky_organization/index'),
         meta: {
-          title: '入驻审核',
+          title: '基金入驻审核',
         }
       },
       {
@@ -527,14 +269,14 @@ export const constantRoutes = [{
         name: 'basicInfor',
         component: () => import('@/views/ky_organization/organizationInfor/index'),
         meta: {
-          title: '基本信息',
+          title: '基金基本信息',
         }
       }, {
         path: 'bigdata',
         name: 'bigdata',
         component: () => import('@/views/ky_organization/organizationData/index'),
         meta: {
-          title: '大数据',
+          title: '基金大数据',
         }
       }
     ]
@@ -554,7 +296,7 @@ export const constantRoutes = [{
         name: 'audit',
         component: () => import('@/views/ky_organization/index'),
         meta: {
-          title: '入驻审核',
+          title: '医院入驻审核',
         }
       },
       {
@@ -562,14 +304,14 @@ export const constantRoutes = [{
         name: 'basicInfor',
         component: () => import('@/views/ky_organization/organizationInfor/index'),
         meta: {
-          title: '基本信息',
+          title: '医院基本信息',
         }
       }, {
         path: 'bigdata',
         name: 'bigdata',
         component: () => import('@/views/ky_organization/organizationData/index'),
         meta: {
-          title: '大数据',
+          title: '医院大数据',
         }
       }
     ]
@@ -589,7 +331,7 @@ export const constantRoutes = [{
         name: 'audit',
         component: () => import('@/views/ky_organization/index'),
         meta: {
-          title: '入驻审核',
+          title: '婚介公司入驻审核',
         }
       },
       {
@@ -597,14 +339,14 @@ export const constantRoutes = [{
         name: 'basicInfor',
         component: () => import('@/views/ky_organization/organizationInfor/index'),
         meta: {
-          title: '基本信息',
+          title: '婚介公司基本信息',
         }
       }, {
         path: 'bigdata',
         name: 'bigdata',
         component: () => import('@/views/ky_organization/organizationData/index'),
         meta: {
-          title: '大数据',
+          title: '婚介公司大数据',
         }
       }
     ]
@@ -651,17 +393,17 @@ export const constantRoutes = [{
       }
     }]
   },
-  // ........................发布管理............................
+  // ........................财务管理............................
   {
-    path: '/issue',
+    path: '/finance',
     component: Layout,
     children: [{
       path: 'index',
-      name: 'issue',
+      name: 'finance',
       component: () => import('@/views/ky_version/index'),
       meta: {
-        title: '发布管理',
-        icon: 'issue'
+        title: '财务管理',
+        icon: 'finance'
       }
     }]
   },

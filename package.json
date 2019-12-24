@@ -2,7 +2,7 @@
   "name": "kywy-myself-admin",
   "version": "4.2.1",
   "description": "A vue admin template with Element UI & axios & iconfont & permission control & lint",
-  "author": "Pan <panfree23@gmail.com>",
+  "author": "wushimoshen <342458029@qq.com>",
   "license": "MIT",
   "scripts": {
     "dev": "vue-cli-service serve",

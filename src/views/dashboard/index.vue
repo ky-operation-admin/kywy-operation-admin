@@ -23,7 +23,7 @@
         <div class="fl">
           <h3>
             <span class="icon"></span>
-            <span>今日待办事项与本周工作计划</span>
+            <span>工作计划TodoList</span>
           </h3>
           <el-table :data="data">
             <el-table-column prop="title" label="标题"></el-table-column>
@@ -287,7 +287,7 @@ export default {
   },
   methods: {
     openTag (path) {
-      window.console.log('path', path)
+    //   window.console.log('path', path)
       this.$router.push({ path: path })
     }
   }

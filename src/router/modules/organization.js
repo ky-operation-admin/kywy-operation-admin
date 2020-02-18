@@ -34,49 +34,49 @@ const organizationRouter = {
         }
       },
       {
-        path: 'bigdata',
-        name: 'bigdata',
+        path: 'org_bigdata',
+        name: 'org_bigdata',
         component: () => import('@/views/ky_organization/organizationData/index'),
         meta: {
           title: '养老机构大数据',
         }
       },
       {
-        path: 'order',
-        name: 'order',
+        path: 'org_order',
+        name: 'org_order',
         component: () => import('@/views/ky_organization/organizationOrder/index'),
         meta: {
           title: '养老机构下单管理',
         }
       },
       {
-        path: 'bigdata2',
-        name: 'bigdata2',
-        component: () => import('@/views/ky_organization/organizationOrder/index'),
+        path: 'org_putaway',
+        name: 'org_Putaway',
+        component: () => import('@/views/ky_organization/organizationPutaway/index'),
         meta: {
           title: '养老机构上架管理',
         }
       },
       {
-        path: 'bigdata3',
-        name: 'bigdata3',
-        component: () => import('@/views/ky_organization/organizationData/index'),
+        path: 'org_account',
+        name: 'org_Account',
+        component: () => import('@/views/ky_organization/organizationAccount/index'),
         meta: {
           title: '养老机构账户管理',
         }
       },
       {
-        path: 'bigdata4',
-        name: 'bigdata4',
-        component: () => import('@/views/ky_organization/organizationData/index'),
+        path: 'org_distribution',
+        name: 'org_Distribution',
+        component: () => import('@/views/ky_organization/organizationDistribution/index'),
         meta: {
           title: '养老机构分销管理',
         }
       },
       {
-        path: 'bigdata5',
-        name: 'bigdata5',
-        component: () => import('@/views/ky_organization/organizationData/index'),
+        path: 'org_aftersale',
+        name: 'org_Aftersale',
+        component: () => import('@/views/ky_organization/organizationAftersale/index'),
         meta: {
           title: '养老机构售后管理',
         }
@@ -86,7 +86,7 @@ const organizationRouter = {
         component: () => import('@/views/ky_merchant/merchantContent/index'),
         name: 'merchantContent',
         meta: {
-          title: '投诉管理'
+          title: '养老机构投诉管理'
         },
         children: [{
           path: 'mer_pl',

@@ -11,9 +11,13 @@ import {
 // create an axios instance
 // 设置默认请求地址，所有请求从这里发起
 const service = axios.create({
-  //   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  baseURL: 'http://120.25.214.5:8081',
-  // withCredentials: true, // send cookies when cross-domain requests
+//   本地接口
+//   baseURL: 'http://192.168.1.171:8081',
+// 测试环境接口
+//   baseURL: 'http://120.25.214.5:8081',
+//   生产环境接口
+  baseURL: 'http://39.107.33.189:8081',
+
   timeout: 3000 // request timeout
 })
 
@@ -52,11 +56,15 @@ service.interceptors.response.use(
     const res = response.data
 
     // 如果返回的不是1，就提示error
-    // window.console.log('res', res, 'res.code', res.code);
+    window.console.log('res', res, 'res.code', res.code);
     if (!res.code){
+        console.log(111);
+
         return res
     }
     if (res.code != 1) {
+        console.log(2222);
+        
       Message({
         message: res.msg || 'Error',
         type: 'error',

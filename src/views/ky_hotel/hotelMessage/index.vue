@@ -72,10 +72,10 @@
               <el-form-item prop="jieshouren" label="消息接收人">
                 <el-input v-model="form2.m_jieshouren" placeholder="请输入消息接收人"></el-input>
               </el-form-item>
-              <el-form-item style="text-align:center">
-                <el-button type="primary" @click="on2Submit()">推送</el-button>
-              </el-form-item>
             </el-form>
+            <span slot="footer" class="dialog-footer">
+              <el-button type="primary" @click="on2Submit()">确定</el-button>
+            </span>
           </el-dialog>
           <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
         </template>

@@ -1,4 +1,5 @@
-import { asyncRoutes, constantRoutes } from '@/router'
+import { constantRoutes } from '@/router'
+
 
 /**
  * 使用meta.roles， 以确定当前用户是否具有权限
@@ -30,7 +31,6 @@ export function filterAsyncRoutes(routes, roles) {
       res.push(tmp)
     }
   })
-
   return res
 }
 
@@ -51,10 +51,11 @@ const actions = {
     return new Promise(resolve => {
       let accessedRoutes
       if (roles.includes('kywyadmin')) {
-        accessedRoutes = asyncRoutes || []
+        accessedRoutes = constantRoutes || []
       } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+        accessedRoutes = filterAsyncRoutes(constantRoutes, roles)
       }
+
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

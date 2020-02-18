@@ -5,8 +5,8 @@
         <el-table :data="onsaleData" border>
           <el-table-column prop="merchant_name" label="商家名称" width="280" align='center'></el-table-column>
           <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="serve_name" align="center" label="上架产品名称"></el-table-column>
-          <el-table-column prop="serve_type" align="center" label="产品类型"></el-table-column>
+          <el-table-column prop="product" align="center" label="上架产品名称"></el-table-column>
+          <el-table-column prop="product_type" align="center" label="产品类型"></el-table-column>
           <el-table-column prop="busLicen" align="center" label="产品图片">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.plimg" alt style="height:6rem;" />

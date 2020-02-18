@@ -1,8 +1,20 @@
 <template>
-  <div id="org" class="app-container">
+  <div id="hotel" class="app-container">
+    <div class="title" style="text-align:left;padding:20px">
+      <el-input v-model="listQuery.keyword" @keyup.enter.native="handleFilter" placeholder="请输入酒店名称/法人姓名/电话号码" style="width: 300px" clearable class="filter-item" />
+      <el-select v-model="listQuery.state" placeholder="状态" clearable style="width: 90px" class="filter-item" @change="handleFilterstate">
+        <el-option v-for="item in stateOptions" :key="item.key" :label="item.value" :value="item.key" />
+      </el-select>
+      <el-select v-model="listQuery.region" placeholder="地域"  class="filter-item" style="width: 130px" @change="handleFilter">
+        <el-option v-for="item in regionOptions" :key="item.key" :label="item.display_name" :value="item.display_name" />
+      </el-select>
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+        查询
+      </el-button>
+    </div>
     <el-tabs v-model="activeName">
       <el-tab-pane label="全部" name="first" class="onsale">
-        <el-table :data="onsaleData" border>
+        <el-table :data="onsaleData" v-loading="listLoading" border>
           <el-table-column prop="hotel_name" label="酒店名称" width="280" align='center'></el-table-column>
           <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
           <el-table-column prop="pingji" label="评级" align='center'></el-table-column>
@@ -18,6 +30,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="状态">
             <template slot-scope="scope">
               <div class="payShow">
@@ -42,6 +55,11 @@
         </el-table>
       </el-tab-pane>
       <el-tab-pane label="待审核" name="second" class="havebought">
+        <!-- <span slot="label">
+            //消息提醒数量
+          <span>待审核</span>
+          <el-badge v-if="onsaleData0length" :value="onsaleData0length" size="mini" class="item"></el-badge>
+        </span> -->
         <el-table :data="onsaleData0" border v-loading="listLoading">
           <el-table-column prop="hotel_name" label="酒店名称" width="280" align='center'></el-table-column>
           <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
@@ -49,15 +67,16 @@
           <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
           <el-table-column prop="id" align="center" label="法人身份证">
             <template slot-scope="scope">
-              <img v-image-preview class="busLicen" :src="scope.row.id" alt style="height:3rem;" />
+              <img :id="scope.row.orderNum" :src="scope.row.id" alt style="height:3rem;cursor:pointer;" @click="photoZoomPro(scope.row)">
             </template>
           </el-table-column>
           <el-table-column prop="busLicen" align="center" label="营业执照">
             <template slot-scope="scope">
-              <img v-image-preview class="busLicen" :src="scope.row.busLicen" alt style="height:6rem;" />
+              <img :id="scope.row.alias" :src="scope.row.busLicen" alt style="height:3rem;cursor:pointer;" @click="photoZoomPro2(scope.row)">
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果" width="250">
             <template slot-scope="scope">
               <el-button type="success" @click="pass(scope.$index)" size="mini">通过</el-button>
@@ -104,6 +123,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template>
               <div class="payShow">
@@ -137,6 +157,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template slot-scope="scope">
               <div class="payShow">
@@ -173,6 +194,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template>
               <div class="payShow">
@@ -206,6 +228,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template>
               <div class="payShow">
@@ -227,6 +250,8 @@
 </template>
 
 <script>
+import Viewer from "@/assets/js/viewer.min.js";
+import '@/assets/css/viewer.min.css';
 import data from '@/assets/js/mock'
 import { deepClone } from '../../utils'
 const defaultForm = {
@@ -234,16 +259,41 @@ const defaultForm = {
   content: '',
   img: ''
 }
+const regionOptions = [
+  { key: 'all', display_name: '全部' },
+  { key: 'gz', display_name: '广州' },
+  { key: 'sz', display_name: '深圳' },
+]
+const calendarTypeKeyValue = regionOptions.reduce((acc, cur) => {
+  acc[cur.key] = cur.display_name
+  return acc
+}, {})
 export default {
   data () {
     return {
       dialogVisible: false,
+      stateOptions: [
+          {value:'全部',key:'first'},
+          {value:'待审核',key:'second'},
+          {value:'已通过',key:'thirdly'},
+          {value:'未通过',key:'fourthly'},
+          {value:'已忽略',key:'fifth'},
+          {value:'黑名单',key:'sixth'}
+          ],
+      regionOptions,
       form: {
         org_id: '',
         content: '',
         img: ''
       },
       form2: Object.assign({}, defaultForm),
+      listQuery: {
+        page: 1,
+        limit: 20,
+        keyword: '',
+        state: '',
+        region: '',
+      },
       listLoading: true,
       visible: false,
       activeName: 'first',
@@ -271,7 +321,25 @@ export default {
   methods: {
     initData () {
       this.listLoading = true
-      this.onsaleData = data.onsaleData
+      let onsaleDatatemp =this.listQuery.region === "全部"?data.onsaleData:data.onsaleData.filter(item => {
+        return item.org_add.includes(this.listQuery.region)
+      })
+      let tempData1 = onsaleDatatemp.filter(item => {
+        return item.hotel_name.includes(this.listQuery.keyword)
+      })
+      let tempData2 = onsaleDatatemp.filter(item => {
+        return item.phone.includes(this.listQuery.keyword)
+      })
+      let tempData3 = onsaleDatatemp.filter(item => {
+        return item.res_name.includes(this.listQuery.keyword)
+      })
+      let tempArray = [...tempData1, ...tempData2, ...tempData3];
+      var obj = {};
+      tempArray = tempArray.reduce(function (item, next) {
+        obj[next.username] ? '' : obj[next.username] = true && item.push(next);
+        return item;
+      }, []);
+      this.onsaleData = tempArray
       var temp1 = this.onsaleData.filter(item => item.org_state === 1)
       var temp2 = this.onsaleData.filter(item => item.org_state === 2)
       var temp3 = this.onsaleData.filter(item => item.org_state === 3)
@@ -286,6 +354,26 @@ export default {
       setTimeout(() => {
         this.listLoading = false
       }, 1.5 * 1000)
+    },
+    handleFilterstate(){
+    this.activeName = this.listQuery.state
+    },
+    // 搜索
+    handleFilter () {
+      this.initData()
+    },
+    // 点击图片放大
+    photoZoomPro (item) {
+      var viewer = new Viewer(document.getElementById(item.orderNum), {
+        url: item.id,
+      });
+
+    },
+    photoZoomPro2 (item) {
+      var viewer = new Viewer(document.getElementById(item.alias), {
+        url: item.busLicen,
+      });
+
     },
     // 点击通过和未通过
     pass (idx) {
@@ -359,7 +447,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#org {
+#hotel {
   height: 100%;
 }
 .el-container {

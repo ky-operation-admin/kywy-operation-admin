@@ -5,8 +5,10 @@
         <el-table :data="onsaleData" border>
           <el-table-column prop="hotel_name" label="酒店名称" width="280" align='center'></el-table-column>
           <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="serve_name" align="center" label="上架服务名称"></el-table-column>
-          <el-table-column prop="serve_type" align="center" label="服务类型"></el-table-column>
+          <el-table-column prop="hotel_serve" align="center" label="客房"></el-table-column>
+          <el-table-column  align="center" label="服务类型">
+              休息
+          </el-table-column>
           <el-table-column prop="busLicen" align="center" label="详情图片">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.plimg" alt style="height:6rem;" />

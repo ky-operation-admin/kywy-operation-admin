@@ -351,6 +351,53 @@ export const constantRoutes = [
       }
     ]
   },
+  // ........................康养人才管理............................
+  {
+    path: '/talentMan',
+    component: Layout,
+    redirect: '/talentMan/talentPool',
+    name: 'tree',
+    meta: {
+      title: '康养人才管理',
+      icon: '人才'
+    },
+    children: [{
+        path: 'talentPool',
+        name: 'TalentPool',
+        component: () => import('@/views/ky_talentsRecruitment/talentPool/index'),
+        meta: {
+          title: '简历/人才库',
+        }
+      },
+      {
+        path: 'talentRecomment',
+        name: 'TalentRecomment',
+        component: () => import('@/views/ky_talentsRecruitment/talentRecomment/index'),
+        meta: {
+          title: '猎头人才推荐',
+        }
+      },
+      {
+        path: 'mannReconmment',
+        name: 'mannReconmment',
+        hidden:true,
+        component: () => import('@/views/ky_talentsRecruitment/mannReconmment/index'),
+        meta: {
+          title: '手动推荐',
+        }
+      },
+      {
+        path: 'autoReconmment',
+        name: 'autoReconmment',
+        hidden: true,
+        component: () => import('@/views/ky_talentsRecruitment/autoReconmment/index'),
+        meta: {
+          title: '自动推荐',
+        }
+      },
+
+    ]
+  },
   // ........................用户管理............................
   {
     path: '/user',

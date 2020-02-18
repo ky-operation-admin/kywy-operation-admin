@@ -1,7 +1,8 @@
 <template>
   <div class="navbar">
+      <!-- 导航收缩框 -->
     <!-- <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
-
+    
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
@@ -17,12 +18,6 @@
               Home
             </el-dropdown-item>
           </router-link>
-          <!-- <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a> -->
-          <!-- <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
-          </a> -->
           <el-dropdown-item divided>
             <span style="display:block;" @click="logout">退出</span>
           </el-dropdown-item>
@@ -142,6 +137,7 @@ export default {
         .el-icon-caret-bottom {
           cursor: pointer;
           position: absolute;
+        //   position:absolute;
           right: -20px;
           top: 20px;
           font-size: 12px;

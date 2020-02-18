@@ -68,6 +68,7 @@ export default {
       })
       let tempArray = [...tempData1, ...tempData2, ...tempData3];
       var obj = {};
+    //   数组对象去重
       tempArray = tempArray.reduce(function (item, next) {
         obj[next.org_id] ? '' : obj[next.org_id] = true && item.push(next);
         return item;

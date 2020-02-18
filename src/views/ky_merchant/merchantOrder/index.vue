@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="title" style="text-align:left;padding:20px">
-      <el-input v-model="keyword" placeholder="请输商家名称/电话/法人姓名" style="width: 300px;margin-right:-10px;" clearable class="filter-item" @keyup.enter.native="handleFilter" />
+      <el-input v-model="keyword" placeholder="请输入商家名称/订单编号/下单账号" style="width: 300px;margin-right:-10px;" clearable class="filter-item" @keyup.enter.native="handleFilter" />
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         查询
       </el-button>
@@ -9,26 +9,39 @@
     <el-table :data="tableData" style="width: 100%" border v-loading="listLoading">
 
       <el-table-column prop="merchant_name" label="商家名称" align="center"></el-table-column>
-      <el-table-column prop="res_name" label="上架人" align="center"></el-table-column>
-      <el-table-column prop="orderTime" label="时间" align="center"></el-table-column>
-      <el-table-column prop="serve_name" label="上架服务" align="center"></el-table-column>
+      <el-table-column prop="user_account" label="下单账号" align="center"></el-table-column>
+      <el-table-column prop="formnum" label="商品编号" align="center"></el-table-column>
+      <el-table-column prop="orderNum" label="订单编号" align="center"></el-table-column>
+      <el-table-column  label="订单类型" align="center">
+          商家产品
+      </el-table-column>
+      <el-table-column prop="orderTime" label="下单时间" align="center"></el-table-column>
       <el-table-column align="center" label="操作" width="200">
         <template slot-scope="scope">
-          <el-button v-if="scope.row.order_state" size="mini" type="danger" @click="steppass(scope.row)">下架</el-button>
-          <el-button v-else size="mini" type="success" @click="putaway(scope.$index)">上架</el-button>
-          <el-dialog title="下架" :visible.sync="dialogVisible" width="50%" :before-close="handleClose" :modal-append-to-body="false">
+          <el-button  size="mini" type="success" @click="look(scope.row)">查看</el-button>
+          <el-dialog title="订单详情" :visible.sync="dialogVisible" width="30%" :before-close="handleClose" :modal-append-to-body="false">
             <el-form ref="form" :model="form" label-width="120px">
-              <el-form-item label="下架理由">
-                <el-input v-model="form.content"></el-input>
+              <el-form-item label="商家名称">
+                {{form.merchant_name}}
               </el-form-item>
-              <el-form-item label="上传截图">
-                <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
-                  <i class="el-icon-plus"></i>
-                </el-upload>
+              <el-form-item label="下单账号">
+                {{form.user_account}}
+              </el-form-item>
+              <el-form-item label="房型编号">
+                {{form.formnum}}
+              </el-form-item>
+              <el-form-item label="订单编号">
+                {{form.orderNum}}
+              </el-form-item>
+              <el-form-item label="订单类型">
+                商家产品
+              </el-form-item>
+              <el-form-item label="下单时间">
+                {{form.orderTime}}
               </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
-              <el-button type="primary" @click="soldOut()">提交</el-button>
+              <el-button type="primary" @click="confirm()">确定</el-button>
             </span>
           </el-dialog>
         </template>
@@ -42,8 +55,12 @@ let onsaleData = data.onsaleData
 import { deepClone } from '@/utils'
 const defaultForm = {
   org_id: '',
-  content: '',
-  img: ''
+  merchant_name: '',
+  user_account: '',
+  formnum: '',
+  orderNum: '',
+  serve_type: '',
+  orderTime: '',
 }
 export default {
   data () {
@@ -52,12 +69,7 @@ export default {
       listLoading: true,
       tableData: [],
       keyword: '',
-      form: {
-        org_id: '',
-        content: '',
-        img: ''
-      },
-      form2: Object.assign({}, defaultForm),
+      form: Object.assign({}, defaultForm),
     }
   },
   created () {
@@ -76,14 +88,14 @@ export default {
         this.listLoading = false
       }, 1.5 * 1000)
       let tempData1 = onsaleData.filter(item => {
-        return item.org_name.includes(this.keyword)
+        return item.merchant_name.includes(this.keyword)
       })
 
       let tempData2 = onsaleData.filter(item => {
-        return item.phone.includes(this.keyword)
+        return item.user_account.includes(this.keyword)
       })
       let tempData3 = onsaleData.filter(item => {
-        return item.res_name.includes(this.keyword)
+        return item.orderNum.includes(this.keyword)
       })
       let tempArray = [...tempData1, ...tempData2, ...tempData3];
       var obj = {};
@@ -101,50 +113,14 @@ export default {
     handleClose (done) {
       done()
     },
-    // 上传
-    handleRemove (file, fileList) {
-      window.console.log(file, fileList);
-    },
-    handlePictureCardPreview (file) {
-      this.dialogImageUrl = file.url;
+    //查看
+    look (idx) {
       this.dialogVisible = true;
+      this.form = deepClone(idx)
     },
-    //下架弹窗
-    steppass (idx) {
-      this.dialogVisible = true;
-      this.form2 = deepClone(idx)
-    },
-    // 下架
-    async soldOut () {
-      for (const v of this.tableData) {
-        for (let index = 0; index < this.tableData.length; index++) {
-          if (this.tableData[index].org_id === this.form2.org_id) {
-            this.tableData[index].order_state = 0
-            break
-          }
-        }
-      }
-      this.$message({
-        type: "success",
-        message: "下架成功!"
-      });
+    // 确定
+    confirm () {
       this.dialogVisible = false
-      this.init()
-    },
-    async putaway (index) {
-      this.$confirm("确定要恢复上架?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "success"
-      }).then(async () => {
-        this.$message({
-          type: "success",
-          message: "恢复上架成功!"
-        });
-        this.dialogVisible = false
-        data.onsaleData[index].order_state = 1;
-        this.init()
-      });
     }
   }
 }

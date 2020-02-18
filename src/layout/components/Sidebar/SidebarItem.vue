@@ -73,7 +73,7 @@ export default {
         return true
       }
 
-      // Show parent if there are no child router to display
+      // 如果没有要显示的子路由器，则显示父路由器
       if (showingChildren.length === 0) {
         this.onlyOneChild = { ... parent, path: '', noShowingChildren: true }
         return true

@@ -32,11 +32,9 @@ export default {
   },
   computed: {
     visitedViews () {
-    console.log('visitedViews', this.$store.state);
       return this.$store.state.tagsView.visitedViews
     },
     routes () {
-    console.log('routes', this.$store.state.permission.routes);
       return this.$store.state.permission.routes
     }
   },

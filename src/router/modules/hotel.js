@@ -44,35 +44,35 @@ const hotelRouter = {
       {
         path: 'bigdata1',
         name: 'bigdata1',
-        component: () => import('@/views/ky_hotel/hotelData/index'),
+        component: () => import('@/views/ky_hotel/hotelOrder/index'),
         meta: {
           title: '酒店下单管理',
         }
       }, {
         path: 'bigdata2',
         name: 'bigdata2',
-        component: () => import('@/views/ky_hotel/hotelData/index'),
+        component: () => import('@/views/ky_hotel/hotelPutaway/index'),
         meta: {
           title: '酒店上架管理',
         }
       }, {
         path: 'bigdata3',
         name: 'bigdata3',
-        component: () => import('@/views/ky_hotel/hotelData/index'),
+        component: () => import('@/views/ky_hotel/hotelAccount/index'),
         meta: {
           title: '酒店账户管理',
         }
       }, {
         path: 'bigdata4',
         name: 'bigdata4',
-        component: () => import('@/views/ky_hotel/hotelData/index'),
+        component: () => import('@/views/ky_hotel/hotelDistribution/index'),
         meta: {
           title: '酒店分销管理',
         }
       }, {
         path: 'bigdata5',
         name: 'bigdata5',
-        component: () => import('@/views/ky_hotel/hotelData/index'),
+        component: () => import('@/views/ky_hotel/hotelAftersale/index'),
         meta: {
           title: '酒店售后管理',
         }
@@ -91,7 +91,7 @@ const hotelRouter = {
         component: () => import('@/views/ky_merchant/merchantContent/index'),
         name: 'merchantContent',
         meta: {
-          title: '投诉管理'
+          title: '酒店投诉管理'
         },
         children: [{
           path: 'mer_pl',

@@ -8,10 +8,10 @@
     </div>
     <el-table :data="tableData" style="width: 100%" border v-loading="listLoading">
 
-      <el-table-column prop="merchant_name" label="商家名称" align="center"></el-table-column>
+      <el-table-column prop="merchant_name" label="商家" align="center"></el-table-column>
       <el-table-column prop="res_name" label="上架人" align="center"></el-table-column>
       <el-table-column prop="orderTime" label="时间" align="center"></el-table-column>
-      <el-table-column prop="serve_name" label="上架服务" align="center"></el-table-column>
+      <el-table-column prop="product" label="产品" align="center"></el-table-column>
       <el-table-column align="center" label="操作" width="200">
         <template slot-scope="scope">
           <el-button v-if="scope.row.order_state" size="mini" type="danger" @click="steppass(scope.row)">下架</el-button>

@@ -1,8 +1,20 @@
 <template>
   <div id="org" class="app-container">
+    <div class="title" style="text-align:left;padding:20px">
+      <el-input v-model="listQuery.keyword" @keyup.enter.native="handleFilter" placeholder="请输入机构名称/法人姓名/电话号码" style="width: 300px" clearable class="filter-item" />
+      <el-select v-model="listQuery.state" placeholder="状态" clearable style="width: 90px" class="filter-item" @change="handleFilterstate">
+        <el-option v-for="item in stateOptions" :key="item.key" :label="item.value" :value="item.key" />
+      </el-select>
+      <el-select v-model="listQuery.region" placeholder="地域" class="filter-item" style="width: 130px" @change="handleFilter">
+        <el-option v-for="item in regionOptions" :key="item.key" :label="item.display_name" :value="item.display_name" />
+      </el-select>
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+        查询
+      </el-button>
+    </div>
     <el-tabs v-model="activeName">
       <el-tab-pane label="全部" name="first" class="onsale">
-        <el-table :data="onsaleData" border>
+        <el-table :data="onsaleData" v-loading="listLoading" border>
           <el-table-column prop="org_name" label="机构名称" width="280" align='center'></el-table-column>
           <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
           <el-table-column prop="pingji" label="评级" align='center'></el-table-column>
@@ -18,6 +30,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="状态">
             <template slot-scope="scope">
               <div class="payShow">
@@ -63,19 +76,35 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果" width="250">
             <template slot-scope="scope">
               <el-button type="success" @click="pass(scope.$index)" size="mini">通过</el-button>
               <el-button type="warning" @click="steppass(scope.row)" size="mini">不通过</el-button>
               <el-dialog title="审核未通过" :visible.sync="dialogVisible" width="50%" :before-close="handleClose" :modal-append-to-body="false">
-                <el-form ref="form" :model="form" label-width="120px">
+                <el-form ref="form" :model="form2" label-width="120px">
                   <el-form-item label="未通过理由">
-                    <el-input v-model="form.content"></el-input>
+                    <el-input v-model="form2.fauilReason"></el-input>
+                  </el-form-item>
+                  <el-form-item label="不通过类型">
+                    <el-radio-group v-model="form2.reseco">
+                      <el-radio label="真实性"></el-radio>
+                      <el-radio label="合法性"></el-radio>
+                      <el-radio label="技术合规性"></el-radio>
+                    </el-radio-group>
                   </el-form-item>
                   <el-form-item label="上传截图">
                     <el-upload action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
                       <i class="el-icon-plus"></i>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item label="通知方式">
+                    <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+                      <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+                    </el-checkbox-group>
+                    <div class="inline-block">
+                      <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+                    </div>
                   </el-form-item>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
@@ -109,6 +138,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template>
               <div class="payShow">
@@ -142,6 +172,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template slot-scope="scope">
               <div class="payShow">
@@ -155,8 +186,33 @@
             </template>
           </el-table-column>
           <el-table-column align="center" label="操作" width="200">
-            <template>
-              <a href="#" class="underline">查看详情</a>
+            <template slot-scope="scope">
+              <el-button @click="readReason(scope.row)" type="success" size="mini">查阅驳回理由</el-button>
+              <el-dialog title="查阅驳回理由" :visible.sync="dialog2Visible" width="40%" :before-close="handle2Close" :modal-append-to-body="false">
+                <el-form ref="form" :model="form3" label-width="120px">
+                  <el-form-item label="机构名称" prop="org_name">
+                    <span>{{form3.org_name}}</span>
+                  </el-form-item>
+                  <el-form-item label="营业执照" prop="busLicen">
+                    <img :src="form3.busLicen" alt="" style="height:6rem;">
+                  </el-form-item>
+                  <el-form-item label="联系电话" prop="phone">
+                    <span>{{form3.phone}}</span>
+                  </el-form-item>
+                  <el-form-item v-if="form3.resco" label="不通过类型">
+                      <el-radio-group v-model="form3.reseco">
+                      <el-radio :label="form3.reseco"></el-radio>
+                    </el-radio-group>
+                  </el-form-item>
+                  <el-form-item label="未通过理由" prop="reseco">
+                    <span>{{form3.fauilReason}}</span>
+                  </el-form-item>
+                  <el-form-item label="通知方式">
+                    <el-checkbox v-model="checkstate" disabled>通知</el-checkbox>
+                    <el-checkbox v-model="checkstate" disabled>邮件</el-checkbox>
+                  </el-form-item>
+                </el-form>
+              </el-dialog>
             </template>
           </el-table-column>
         </el-table>
@@ -178,6 +234,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template>
               <div class="payShow">
@@ -211,6 +268,7 @@
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
+          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template>
               <div class="payShow">
@@ -235,22 +293,65 @@
 import Viewer from "@/assets/js/viewer.min.js";
 import '@/assets/css/viewer.min.css';
 import data from '@/assets/js/mock'
-import { deepClone } from '../../utils'
+import { deepClone } from '@/utils'
+const default2Form = {
+  org_name: '',
+  busLicen: '',
+  phone: '',
+  fauilReason: '',
+  reseco:''
+}
 const defaultForm = {
   org_id: '',
-  content: '',
-  img: ''
+  fauilReason: '',
+  img: '',
+  reseco: ''
 }
+const regionOptions = [
+  { key: 'all', display_name: '全部' },
+  { key: 'gz', display_name: '广州' },
+  { key: 'sz', display_name: '深圳' },
+]
+const calendarTypeKeyValue = regionOptions.reduce((acc, cur) => {
+  acc[cur.key] = cur.display_name
+  return acc
+}, {})
+const cityOptions = ['通知', '邮件', '短信', '留言'];
 export default {
   data () {
     return {
+      // 多选框数据
+      checkAll: false,
+      checkstate:true,
+      checkedCities: ['通知', '邮件'],
+      cities: cityOptions,
+      isIndeterminate: true,
       dialogVisible: false,
+      dialog2Visible: false,
+      stateOptions: [
+        { value: '全部', key: 'first' },
+        { value: '待审核', key: 'second' },
+        { value: '已通过', key: 'thirdly' },
+        { value: '未通过', key: 'fourthly' },
+        { value: '已忽略', key: 'fifth' },
+        { value: '黑名单', key: 'sixth' }
+      ],
+      regionOptions,
       form: {
         org_id: '',
         content: '',
-        img: ''
+        img: '',
+        reseco: ''
       },
       form2: Object.assign({}, defaultForm),
+      form3: Object.assign({}, default2Form),
+      listQuery: {
+        page: 1,
+        limit: 20,
+        keyword: '',
+        state: '',
+        region: '',
+      },
       listLoading: true,
       visible: false,
       activeName: 'first',
@@ -276,9 +377,37 @@ export default {
     },
   },
   methods: {
+    //   不通过理由多选框
+    handleCheckAllChange (val) {
+      this.checkedCities = val ? cityOptions : [];
+      this.isIndeterminate = false;
+    },
+    handleCheckedCitiesChange (value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.cities.length;
+      this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+    },
     initData () {
       this.listLoading = true
-      this.onsaleData = data.onsaleData
+      let onsaleDatatemp = this.listQuery.region === "全部" ? data.onsaleData : data.onsaleData.filter(item => {
+        return item.org_add.includes(this.listQuery.region)
+      })
+      let tempData1 = onsaleDatatemp.filter(item => {
+        return item.org_name.includes(this.listQuery.keyword)
+      })
+      let tempData2 = onsaleDatatemp.filter(item => {
+        return item.phone.includes(this.listQuery.keyword)
+      })
+      let tempData3 = onsaleDatatemp.filter(item => {
+        return item.res_name.includes(this.listQuery.keyword)
+      })
+      let tempArray = [...tempData1, ...tempData2, ...tempData3];
+      var obj = {};
+      tempArray = tempArray.reduce(function (item, next) {
+        obj[next.username] ? '' : obj[next.username] = true && item.push(next);
+        return item;
+      }, []);
+      this.onsaleData = tempArray
       var temp1 = this.onsaleData.filter(item => item.org_state === 1)
       var temp2 = this.onsaleData.filter(item => item.org_state === 2)
       var temp3 = this.onsaleData.filter(item => item.org_state === 3)
@@ -293,6 +422,13 @@ export default {
       setTimeout(() => {
         this.listLoading = false
       }, 1.5 * 1000)
+    },
+    handleFilterstate () {
+      this.activeName = this.listQuery.state
+    },
+    // 搜索
+    handleFilter () {
+      this.initData()
     },
     // 点击图片放大
     photoZoomPro (item) {
@@ -328,16 +464,27 @@ export default {
           if (this.onsaleData0[index].org_id === this.form2.org_id) {
             this.onsaleData0[index].org_state = 2
             this.onsaleData0[index].visible = false
+            this.onsaleData0[index].fauilReason = this.form2.fauilReason
+            this.onsaleData0[index].reseco = this.form2.reseco
             break
           }
         }
       }
+
       this.dialogVisible = false
       this.$message({
         type: "warning",
         message: "审核未通过，审核结果已推送给目标机构!"
       });
       this.initData()
+    },
+    // 点击查看未通过理由
+    readReason (row) {
+      // 出现弹窗
+      this.dialog2Visible = true
+      this.form3 = deepClone(row)
+      console.log(this.form3);
+      
     },
     // 忽略和拉黑
     ignore (idx) {
@@ -364,6 +511,9 @@ export default {
 
     },
     handleClose (done) {
+      done()
+    },
+    handle2Close (done) {
       done()
     },
     // 上传
@@ -452,9 +602,7 @@ body > .el-container {
 .el-row {
   text-align: left;
 }
-.el-dialog__footer {
-  text-align: center !important;
-}
+
 .underline {
   color: #e9716d;
   padding-bottom: 2px;

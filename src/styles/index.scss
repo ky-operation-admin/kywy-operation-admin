@@ -80,7 +80,31 @@ div:focus {
   white-space: nowrap;
 }
 
-.product-list .has-gutter .el-table thead
-{
+.product-list .has-gutter .el-table thead {
   background-color: #f11;
 }
+
+// 表单子项(详见消费者基本信息管理)
+.el-form-item {
+  .el-form-item__content {
+    text-align: left;
+  }
+
+  &:last-child {
+    .el-form-item__content {
+    }
+  }
+}
+// 不通过全选
+.el-checkbox-group {
+    display: inline-block;
+}
+.inline-block{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.el-dialog__footer {
+  text-align: center !important;
+}
+

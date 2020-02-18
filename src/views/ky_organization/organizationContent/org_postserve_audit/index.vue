@@ -5,7 +5,7 @@
         <el-table :data="onsaleData" border>
           <el-table-column prop="org_name" label="机构名称" width="280" align='center'></el-table-column>
           <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="serve_name" align="center" label="上架服务名称"></el-table-column>
+          <el-table-column prop="serve_name" align="center" label="房间"></el-table-column>
           <el-table-column prop="serve_type" align="center" label="服务类型"></el-table-column>
           <el-table-column prop="busLicen" align="center" label="详情图片">
             <template slot-scope="scope">
@@ -42,7 +42,7 @@
         <el-table :data="onsaleData0" border v-loading="listLoading">
           <el-table-column prop="org_name" label="机构名称" width="280" align='center'></el-table-column>
           <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="serve_name" align="center" label="上架服务名称"></el-table-column>
+          <el-table-column prop="serve_name" align="center" label="房间"></el-table-column>
           <el-table-column prop="price" align="center" label="价格"></el-table-column>
           <el-table-column prop="serve_type" align="center" label="服务类型"></el-table-column>
           <el-table-column prop="busLicen" align="center" label="详情图片">
@@ -91,7 +91,7 @@
         <el-table :data="onsaleData1" border>
           <el-table-column prop="org_name" label="机构名称" width="280" align='center'></el-table-column>
           <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="serve_name" align="center" label="上架服务名称"></el-table-column>
+          <el-table-column prop="serve_name" align="center" label="房间"></el-table-column>
           <el-table-column prop="serve_type" align="center" label="服务类型"></el-table-column>
           <el-table-column prop="busLicen" align="center" label="详情图片">
             <template slot-scope="scope">
@@ -117,7 +117,7 @@
         <el-table :data="onsaleData2" border>
           <el-table-column prop="org_name" label="机构名称" width="280" align='center'></el-table-column>
           <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="serve_name" align="center" label="上架服务名称"></el-table-column>
+          <el-table-column prop="serve_name" align="center" label="房间"></el-table-column>
           <el-table-column prop="serve_type" align="center" label="服务类型"></el-table-column>
           <el-table-column prop="busLicen" align="center" label="详情图片">
             <template slot-scope="scope">
@@ -146,7 +146,7 @@
         <el-table :data="onsaleData3" border>
           <el-table-column prop="org_name" label="机构名称" width="280" align='center'></el-table-column>
           <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="serve_name" align="center" label="上架服务名称"></el-table-column>
+          <el-table-column prop="serve_name" align="center" label="房间"></el-table-column>
           <el-table-column prop="serve_type" align="center" label="服务类型"></el-table-column>
           <el-table-column prop="busLicen" align="center" label="详情图片">
             <template slot-scope="scope">
@@ -172,7 +172,7 @@
         <el-table :data="onsaleData4" border>
           <el-table-column prop="org_name" label="机构名称" width="280" align='center'></el-table-column>
           <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="serve_name" align="center" label="上架服务名称"></el-table-column>
+          <el-table-column prop="serve_name" align="center" label="房间"></el-table-column>
           <el-table-column prop="serve_type" align="center" label="服务类型"></el-table-column>
           <el-table-column prop="busLicen" align="center" label="详情图片">
             <template slot-scope="scope">

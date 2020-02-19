@@ -8,7 +8,7 @@ const medicineRouter = {
   name: 'tree',
   meta: {
     title: '寻医问药',
-    icon: '酒店'
+    icon: 'medicine'
   },
   children: [{
       path: 'audit',

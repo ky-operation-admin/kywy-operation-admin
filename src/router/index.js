@@ -8,6 +8,7 @@ import Layout from '@/layout'
 
 /* 引入模块路由*/
 import merchantRouter from './modules/merchant'
+import medicineRouter from './modules/Medicine'
 import hotelRouter from './modules/hotel'
 import organizationRouter from './modules/organization'
 /**
@@ -73,6 +74,8 @@ export const constantRoutes = [
       }
     }]
   },
+  // ........................寻医问药............................
+  medicineRouter,
   // ........................消费者管理............................
   {
     path: '/consumer',
@@ -380,7 +383,7 @@ export const constantRoutes = [
       {
         path: 'mannReconmment',
         name: 'mannReconmment',
-        hidden:true,
+        hidden: true,
         component: () => import('@/views/ky_talentsRecruitment/mannReconmment/index'),
         meta: {
           title: '手动推荐',

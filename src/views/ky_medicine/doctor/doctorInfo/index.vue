@@ -12,7 +12,6 @@
       <el-table-column prop="name" label="医生姓名" align="center"></el-table-column>
       <el-table-column prop="account" label="医生账号" align="center"></el-table-column>
       <el-table-column prop="phone" label="医生手机号" align="center"></el-table-column>
-      <!-- <el-table-column prop="type" label="企业类型" align="center"></el-table-column> -->
       <el-table-column prop="busLicen" label="医生头像" align="center">
         <template slot-scope="scope">
           <img v-image-preview :src="scope.row.busLicen" alt style="height:6rem;" />
@@ -51,7 +50,6 @@
       </el-table-column>
       <el-table-column align="center" label="操作" width="200">
         <template slot-scope="scope">
-          <!-- <el-button size="mini" type="primary" @click="edti(scope.$index)">编辑</el-button> -->
           <el-button size="mini" type="primary" disabled>编辑</el-button>
           <el-button size="mini" type="danger" @click="del(scope.$index,scope.row)">删除</el-button>
         </template>

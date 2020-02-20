@@ -1,12 +1,32 @@
 <template>
   <div class="navbar">
-      <!-- 导航收缩框 -->
+    <!-- 导航收缩框 -->
     <!-- <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
-    
+
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
+      <div class="home" @click="gotohome">
+        首页
+      </div>
+      <screenfull id="screenfull" class="right-menu-item hover-effect" />
       <el-dropdown class="avatar-container" trigger="click">
+        <div class="avatar-wrapper">
+          <span style="vertical-align:middle;margin-right:10px">设置</span>
+          <i class="el-icon-caret-bottom" style="vertical-align:middle;" />
+        </div>
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <router-link to="/">
+            <el-dropdown-item>
+              主题
+            </el-dropdown-item>
+          </router-link>
+          <el-dropdown-item divided>
+            <span style="display:block;" @click="logout">皮肤</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <!-- <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img src='@/assets/kyuser.png' class="user-avatar">
           <span>{{getUserName}}</span>
@@ -22,6 +42,23 @@
             <span style="display:block;" @click="logout">退出</span>
           </el-dropdown-item>
         </el-dropdown-menu>
+      </el-dropdown> -->
+      <el-dropdown class="avatar-container" trigger="click">
+        <div class="avatar-wrapper">
+          <img src='@/assets/kyuser.png' style="width:36px;height:36px;vertical-align:middle;margin-right:3px">
+          <!-- <span style="vertical-align:middle;margin-right:10px">{{getUserName}}</span> -->
+          <i class="el-icon-caret-bottom" style="vertical-align:middle;" />
+        </div>
+        <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <router-link to="/">
+            <el-dropdown-item>
+              账户
+            </el-dropdown-item>
+          </router-link>
+          <el-dropdown-item divided>
+            <span style="display:block;" @click="logout">退出</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
       </el-dropdown>
     </div>
   </div>
@@ -31,7 +68,8 @@
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 // import Hamburger from '@/components/Hamburger'
-import {getName,setName,removeName} from '@/utils/auth'
+import Screenfull from '@/layout/components/Screenfull/index'
+import { getName, setName, removeName } from '@/utils/auth'
 export default {
   data () {
     return {
@@ -40,11 +78,12 @@ export default {
   },
   components: {
     Breadcrumb,
+    Screenfull
     // Hamburger
   },
   computed: {
     ...mapGetters([
-        'name',
+      'name',
       'sidebar',
       'avatar'
     ]),
@@ -57,18 +96,35 @@ export default {
       this.$store.dispatch('app/toggleSideBar')
     },
     async logout () {
-       removeName();
+      removeName();
       await this.$store.dispatch('user/logout')
       //   this.$store.commit('removeuserItem')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    },
+    gotohome () {
+      this.$router.push({ path: '/' })
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.home {
+  display: inline-block;
+  padding: 0 20px;
+  float: left;
+  margin-right: 10px;
+  height: 100%;
+  font-size: 14px;
+  cursor: pointer;
+  color: #5a5e66;
+  vertical-align: text-bottom;
+  &:hover {
+    background: #ccc;
+  }
+}
 .navbar {
-  height: 50px;
+  height: 80px;
   overflow: hidden;
   position: relative;
   background: #fff;
@@ -94,7 +150,7 @@ export default {
   .right-menu {
     float: right;
     height: 100%;
-    line-height: 50px;
+    line-height: 80px;
 
     &:focus {
       outline: none;
@@ -104,6 +160,8 @@ export default {
       display: inline-block;
       padding: 0 8px;
       height: 100%;
+      float: left;
+      margin-right: 30px;
       font-size: 18px;
       color: #5a5e66;
       vertical-align: text-bottom;
@@ -122,25 +180,20 @@ export default {
       margin-right: 30px;
 
       .avatar-wrapper {
-        margin-top: 5px;
         position: relative;
-        display: flex;
-
+        cursor: pointer;
         .user-avatar {
           cursor: pointer;
           width: 40px;
           height: 40px;
           border-radius: 10px;
-          margin-right: 10px;
         }
-
         .el-icon-caret-bottom {
           cursor: pointer;
           position: absolute;
-        //   position:absolute;
           right: -20px;
-          top: 20px;
-          font-size: 12px;
+          top: 35px;
+          font-size: 17px;
         }
       }
     }

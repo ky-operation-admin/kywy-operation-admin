@@ -5,9 +5,6 @@
       <el-select v-model="listQuery.state" placeholder="状态" clearable style="width: 90px" class="filter-item" @change="handleFilterstate">
         <el-option v-for="item in stateOptions" :key="item.key" :label="item.value" :value="item.key" />
       </el-select>
-      <el-select v-model="listQuery.region" placeholder="地域" class="filter-item" style="width: 130px" @change="handleFilter">
-        <el-option v-for="item in regionOptions" :key="item.key" :label="item.display_name" :value="item.display_name" />
-      </el-select>
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
         查询
       </el-button>
@@ -15,30 +12,57 @@
     <el-tabs v-model="activeName">
       <el-tab-pane label="全部" name="first" class="onsale">
         <el-table :data="onsaleData" v-loading="listLoading" border>
-          <el-table-column prop="res_name" label="医生名称" width="280" align='center'></el-table-column>
-          <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
-          <el-table-column prop="pingji" label="评级" align='center'></el-table-column>
-          <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="id" align="center" label="法人身份证">
+          <el-table-column prop="phone" label="医生编号" align="center"></el-table-column>
+          <el-table-column prop="res_name" label="医生真实姓名" width="280" align='center'></el-table-column>
+          <el-table-column prop="id" align="center" label="身份证号码">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.id" alt style="height:3rem;" />
             </template>
           </el-table-column>
-          <el-table-column prop="busLicen" align="center" label="营业执照">
+          <el-table-column prop="busLicen" align="center" label="工牌照片">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.busLicen" alt style="height:6rem;" />
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
-          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
-          <el-table-column prop="org_stateText" align="center" label="状态">
+          <el-table-column align="center" label="查看详情">
+            <template slot-scope="scope">
+              <el-button size="mini" type="primary" @click="editPush(scope.$index, scope.row)">查看</el-button>
+              <el-dialog title="消息详情" :visible.sync="dialog2Visible" width="600px" :before-close="handle2Close" :modal-append-to-body="false">
+                <el-form ref="form" :model="form2" label-width="100px">
+                  <el-form-item label="消息标题" prop="title">
+                    <el-input v-model="form2.m_title" :disabled="true"></el-input>
+                  </el-form-item>
+                  <el-form-item label="消息内容" prop="content">
+                    <el-input type="textarea" v-model="form2.m_canten" :disabled="true"></el-input>
+                  </el-form-item>
+                  <el-form-item label="消息发送人" prop="name">
+                    <el-input v-model="form2.m_name" :disabled="true"></el-input>
+                  </el-form-item>
+                  <el-form-item label="消息类型" prop="l_type" style="text-align:left">
+                    <el-radio-group v-model="form2.m_type" :disabled="true">
+                      <el-radio label="广告促销"></el-radio>
+                      <el-radio label="要是通知"></el-radio>
+                    </el-radio-group>
+                  </el-form-item>
+                  <el-form-item prop="m_porpose" label="目的">
+                    <el-input v-model="form2.m_porpose" placeholder="请输入消息接收人" :disabled="true"></el-input>
+                  </el-form-item>
+                </el-form>
+                <span slot="footer" class="dialog-footer">
+                  <el-button type="primary" @click="on2Submit()">确定</el-button>
+                </span>
+              </el-dialog>
+            </template>
+          </el-table-column>
+          <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template slot-scope="scope">
               <div class="payShow">
                 <a v-if="scope.row.org_state==1" class="pass">
-                  <span>已通过</span>
+                  <span>认证已通过</span>
                 </a>
                 <a v-else-if="scope.row.org_state==2" class="notPass">
-                  <span>未通过</span>
+                  <span>认证未通过</span>
                 </a>
                 <a v-else-if="scope.row.org_state==3" class="notPass">
                   <span>已忽略</span>
@@ -47,7 +71,7 @@
                   <span>黑名单</span>
                 </a>
                 <a v-else>
-                  <span>未审核</span>
+                  <span>未认证</span>
                 </a>
               </div>
             </template>
@@ -61,22 +85,22 @@
           <el-badge v-if="onsaleData0length" :value="onsaleData0length" size="mini" class="item"></el-badge>
         </span> -->
         <el-table :data="onsaleData0" border v-loading="listLoading">
-          <el-table-column prop="res_name" label="医生名称" width="280" align='center'></el-table-column>
-          <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
-          <el-table-column prop="pingji" label="评级" align='center'></el-table-column>
-          <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="id" align="center" label="法人身份证">
+          <el-table-column prop="phone" label="医生编号" align="center"></el-table-column>
+          <el-table-column prop="res_name" label="医生真实姓名" width="280" align='center'></el-table-column>
+          <!-- <el-table-column prop="xinyong" label="医生详情" align='center'></el-table-column> -->
+          <!-- <el-table-column prop="pingji" label="入驻信息表" align='center'></el-table-column> -->
+          <el-table-column prop="id" align="center" label="身份证号码">
             <template slot-scope="scope">
-              <img :id="scope.row.orderNum" :src="scope.row.id" alt style="height:3rem;cursor:pointer;" @click="photoZoomPro(scope.row)">
+              <img v-image-preview class="busLicen" :src="scope.row.id" alt style="height:3rem;" />
             </template>
           </el-table-column>
-          <el-table-column prop="busLicen" align="center" label="营业执照">
+          <el-table-column prop="busLicen" align="center" label="工牌照片">
             <template slot-scope="scope">
-              <img :id="scope.row.alias" :src="scope.row.busLicen" alt style="height:3rem;cursor:pointer;" @click="photoZoomPro2(scope.row)">
+              <img v-image-preview class="busLicen" :src="scope.row.busLicen" alt style="height:6rem;" />
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
-          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
+          <!-- <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column> -->
           <el-table-column prop="org_stateText" align="center" label="审核结果" width="250">
             <template slot-scope="scope">
               <el-button type="success" @click="pass(scope.$index)" size="mini">通过</el-button>
@@ -108,22 +132,22 @@
       </el-tab-pane>
       <el-tab-pane label="已通过" name="thirdly" class="havebought">
         <el-table :data="onsaleData1" border>
-          <el-table-column prop="res_name" label="医生名称" width="280" align='center'></el-table-column>
-          <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
-          <el-table-column prop="pingji" label="评级" align='center'></el-table-column>
-          <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="id" align="center" label="法人身份证">
+          <el-table-column prop="phone" label="医生编号" align="center"></el-table-column>
+          <el-table-column prop="res_name" label="医生真实姓名" width="280" align='center'></el-table-column>
+          <!-- <el-table-column prop="xinyong" label="医生详情" align='center'></el-table-column> -->
+          <!-- <el-table-column prop="pingji" label="入驻信息表" align='center'></el-table-column> -->
+          <el-table-column prop="id" align="center" label="身份证号码">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.id" alt style="height:3rem;" />
             </template>
           </el-table-column>
-          <el-table-column prop="busLicen" align="center" label="营业执照">
+          <el-table-column prop="busLicen" align="center" label="工牌照片">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.busLicen" alt style="height:6rem;" />
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
-          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
+          <!-- <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column> -->
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template>
               <div class="payShow">
@@ -142,22 +166,22 @@
       </el-tab-pane>
       <el-tab-pane label="未通过" name="fourthly" class="havebought">
         <el-table :data="onsaleData2" border>
-          <el-table-column prop="res_name" label="医生名称" width="280" align='center'></el-table-column>
-          <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
-          <el-table-column prop="pingji" label="评级" align='center'></el-table-column>
-          <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="id" align="center" label="法人身份证">
+          <el-table-column prop="phone" label="医生编号" align="center"></el-table-column>
+          <el-table-column prop="res_name" label="医生真实姓名" width="280" align='center'></el-table-column>
+          <!-- <el-table-column prop="xinyong" label="医生详情" align='center'></el-table-column> -->
+          <!-- <el-table-column prop="pingji" label="入驻信息表" align='center'></el-table-column> -->
+          <el-table-column prop="id" align="center" label="身份证号码">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.id" alt style="height:3rem;" />
             </template>
           </el-table-column>
-          <el-table-column prop="busLicen" align="center" label="营业执照">
+          <el-table-column prop="busLicen" align="center" label="工牌照片">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.busLicen" alt style="height:6rem;" />
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
-          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
+          <!-- <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column> -->
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template slot-scope="scope">
               <div class="payShow">
@@ -179,22 +203,22 @@
       </el-tab-pane>
       <el-tab-pane label="已忽略" name="fifth" class="havebought">
         <el-table :data="onsaleData3" border>
-          <el-table-column prop="res_name" label="医生名称" width="280" align='center'></el-table-column>
-          <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
-          <el-table-column prop="pingji" label="评级" align='center'></el-table-column>
-          <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="id" align="center" label="法人身份证">
+          <el-table-column prop="phone" label="医生编号" align="center"></el-table-column>
+          <el-table-column prop="res_name" label="医生真实姓名" width="280" align='center'></el-table-column>
+          <!-- <el-table-column prop="xinyong" label="医生详情" align='center'></el-table-column> -->
+          <!-- <el-table-column prop="pingji" label="入驻信息表" align='center'></el-table-column> -->
+          <el-table-column prop="id" align="center" label="身份证号码">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.id" alt style="height:3rem;" />
             </template>
           </el-table-column>
-          <el-table-column prop="busLicen" align="center" label="营业执照">
+          <el-table-column prop="busLicen" align="center" label="工牌照片">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.busLicen" alt style="height:6rem;" />
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
-          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
+          <!-- <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column> -->
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template>
               <div class="payShow">
@@ -213,22 +237,22 @@
       </el-tab-pane>
       <el-tab-pane label="黑名单" name="sixth" class="havebought">
         <el-table :data="onsaleData4" border>
-          <el-table-column prop="res_name" label="医生名称" width="280" align='center'></el-table-column>
-          <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
-          <el-table-column prop="pingji" label="评级" align='center'></el-table-column>
-          <el-table-column prop="res_name" align="center" label="发布人"></el-table-column>
-          <el-table-column prop="id" align="center" label="法人身份证">
+          <el-table-column prop="phone" label="医生编号" align="center"></el-table-column>
+          <el-table-column prop="res_name" label="医生真实姓名" width="280" align='center'></el-table-column>
+          <!-- <el-table-column prop="xinyong" label="医生详情" align='center'></el-table-column> -->
+          <!-- <el-table-column prop="pingji" label="入驻信息表" align='center'></el-table-column> -->
+          <el-table-column prop="id" align="center" label="身份证号码">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.id" alt style="height:3rem;" />
             </template>
           </el-table-column>
-          <el-table-column prop="busLicen" align="center" label="营业执照">
+          <el-table-column prop="busLicen" align="center" label="工牌照片">
             <template slot-scope="scope">
               <img v-image-preview class="busLicen" :src="scope.row.busLicen" alt style="height:6rem;" />
             </template>
           </el-table-column>
           <el-table-column prop="phone" align="center" label="联系电话"></el-table-column>
-          <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column>
+          <!-- <el-table-column prop="org_add" align="center" label="入驻所在地"></el-table-column> -->
           <el-table-column prop="org_stateText" align="center" label="审核结果">
             <template>
               <div class="payShow">
@@ -295,6 +319,7 @@ export default {
         region: '',
       },
       listLoading: true,
+      dialog2Visible: false,
       visible: false,
       activeName: 'first',
       onsaleData1: [],//已通过
@@ -374,6 +399,19 @@ export default {
         url: item.busLicen,
       });
 
+    },
+    handle2Close (done) {
+      done();
+    },
+    // 点击查看
+    editPush (i, row) {
+      // 出现弹窗
+      this.dialog2Visible = true
+      this.form2 = deepClone(row)
+    },
+    // 编辑推送弹框推送
+    on2Submit () {
+      this.dialog2Visible = false
     },
     // 点击通过和未通过
     pass (idx) {

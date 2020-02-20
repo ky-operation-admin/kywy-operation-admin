@@ -57,6 +57,10 @@
         </template>
       </el-table-column>
     </el-table>
+    <div class="block" style="margin:30px;" v-if="total > 0">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="data.pageNum" :page-sizes="[1,2,3,4]" :page-size="data.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      </el-pagination>
+    </div>
   </div>
 </template>
 <script>
@@ -70,7 +74,12 @@ export default {
     return {
       listLoading: true,
       tableData: [],
-      keyword: ''
+      keyword: '',
+      data: {
+        pageNum: 1,
+        pageSize: 1,
+      },
+      total: 0,
     }
   },
   created () {
@@ -90,9 +99,12 @@ export default {
         this.listLoading = false
       }, 1.5 * 1000)
       // 请求数据
-      queryMeDoctor().then(res => {
+      queryMeDoctor({
+        ...this.data
+      }).then(res => {
         console.log('res', res.data.list);
         this.tableData = res.data.list
+        this.total = res.data.total
       })
     },
     handleFilter () {
@@ -113,6 +125,15 @@ export default {
         this.init()
       });
     },
+    // --------------------------分页----------------------------
+    handleSizeChange (val) {
+      this.data.pageSize = val
+      this.init()
+    },
+    handleCurrentChange (val) {
+      this.data.pageNum = val
+      this.init()
+    }
   }
 }
 </script>

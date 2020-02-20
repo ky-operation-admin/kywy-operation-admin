@@ -9,9 +9,9 @@
     <el-table :data="tableData" style="width: 100%" border v-loading="listLoading">
 
       <el-table-column prop="res_name" label="患者名称" align="center"></el-table-column>
-      <!-- <el-table-column prop="alias" label="统一社会信用代码" align="center"></el-table-column> -->
-      <el-table-column prop="username" label="注册号" align="center"></el-table-column>
-      <!-- <el-table-column prop="type" label="企业类型" align="center"></el-table-column> -->
+      <el-table-column prop="alias" label="性别" align="center"></el-table-column>
+      <el-table-column prop="username" label="年龄" align="center"></el-table-column>
+      <el-table-column prop="type" label="患者病情" align="center"></el-table-column>
       <el-table-column prop="busLicen" label="营业执照" align="center">
         <template slot-scope="scope">
           <img v-image-preview :src="scope.row.busLicen" alt style="height:6rem;" />

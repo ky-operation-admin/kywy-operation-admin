@@ -6,10 +6,11 @@ import {
 
 let token = getToken()
 // 查询医生列表
-export function queryMeDoctor() {
+export function queryMeDoctor(data) {
   return request({
     url: '/meDoctor/queryMeDoctor',
     method: 'get',
+    params: data,
     headers: {
       token
     },

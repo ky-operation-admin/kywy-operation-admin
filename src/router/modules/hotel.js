@@ -9,7 +9,9 @@ const hotelRouter = {
       title: '酒店管理',
       icon: '酒店'
     },
-    children: [{
+    children: 
+    [
+        {
         path: 'audit',
         name: 'audit',
         component: () => import('@/views/ky_hotel/index'),

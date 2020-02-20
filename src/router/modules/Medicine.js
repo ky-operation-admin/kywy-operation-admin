@@ -4,27 +4,67 @@ import Layout from '@/layout'
 const medicineRouter = {
   path: '/medicine',
   component: Layout,
-  redirect: '/medicine/doctorInfo',
+  redirect: '/medicine/index',
   name: 'tree',
   meta: {
     title: '寻医问药',
     icon: 'medicine'
   },
   children: [{
-      path: 'audit',
-      name: 'audit',
-      component: () => import('@/views/ky_medicine/index'),
+      path: 'patient',
+      name: 'patient',
+      component: () => import('@/views/ky_medicine/patient/index'),
       meta: {
-        title: '医生入驻审核',
-      }
+        title: '患者管理',
+      },
+      children: [{
+        path: 'patientInfo',
+        name: 'patientInfo',
+        component: () => import('@/views/ky_medicine/patient/patientInfo'),
+        meta: {
+          title: '患者基本信息',
+        }
+      }, {
+        path: 'doctorInfo',
+        name: 'doctorInfo',
+        component: () => import('@/views/ky_medicine/doctor/doctorInfo/index'),
+        meta: {
+          title: '患者下单信息',
+        }
+      }, ]
     },
     {
-      path: 'doctorInfo',
-      name: 'doctorInfo',
-      component: () => import('@/views/ky_medicine/doctorInfo/index'),
+      path: 'doctor',
+      name: 'doctor',
+      component: () => import('@/views/ky_medicine/doctor/index'),
       meta: {
-        title: '医生基本信息',
-      }
+        title: '医生管理',
+      },
+      children: [{
+          path: 'audit',
+          name: 'audit',
+          component: () => import('@/views/ky_medicine/doctor/doctorAudit'),
+          meta: {
+            title: '医生入驻审核',
+          }
+        },
+        {
+          path: 'doctorInfo',
+          name: 'doctorInfo',
+          component: () => import('@/views/ky_medicine/doctor/doctorInfo/index'),
+          meta: {
+            title: '医生基本信息',
+          }
+        },
+        {
+          path: 'docReorder',
+          name: 'docReorder',
+          component: () => import('@/views/ky_medicine/message/index'),
+          meta: {
+            title: '医生接单',
+          }
+        }
+      ]
     },
     {
       path: 'message',

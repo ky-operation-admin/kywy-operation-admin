@@ -1,6 +1,6 @@
 <template>
   <!-- <div :class="classObj" class="app-wrapper"> -->
-  <div  class="app-wrapper">
+  <div class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" />
     <div class="main-container" :class="{hasTagsView:needTagsView}">
@@ -8,13 +8,17 @@
         <navbar />
         <tags-view v-if="needTagsView"></tags-view>
       </div>
-      <app-main />
+      <app-main :class="{'fixed':fixedHeader}" />
+      <right-panel v-if="showSettings">
+        <settings />
+      </right-panel>
     </div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain} from './components'
+import RightPanel from '@/components/RightPanel'
+import { Navbar, Sidebar, AppMain, Settings } from './components'
 import tagsView from './components/TagsView/index'
 import ResizeMixin from './mixin/ResizeHandler'
 import { resetRouter } from '../router'
@@ -25,7 +29,9 @@ export default {
     Navbar,
     Sidebar,
     AppMain,
-    tagsView
+    tagsView,
+    RightPanel,
+    Settings
   },
   mixins: [ResizeMixin],
   computed: {
@@ -36,13 +42,14 @@ export default {
       return this.$store.state.app.device
     },
     fixedHeader () {
+      console.log('fixedHeader', this.$store.state.settings.fixedHeader)
       return this.$store.state.settings.fixedHeader
     },
     showSettings () {
       return this.$store.state.settings.showSettings
     },
     needTagsView () {
-    //   console.log('needTagsView', this.$store.state)
+      //   console.log('needTagsView', this.$store.state)
       return this.$store.state.settings.tagsView
     },
     classObj () {
@@ -63,8 +70,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~@/styles/mixin.scss";
-@import "~@/styles/variables.scss";
+@import '~@/styles/mixin.scss';
+@import '~@/styles/variables.scss';
 
 .app-wrapper {
   @include clearfix;
@@ -95,10 +102,12 @@ export default {
   transition: width 0.28s;
 }
 
-.hideSidebar .fixed-header {
-  width: calc(100% - 54px);
+// .hideSidebar .fixed-header {
+//   width: calc(100% - 54px);
+// }
+.fixed {
+  padding-top: 113px;
 }
-
 .mobile .fixed-header {
   width: 100%;
 }

@@ -1,4 +1,5 @@
 import defaultSettings from '@/settings'
+import variables from '@/styles/element-variables.scss'
 
 const {
   showSettings,
@@ -8,6 +9,7 @@ const {
 } = defaultSettings
 
 const state = {
+  theme: variables.theme,
   showSettings: showSettings,
   tagsView: tagsView,
   fixedHeader: fixedHeader,

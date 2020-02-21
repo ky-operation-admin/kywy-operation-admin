@@ -3,7 +3,7 @@
     <!-- 导航收缩框 -->
     <!-- <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
 
-    <breadcrumb class="breadcrumb-container" />
+    <!-- <breadcrumb class="breadcrumb-container" /> -->
 
     <div class="right-menu">
       <div class="home" @click="gotohome">

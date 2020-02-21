@@ -16,3 +16,29 @@ export function queryMeDoctor(data) {
     },
   })
 }
+// 修改医生信息
+export function modifyMeDoctor(userinfo) {
+  return request({
+    url: '/meDoctor/modifyMeDoctor',
+    method: 'put',
+    headers: {
+      token
+    },
+    params: {
+        'id': userinfo.id,
+        'profilePhoto': userinfo.profilePhoto,
+        'account': userinfo.account,
+        'phone': userinfo.phone,
+        'name': userinfo.name,
+        'gender': userinfo.gender,
+        'authState': userinfo.authState,
+        'hospital': userinfo.hospital,
+        'department': userinfo.department,
+        'professionalTitle': userinfo.professionalTitle,
+        'goodAt': userinfo.goodAt,
+        'introduce': userinfo.introduce,
+        'experience': userinfo.experience,
+        'doctorno': userinfo.doctorno,
+    }
+  })
+}

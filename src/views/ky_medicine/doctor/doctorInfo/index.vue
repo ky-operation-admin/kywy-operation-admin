@@ -50,8 +50,45 @@
       </el-table-column>
       <el-table-column align="center" label="操作" width="200">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" disabled>编辑</el-button>
-          <el-button size="mini" type="danger" @click="del(scope.$index,scope.row)">删除</el-button>
+          <el-button size="mini" type="primary" @click="edit(scope.row)">编辑</el-button>
+          <el-dialog title="编辑信息" top="5vh" :visible.sync="dialogVisible" width="600px" :before-close="handleClose" :modal-append-to-body="false">
+            <el-form ref="form" :model="form2" label-width="100px">
+              <el-form-item label="医生编号" prop="doctorno">
+                <el-input v-model="form2.doctorno"></el-input>
+              </el-form-item>
+              <el-form-item label="医生姓名" prop="name">
+                <el-input v-model="form2.name"></el-input>
+              </el-form-item>
+              <el-form-item label="医生账号" prop="account">
+                <el-input v-model="form2.account"></el-input>
+              </el-form-item>
+              <el-form-item label="手机号码" prop="phone">
+                <el-input v-model="form2.phone"></el-input>
+              </el-form-item>
+              <el-form-item label="所属医院" prop="hospital">
+                <el-input v-model="form2.hospital"></el-input>
+              </el-form-item>
+              <el-form-item label="所属科室" prop="department">
+                <el-input v-model="form2.department"></el-input>
+              </el-form-item>
+              <el-form-item label="职称" prop="professionalTitle">
+                <el-input v-model="form2.professionalTitle"></el-input>
+              </el-form-item>
+              <el-form-item label="擅长" prop="goodAt">
+                <el-input v-model="form2.goodAt"></el-input>
+              </el-form-item>
+              <el-form-item label="简介" prop="introduce">
+                <el-input type="textarea" v-model="form2.introduce"></el-input>
+              </el-form-item>
+              <el-form-item label="经验" prop="experience">
+                <el-input v-model="form2.experience"></el-input>
+              </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+              <el-button type="primary" @click="onSubmit()">确定</el-button>
+            </span>
+          </el-dialog>
+          <!-- <el-button size="mini" type="danger" @click="del(scope.$index,scope.row)">删除</el-button> -->
         </template>
       </el-table-column>
     </el-table>
@@ -62,11 +99,24 @@
   </div>
 </template>
 <script>
-// 模拟数据
-import data from '@/assets/js/mock'
+import { deepClone } from '@/utils'
+const defaultForm = {
+  profilePhoto: '',
+  account: '',
+  phone: '',
+  name: '',
+  gender: '',
+  authState: '',
+  hospital: '',
+  department: '',
+  professionalTitle: '',
+  goodAt: '',
+  introduce: '',
+  experience: '',
+  doctorno: '',
+}
 // 引入接口
-import { queryMeDoctor } from '@/api/medicine'
-let onsaleData = data.onsaleData
+import { queryMeDoctor, modifyMeDoctor } from '@/api/medicine'
 export default {
   data () {
     return {
@@ -75,21 +125,17 @@ export default {
       keyword: '',
       data: {
         pageNum: 1,
-        pageSize: 1,
+        pageSize: 8,
       },
+      dialogVisible: false,
       total: 0,
+      form2: Object.assign({}, defaultForm),
     }
   },
   created () {
     this.init()
   },
   methods: {
-    handleEdit () {
-      this.dialogVisible = true
-    },
-    onSubmit () {
-      window.console.log('submit!')
-    },
     // 数据初始化
     init () {
       this.listLoading = true
@@ -100,7 +146,6 @@ export default {
       queryMeDoctor({
         ...this.data
       }).then(res => {
-        console.log('res', res.data.list);
         this.tableData = res.data.list
         this.total = res.data.total
       })
@@ -108,20 +153,25 @@ export default {
     handleFilter () {
       this.init()
     },
-    // 删除
-    async del (index, row) {
-      this.$confirm("是否确定要删除?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(async () => {
-        this.$message({
-          type: "success",
-          message: "删除成功!"
-        });
-        data.onsaleData.splice(index, 1)
+    handleClose (done) {
+      done();
+    },
+    // 点击编辑推送
+    edit (row) {
+      // 出现弹窗
+      this.dialogVisible = true
+      this.form2 = deepClone(row)
+    },
+    // 编辑推送弹框推送
+    onSubmit () {
+      // 发送网络请求修改
+      console.log(this.form2);
+      modifyMeDoctor(this.form2).then(res=>{
+          console.log(res);
+        //   更新信息
         this.init()
-      });
+      })
+      this.dialogVisible = false
     },
     // --------------------------分页----------------------------
     handleSizeChange (val) {

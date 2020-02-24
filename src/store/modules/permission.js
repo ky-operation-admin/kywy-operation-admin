@@ -1,8 +1,10 @@
-import { constantRoutes } from '@/router'
-
+import {
+  asyncRoutes,
+  constantRoutes
+} from '@/router'
 
 /**
- * 使用meta.roles， 以确定当前用户是否具有权限
+ * Use meta.role to determine if the current user has permission
  * @param roles
  * @param route
  */
@@ -15,7 +17,7 @@ function hasPermission(roles, route) {
 }
 
 /**
- * 通过递归过滤异步路由表
+ * Filter asynchronous routing tables by recursion
  * @param routes asyncRoutes
  * @param roles
  */
@@ -23,7 +25,9 @@ export function filterAsyncRoutes(routes, roles) {
   const res = []
 
   routes.forEach(route => {
-    const tmp = { ...route }
+    const tmp = {
+      ...route
+    }
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
         tmp.children = filterAsyncRoutes(tmp.children, roles)
@@ -31,6 +35,7 @@ export function filterAsyncRoutes(routes, roles) {
       res.push(tmp)
     }
   })
+  console.log('res', res);
   return res
 }
 
@@ -47,15 +52,19 @@ const mutations = {
 }
 
 const actions = {
-  generateRoutes({ commit }, roles) {
+  generateRoutes({
+    commit
+  }, roles) {
     return new Promise(resolve => {
       let accessedRoutes
-      if (roles.includes('kywyadmin')) {
-        accessedRoutes = constantRoutes || []
+      if (roles.includes('admin')) {
+        accessedRoutes = asyncRoutes || []
+        console.log('asyncRoutes',asyncRoutes);
+        
       } else {
-        accessedRoutes = filterAsyncRoutes(constantRoutes, roles)
-      }
-
+        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+    }
+    console.log('accessedRoutes', accessedRoutes);
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

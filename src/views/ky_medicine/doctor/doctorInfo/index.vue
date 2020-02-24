@@ -24,7 +24,7 @@
       </el-table-column>
       <el-table-column label="经验简介" align="center">
         <el-table-column prop="goodAt" align="center" label="擅长"></el-table-column>
-        <el-table-column prop="introduce" align="center" label="简介"></el-table-column>
+        <el-table-column prop="introduce" align="center" label="简介" ></el-table-column>
         <el-table-column prop="experience" align="center" label="经验"></el-table-column>
       </el-table-column>
       <el-table-column prop="org_stateText" align="center" label="认证状态">
@@ -93,7 +93,7 @@
       </el-table-column>
     </el-table>
     <div class="block" style="margin:30px;" v-if="total > 0">
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="data.pageNum" :page-sizes="[1,2,3,4]" :page-size="data.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="data.pageNum" :page-sizes="[5,10,15,20]" :page-size="data.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </div>
   </div>
@@ -125,7 +125,7 @@ export default {
       keyword: '',
       data: {
         pageNum: 1,
-        pageSize: 8,
+        pageSize: 5,
       },
       dialogVisible: false,
       total: 0,
@@ -166,9 +166,15 @@ export default {
     onSubmit () {
       // 发送网络请求修改
       console.log(this.form2);
-      modifyMeDoctor(this.form2).then(res=>{
-          console.log(res);
+      modifyMeDoctor(this.form2).then(res => {
+        console.log(res);
         //   更新信息
+        this.$message({
+          message: '修改成功!',
+          offset: 500,
+          duration: 1300,
+          type: 'success'
+        });
         this.init()
       })
       this.dialogVisible = false

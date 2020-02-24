@@ -4,7 +4,7 @@ const hotelRouter = {
     path: '/hotel',
     component: Layout,
     redirect: '/hotel/basicInfor',
-    name: 'tree',
+    name: 'Hotel',
     meta: {
       title: '酒店管理',
       icon: '酒店'
@@ -28,83 +28,82 @@ const hotelRouter = {
         }
       },
       {
-        path: 'message',
-        name: 'message',
+        path: 'hotel_message',
+        name: 'HotelMessage',
         component: () => import('@/views/ky_hotel/hotelMessage/index'),
         meta: {
           title: '酒店消息管理',
         }
       },
       {
-        path: 'bigdata',
-        name: 'bigdata',
+        path: 'hotel_bigdata',
+        name: 'HotelBigdata',
         component: () => import('@/views/ky_hotel/hotelData/index'),
         meta: {
           title: '酒店大数据',
         }
       },
       {
-        path: 'bigdata1',
-        name: 'bigdata1',
+        path: 'hotel_order',
+        name: 'HotelOrder',
         component: () => import('@/views/ky_hotel/hotelOrder/index'),
         meta: {
           title: '酒店下单管理',
         }
       }, {
-        path: 'bigdata2',
-        name: 'bigdata2',
+        path: 'hotel_putaway',
+        name: 'HotelPutaway',
         component: () => import('@/views/ky_hotel/hotelPutaway/index'),
         meta: {
           title: '酒店上架管理',
         }
       }, {
-        path: 'bigdata3',
-        name: 'bigdata3',
+        path: 'hotel_accout',
+        name: 'HotelAccout',
         component: () => import('@/views/ky_hotel/hotelAccount/index'),
         meta: {
           title: '酒店账户管理',
         }
       }, {
-        path: 'bigdata4',
-        name: 'bigdata4',
+        path: 'hotel_dis',
+        name: 'HotelDis',
         component: () => import('@/views/ky_hotel/hotelDistribution/index'),
         meta: {
           title: '酒店分销管理',
         }
       }, {
-        path: 'bigdata5',
-        name: 'bigdata5',
+        path: 'hotel_after',
+        name: 'HotelAfter',
         component: () => import('@/views/ky_hotel/hotelAftersale/index'),
         meta: {
           title: '酒店售后管理',
         }
       },
       {
-        path: 'bigdata6',
-        name: 'bigdata6',
+        path: 'hotel_hq',
+        name: 'HotelHq',
         component: () => import('@/views/ky_hotel/hotelData/index'),
         meta: {
           title: '市场行情监测',
         }
       },
       {
-        path: 'ts',
-        name: 'ts',
+        path: 'hotel_complain',
         component: () => import('@/views/ky_merchant/merchantContent/index'),
-        name: 'merchantContent',
+        name: 'HotelComplain',
         meta: {
           title: '酒店投诉管理'
         },
         children: [{
-          path: 'mer_pl',
-          name: 'mer_pl',
+          path: 'hotel_pl',
+          name: 'HotelPl',
           component: () => import('@/views/ky_hotel/hotelContent/hotel_conment_audit'),
           meta: {
             title: '酒店投诉管理',
           }
         }, {
-          path: 'mer_serve',
-          name: 'mer_serve',
+          path: 'hot_serve',
+          name: 'HotServe',
           component: () => import('@/views/ky_hotel/hotelContent/hotel_conment_audit'),
           meta: {
             title: '消费者投诉管理',

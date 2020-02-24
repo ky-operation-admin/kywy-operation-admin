@@ -3,31 +3,31 @@ import Layout from '@/layout'
 const merchantRouter = {
   path: '/merchant',
   component: Layout,
-  redirect: '/merchant/basicInfor',
-  name: 'tree',
+  redirect: '/merchant/merchantInfor',
+  name: 'Merchant',
   meta: {
     title: '商城商家管理',
     icon: 'shangcheng'
   },
   children: [{
-      path: 'audit',
-      name: 'audit',
+      path: 'merchant_audit',
+      name: 'MerchantAudit',
       component: () => import('@/views/ky_merchant/index'),
       meta: {
         title: '商家入驻审核',
       }
     },
     {
-      path: 'basicInfor',
-      name: 'basicInfor',
+      path: 'merchantInfor',
+      name: 'MerchantInfor',
       component: () => import('@/views/ky_merchant/merchantInfor/index'),
       meta: {
         title: '商家基本信息',
       }
     },
     {
-      path: 'message',
-      name: 'message',
+      path: 'mer_message',
+      name: 'MerMessage',
       component: () => import('@/views/ky_organization/organizationMessage/index'),
       meta: {
         title: '商家消息管理',
@@ -86,22 +86,22 @@ const merchantRouter = {
       }
     },
     {
-      path: 'ts',
+      path: 'mer_complain',
       component: () => import('@/views/ky_merchant/merchantContent/index'),
-      name: 'merchantContent',
+      name: 'MerComplain',
       meta: {
         title: '商家投诉管理'
       },
       children: [{
-        path: 'mer_pl',
-        name: 'mer_pl',
+        path: 'mer_ts',
+        name: 'mer_ts',
         component: () => import('@/views/ky_merchant/merchantContent/mer_conment_audit'),
         meta: {
           title: '商家投诉管理',
         }
       }, {
-        path: 'mer_serve',
-        name: 'mer_serve',
+        path: 'consumer_ts',
+        name: 'ConsumerTs',
         component: () => import('@/views/ky_merchant/merchantContent/mer_postserve_audit'),
         meta: {
           title: '消费者投诉管理',
@@ -109,9 +109,9 @@ const merchantRouter = {
       }]
     },
     {
-      path: 'merchantContent',
+      path: 'merchantContent_audit',
       component: () => import('@/views/ky_merchant/merchantContent/index'),
-      name: 'merchantContent',
+      name: 'MerchantContentAudit',
       meta: {
         title: '商家内容审核'
       },
@@ -154,8 +154,8 @@ const merchantRouter = {
           title: '商家经营监测',
         }
       }, {
-        path: 'pay',
-        name: 'pay',
+        path: 'merchant_pay',
+        name: 'MerchantPay',
         component: () => import('@/views/ky_merchant/merchantSuoervice/merchant_zf'),
         meta: {
           title: '商家支付管理',
@@ -168,9 +168,9 @@ const merchantRouter = {
           title: '商家资金管理',
         },
         children: [{
-          path: 'merchantSuoervice',
+          path: 'merchant_dk',
           component: () => import('@/views/ky_merchant/merchantSuoervice/merchant_jy'),
-          name: 'merchantSuoervice',
+          name: 'MerchantDk',
           meta: {
             title: '打款管理',
           }

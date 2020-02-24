@@ -5,7 +5,6 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
-
 /* 引入模块路由*/
 import merchantRouter from './modules/merchant'
 import medicineRouter from './modules/Medicine'
@@ -75,292 +74,445 @@ export const constantRoutes = [
       }
     }]
   },
-  // ........................寻医问药............................
-  medicineRouter,
+
   // ........................消费者管理............................
+  //   {
+  //     path: '/consumer',
+  //     component: Layout,
+  //     redirect: '/consumer/basicInfor',
+  //     name: 'Example',
+  //     meta: {
+  //       title: '消费者管理',
+  //       icon: 'xiaofeizhe'
+  //     },
+  //     children: [{
+  //         path: 'basicInfor',
+  //         name: 'basicInfor',
+  //         component: () => import('@/views/ky_consumer/index'),
+  //         meta: {
+  //           title: '消费者基本信息',
+  //         }
+  //       },
+  //       {
+  //         path: 'consumer_mes',
+  //         name: 'ConsumerMes',
+  //         component: () => import('@/views/ky_consumer/consumer_mes'),
+  //         meta: {
+  //           title: '消费者消息管理',
+  //         }
+  //       },
+  //       {
+  //         path: 'consumer_acc',
+  //         name: 'ConsumerAcc',
+  //         component: () => import('@/views/ky_consumer/consumerAcc/index'),
+  //         meta: {
+  //           title: '消费者账户管理',
+  //         }
+  //       },
+  //       {
+  //         path: 'health',
+  //         name: 'health',
+  //         component: () => import('@/views/ky_consumer/healthData/index'),
+  //         meta: {
+  //           title: '消费者健康数据',
+  //         }
+  //       },
+  //       {
+  //         path: 'cpfw',
+  //         name: 'cpfw',
+  //         component: () => import('@/views/ky_consumer/consumer_cpfw/index'),
+  //         meta: {
+  //           title: '消费者产品服务',
+  //         }
+  //       },
+  //       {
+  //         path: 'bigdata',
+  //         name: 'bigdata',
+  //         component: () => import('@/views/ky_consumer/consumer_bigdata/index'),
+  //         meta: {
+  //           title: '消费者大数据分析',
+  //         }
+  //       },
+  //     ]
+  //   },
+
+  // ........................平台规则............................
   {
-    path: '/consumer',
+    path: '/platform_rule',
     component: Layout,
-    redirect: '/consumer/basicInfor',
-    name: 'Example',
-    meta: {
-      title: '消费者管理',
-      icon: 'xiaofeizhe'
-    },
     children: [{
-        path: 'basicInfor',
-        name: 'basicInfor',
-        component: () => import('@/views/ky_consumer/index'),
+      path: 'index',
+      name: 'Platform_rule',
+      component: () => import('@/views/ky_rule/index'),
+      meta: {
+        title: '平台规则',
+        icon: 'rule'
+      }
+    }]
+  },
+  // ........................社区管理............................
+  //   {
+  //     path: '/community',
+  //     component: Layout,
+  //     redirect: '/community/activityCenter',
+  //     name: 'Community',
+  //     meta: {
+  //       title: '社区管理',
+  //       icon: 'shequ'
+  //     },
+  //     children: [{
+  //         path: 'activityCenter',
+  //         name: 'activityCenter',
+  //         component: () => import('@/views/ky_organization/index'),
+  //         meta: {
+  //           title: '社区内容管理',
+  //           roles: ['editor'],
+
+  //         }
+  //       },
+  //       {
+  //         path: 'drugstore',
+  //         name: 'drugstore',
+  //         component: () => import('@/views/ky_organization/organizationInfor/index'),
+  //         meta: {
+  //           title: '社区基本信息',
+  //         }
+  //       }, {
+  //         path: 'elderlyUniversity',
+  //         name: 'elderlyUniversity',
+  //         component: () => import('@/views/ky_organization/organizationData/index'),
+  //         meta: {
+  //           title: '社区大数据',
+  //         }
+  //       }
+  //     ]
+  //   },
+
+
+  // ........................景点管理............................
+  //   {
+  //     path: '/scenic',
+  //     component: Layout,
+  //     redirect: '/scenic/basicInfor',
+  //     name: 'tree',
+  //     meta: {
+  //       title: '景点管理',
+  //       icon: '景点'
+  //     },
+  //     children: [{
+  //         path: 'audit',
+  //         name: 'audit',
+  //         component: () => import('@/views/ky_organization/index'),
+  //         meta: {
+  //           title: '景点入驻审核',
+  //         }
+  //       },
+  //       {
+  //         path: 'basicInfor',
+  //         name: 'basicInfor',
+  //         component: () => import('@/views/ky_organization/organizationInfor/index'),
+  //         meta: {
+  //           title: '景点基本信息',
+  //         }
+  //       }, {
+  //         path: 'bigdata',
+  //         name: 'bigdata',
+  //         component: () => import('@/views/ky_organization/organizationData/index'),
+  //         meta: {
+  //           title: '景点大数据',
+  //         }
+  //       }
+  //     ]
+  //   },
+  // ........................保险管理............................
+  //   {
+  //     path: '/insurance',
+  //     component: Layout,
+  //     redirect: '/insurance/basicInfor',
+  //     name: 'tree',
+  //     meta: {
+  //       title: '保险管理',
+  //       icon: 'baoxian'
+  //     },
+  //     children: [{
+  //         path: 'audit',
+  //         name: 'audit',
+  //         component: () => import('@/views/ky_organization/index'),
+  //         meta: {
+  //           title: '保险入驻审核',
+  //         }
+  //       },
+  //       {
+  //         path: 'basicInfor',
+  //         name: 'basicInfor',
+  //         component: () => import('@/views/ky_organization/organizationInfor/index'),
+  //         meta: {
+  //           title: '保险基本信息',
+  //         }
+  //       }, {
+  //         path: 'bigdata',
+  //         name: 'bigdata',
+  //         component: () => import('@/views/ky_organization/organizationData/index'),
+  //         meta: {
+  //           title: '保险大数据',
+  //         }
+  //       }
+  //     ]
+  //   },
+  // ........................基金管理............................
+  //   {
+  //     path: '/fund',
+  //     component: Layout,
+  //     redirect: '/fund/basicInfor',
+  //     name: 'tree',
+  //     meta: {
+  //       title: '基金管理',
+  //       icon: 'jijin'
+  //     },
+  //     children: [{
+  //         path: 'audit',
+  //         name: 'audit',
+  //         component: () => import('@/views/ky_organization/index'),
+  //         meta: {
+  //           title: '基金入驻审核',
+  //         }
+  //       },
+  //       {
+  //         path: 'basicInfor',
+  //         name: 'basicInfor',
+  //         component: () => import('@/views/ky_organization/organizationInfor/index'),
+  //         meta: {
+  //           title: '基金基本信息',
+  //         }
+  //       }, {
+  //         path: 'bigdata',
+  //         name: 'bigdata',
+  //         component: () => import('@/views/ky_organization/organizationData/index'),
+  //         meta: {
+  //           title: '基金大数据',
+  //         }
+  //       }
+  //     ]
+  //   },
+  // ........................医院管理............................
+  //   {
+  //     path: '/hospital',
+  //     component: Layout,
+  //     redirect: '/hospital/basicInfor',
+  //     name: 'tree',
+  //     meta: {
+  //       title: '医院管理',
+  //       icon: '医院'
+  //     },
+  //     children: [{
+  //         path: 'audit',
+  //         name: 'audit',
+  //         component: () => import('@/views/ky_organization/index'),
+  //         meta: {
+  //           title: '医院入驻审核',
+  //         }
+  //       },
+  //       {
+  //         path: 'basicInfor',
+  //         name: 'basicInfor',
+  //         component: () => import('@/views/ky_organization/organizationInfor/index'),
+  //         meta: {
+  //           title: '医院基本信息',
+  //         }
+  //       }, {
+  //         path: 'bigdata',
+  //         name: 'bigdata',
+  //         component: () => import('@/views/ky_organization/organizationData/index'),
+  //         meta: {
+  //           title: '医院大数据',
+  //         }
+  //       }
+  //     ]
+  //   },
+  // ........................婚介公司管理............................
+  //   {
+  //     path: '/datingAgency',
+  //     component: Layout,
+  //     redirect: '/datingAgency/basicInfor',
+  //     name: 'tree',
+  //     meta: {
+  //       title: '婚介公司管理',
+  //       icon: 'hunjie'
+  //     },
+  //     children: [{
+  //         path: 'audit',
+  //         name: 'audit',
+  //         component: () => import('@/views/ky_organization/index'),
+  //         meta: {
+  //           title: '婚介公司入驻审核',
+  //         }
+  //       },
+  //       {
+  //         path: 'basicInfor',
+  //         name: 'basicInfor',
+  //         component: () => import('@/views/ky_organization/organizationInfor/index'),
+  //         meta: {
+  //           title: '婚介公司基本信息',
+  //         }
+  //       }, {
+  //         path: 'bigdata',
+  //         name: 'bigdata',
+  //         component: () => import('@/views/ky_organization/organizationData/index'),
+  //         meta: {
+  //           title: '婚介公司大数据',
+  //         }
+  //       }
+  //     ]
+  //   },
+
+  // ........................个人信息............................
+  //   {
+  //     path: '/talents',
+  //     component: Layout,
+  //     redirect: '/talents/resume',
+  //     name: 'talents',
+  //     meta: {
+  //       title: '人事人才管理',
+  //       icon: 'example'
+  //     },
+  //     children: [{
+  //         path: 'resume',
+  //         name: 'resume',
+  //         component: () => import('@/views/ky_resume/index'),
+  //         meta: {
+  //           title: '简历/人才库',
+  //           icon: 'table'
+  //         }
+  //       },
+  //       {
+  //         path: 'jobsAvailable',
+  //         name: 'jobsAvailable',
+  //         component: () => import('@/views/ky_jobsAvailable/index'),
+  //         meta: {
+  //           title: '查看在招职位',
+  //           icon: 'tree'
+  //         }
+  //       }, {
+  //         path: 'beonjob',
+  //         name: 'beonjob',
+  //         component: () => import('@/views/ky_beOnJob/index'),
+  //         meta: {
+  //           title: '查看公司职位',
+  //           icon: 'tree'
+  //         }
+  //       }, {
+  //         path: 'postPosition',
+  //         name: 'postPosition',
+  //         component: () => import('@/views/ky_postPosition/index'),
+  //         meta: {
+  //           title: '发布新职位',
+  //           icon: 'tree'
+  //         }
+  //       }
+  //     ]
+  //   },
+  // 404 page must be placed at the end !!!
+  // ........................内容审核............................
+  //   {
+  //     path: '/ContentApproval',
+  //     component: Layout,
+  //     redirect: '/ContentApproval/promotions',
+  //     name: 'tree',
+  //     meta: {
+  //       title: '内容审核',
+  //       icon: 'shenhe'
+  //     },
+  //     children: [{
+  //         path: 'comment ',
+  //         name: 'comment',
+  //         component: () => import('@/views/ky_organization/index'),
+  //         meta: {
+  //           title: '评论管理',
+  //         }
+  //       },
+  //       {
+  //         path: 'promotions',
+  //         name: 'promotions',
+  //         component: () => import('@/views/ky_organization/organizationInfor/index'),
+  //         meta: {
+  //           title: '商家发布管理',
+  //         }
+  //       }, {
+  //         path: 'merchantsShelves',
+  //         name: 'merchantsShelves',
+  //         component: () => import('@/views/ky_organization/organizationData/index'),
+  //         meta: {
+  //           title: '商家上架管理',
+  //         }
+  //       }, {
+  //         path: 'uptata',
+  //         name: 'uptata',
+  //         component: () => import('@/views/ky_organization/organizationData/index'),
+  //         meta: {
+  //           title: '上传活动',
+  //         }
+  //       }
+  //     ]
+  //   },
+
+]
+//异步挂载的路由
+//动态需要根据权限加载的路由表 
+export const asyncRoutes = [{
+    path: '/permission',
+    component: Layout,
+    name: 'Permission',
+    alwaysShow: true, // 总是显示在根菜单
+    redirect: '/permission/page',
+    meta: {
+      title: '权限管理',
+      icon: 'role',
+      role: ['admin', 'editor']
+    }, //页面需要的权限
+    children: [{
+        path: 'page',
+        component: () => import('@/views/permission/page'),
+        name: 'PagePermission',
         meta: {
-          title: '消费者基本信息',
+          title: '账号一览',
+          role: ['admin', 'editor']
+        } //页面需要的权限
+      },
+      {
+        path: 'directive',
+        component: () => import('@/views/permission/directive'),
+        name: 'DirectivePermission',
+        meta: {
+          title: '权限指令'
+          // if do not set roles, means: this page does not require permission
         }
       },
       {
-        path: 'consumer_mes',
-        name: 'account',
-        component: () => import('@/views/ky_consumer/consumer_mes'),
+        path: 'role',
+        component: () => import('@/views/permission/role'),
+        name: 'Role',
         meta: {
-          title: '消费者消息管理',
+          title: '账号权限设置',
+          roles: ['admin', 'yc666']
         }
-      },
-      {
-        path: 'account',
-        name: 'account',
-        component: () => import('@/views/ky_consumer/consumerAcc/index'),
-        meta: {
-          title: '消费者账户管理',
-        }
-      },
-      {
-        path: 'health',
-        name: 'health',
-        component: () => import('@/views/ky_consumer/healthData/index'),
-        meta: {
-          title: '消费者健康数据',
-        }
-      },
-      {
-        path: 'cpfw',
-        name: 'cpfw',
-        component: () => import('@/views/ky_consumer/consumer_cpfw/index'),
-        meta: {
-          title: '消费者产品服务',
-        }
-      },
-      {
-        path: 'bigdata',
-        name: 'bigdata',
-        component: () => import('@/views/ky_consumer/consumer_bigdata/index'),
-        meta: {
-          title: '消费者大数据分析',
-        }
-      },
+      }
     ]
   },
-  // ........................养老机构管理............................
-  organizationRouter,
+  // ........................寻医问药............................
+  medicineRouter,
   // ........................商城商家管理............................
   merchantRouter,
   // ........................酒店管理............................
   hotelRouter,
-  // ........................社区管理............................
-  {
-    path: '/community',
-    component: Layout,
-    redirect: '/community/activityCenter',
-    name: 'tree',
-    meta: {
-      title: '社区管理',
-      icon: 'shequ'
-    },
-    children: [{
-        path: 'activityCenter',
-        name: 'activityCenter',
-        component: () => import('@/views/ky_organization/index'),
-        meta: {
-          title: '社区内容管理',
-        }
-      },
-      {
-        path: 'drugstore',
-        name: 'drugstore',
-        component: () => import('@/views/ky_organization/organizationInfor/index'),
-        meta: {
-          title: '社区基本信息',
-        }
-      }, {
-        path: 'elderlyUniversity',
-        name: 'elderlyUniversity',
-        component: () => import('@/views/ky_organization/organizationData/index'),
-        meta: {
-          title: '社区大数据',
-        }
-      }
-    ]
-  },
 
-
-  // ........................景点管理............................
-  {
-    path: '/scenic',
-    component: Layout,
-    redirect: '/scenic/basicInfor',
-    name: 'tree',
-    meta: {
-      title: '景点管理',
-      icon: '景点'
-    },
-    children: [{
-        path: 'audit',
-        name: 'audit',
-        component: () => import('@/views/ky_organization/index'),
-        meta: {
-          title: '景点入驻审核',
-        }
-      },
-      {
-        path: 'basicInfor',
-        name: 'basicInfor',
-        component: () => import('@/views/ky_organization/organizationInfor/index'),
-        meta: {
-          title: '景点基本信息',
-        }
-      }, {
-        path: 'bigdata',
-        name: 'bigdata',
-        component: () => import('@/views/ky_organization/organizationData/index'),
-        meta: {
-          title: '景点大数据',
-        }
-      }
-    ]
-  },
-  // ........................保险管理............................
-  {
-    path: '/insurance',
-    component: Layout,
-    redirect: '/insurance/basicInfor',
-    name: 'tree',
-    meta: {
-      title: '保险管理',
-      icon: 'baoxian'
-    },
-    children: [{
-        path: 'audit',
-        name: 'audit',
-        component: () => import('@/views/ky_organization/index'),
-        meta: {
-          title: '保险入驻审核',
-        }
-      },
-      {
-        path: 'basicInfor',
-        name: 'basicInfor',
-        component: () => import('@/views/ky_organization/organizationInfor/index'),
-        meta: {
-          title: '保险基本信息',
-        }
-      }, {
-        path: 'bigdata',
-        name: 'bigdata',
-        component: () => import('@/views/ky_organization/organizationData/index'),
-        meta: {
-          title: '保险大数据',
-        }
-      }
-    ]
-  },
-  // ........................基金管理............................
-  {
-    path: '/fund',
-    component: Layout,
-    redirect: '/fund/basicInfor',
-    name: 'tree',
-    meta: {
-      title: '基金管理',
-      icon: 'jijin'
-    },
-    children: [{
-        path: 'audit',
-        name: 'audit',
-        component: () => import('@/views/ky_organization/index'),
-        meta: {
-          title: '基金入驻审核',
-        }
-      },
-      {
-        path: 'basicInfor',
-        name: 'basicInfor',
-        component: () => import('@/views/ky_organization/organizationInfor/index'),
-        meta: {
-          title: '基金基本信息',
-        }
-      }, {
-        path: 'bigdata',
-        name: 'bigdata',
-        component: () => import('@/views/ky_organization/organizationData/index'),
-        meta: {
-          title: '基金大数据',
-        }
-      }
-    ]
-  },
-  // ........................医院管理............................
-  {
-    path: '/hospital',
-    component: Layout,
-    redirect: '/hospital/basicInfor',
-    name: 'tree',
-    meta: {
-      title: '医院管理',
-      icon: '医院'
-    },
-    children: [{
-        path: 'audit',
-        name: 'audit',
-        component: () => import('@/views/ky_organization/index'),
-        meta: {
-          title: '医院入驻审核',
-        }
-      },
-      {
-        path: 'basicInfor',
-        name: 'basicInfor',
-        component: () => import('@/views/ky_organization/organizationInfor/index'),
-        meta: {
-          title: '医院基本信息',
-        }
-      }, {
-        path: 'bigdata',
-        name: 'bigdata',
-        component: () => import('@/views/ky_organization/organizationData/index'),
-        meta: {
-          title: '医院大数据',
-        }
-      }
-    ]
-  },
-  // ........................婚介公司管理............................
-  {
-    path: '/datingAgency',
-    component: Layout,
-    redirect: '/datingAgency/basicInfor',
-    name: 'tree',
-    meta: {
-      title: '婚介公司管理',
-      icon: 'hunjie'
-    },
-    children: [{
-        path: 'audit',
-        name: 'audit',
-        component: () => import('@/views/ky_organization/index'),
-        meta: {
-          title: '婚介公司入驻审核',
-        }
-      },
-      {
-        path: 'basicInfor',
-        name: 'basicInfor',
-        component: () => import('@/views/ky_organization/organizationInfor/index'),
-        meta: {
-          title: '婚介公司基本信息',
-        }
-      }, {
-        path: 'bigdata',
-        name: 'bigdata',
-        component: () => import('@/views/ky_organization/organizationData/index'),
-        meta: {
-          title: '婚介公司大数据',
-        }
-      }
-    ]
-  },
+  // ........................养老机构管理............................
+  organizationRouter,
   // ........................康养人才管理............................
   {
     path: '/talentMan',
     component: Layout,
     redirect: '/talentMan/talentPool',
-    name: 'tree',
+    name: 'TalentMan',
     meta: {
       title: '康养人才管理',
       icon: '人才'
@@ -515,116 +667,12 @@ export const constantRoutes = [
     }]
   },
 
-  // ........................平台规则............................
-  {
-    path: '/platform_rule',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'Platform_rule',
-      component: () => import('@/views/ky_rule/index'),
-      meta: {
-        title: '平台规则',
-        icon: 'rule'
-      }
-    }]
-  },
-  // ........................个人信息............................
-  //   {
-  //     path: '/talents',
-  //     component: Layout,
-  //     redirect: '/talents/resume',
-  //     name: 'talents',
-  //     meta: {
-  //       title: '人事人才管理',
-  //       icon: 'example'
-  //     },
-  //     children: [{
-  //         path: 'resume',
-  //         name: 'resume',
-  //         component: () => import('@/views/ky_resume/index'),
-  //         meta: {
-  //           title: '简历/人才库',
-  //           icon: 'table'
-  //         }
-  //       },
-  //       {
-  //         path: 'jobsAvailable',
-  //         name: 'jobsAvailable',
-  //         component: () => import('@/views/ky_jobsAvailable/index'),
-  //         meta: {
-  //           title: '查看在招职位',
-  //           icon: 'tree'
-  //         }
-  //       }, {
-  //         path: 'beonjob',
-  //         name: 'beonjob',
-  //         component: () => import('@/views/ky_beOnJob/index'),
-  //         meta: {
-  //           title: '查看公司职位',
-  //           icon: 'tree'
-  //         }
-  //       }, {
-  //         path: 'postPosition',
-  //         name: 'postPosition',
-  //         component: () => import('@/views/ky_postPosition/index'),
-  //         meta: {
-  //           title: '发布新职位',
-  //           icon: 'tree'
-  //         }
-  //       }
-  //     ]
-  //   },
-  // 404 page must be placed at the end !!!
-  // ........................内容审核............................
-  //   {
-  //     path: '/ContentApproval',
-  //     component: Layout,
-  //     redirect: '/ContentApproval/promotions',
-  //     name: 'tree',
-  //     meta: {
-  //       title: '内容审核',
-  //       icon: 'shenhe'
-  //     },
-  //     children: [{
-  //         path: 'comment ',
-  //         name: 'comment',
-  //         component: () => import('@/views/ky_organization/index'),
-  //         meta: {
-  //           title: '评论管理',
-  //         }
-  //       },
-  //       {
-  //         path: 'promotions',
-  //         name: 'promotions',
-  //         component: () => import('@/views/ky_organization/organizationInfor/index'),
-  //         meta: {
-  //           title: '商家发布管理',
-  //         }
-  //       }, {
-  //         path: 'merchantsShelves',
-  //         name: 'merchantsShelves',
-  //         component: () => import('@/views/ky_organization/organizationData/index'),
-  //         meta: {
-  //           title: '商家上架管理',
-  //         }
-  //       }, {
-  //         path: 'uptata',
-  //         name: 'uptata',
-  //         component: () => import('@/views/ky_organization/organizationData/index'),
-  //         meta: {
-  //           title: '上传活动',
-  //         }
-  //       }
-  //     ]
-  //   },
   {
     path: '*',
     redirect: '/404',
     hidden: true
   }
-]
-
+];
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({
@@ -634,11 +682,8 @@ const createRouter = () => new Router({
 })
 
 const router = createRouter()
-
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
-
 export default router

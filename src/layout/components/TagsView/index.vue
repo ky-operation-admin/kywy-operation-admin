@@ -36,6 +36,8 @@ export default {
     },
     routes () {
       return this.$store.state.permission.routes
+    //   console.log('routes', this.$store.state.permission.routes);
+    //   console.log('routes');
     }
   },
   watch: {

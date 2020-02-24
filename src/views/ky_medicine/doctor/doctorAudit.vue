@@ -11,7 +11,7 @@
     </div>
     <el-tabs v-model="activeName">
       <el-tab-pane label="全部" name="first" class="onsale">
-        <el-table :data="onsaleData" v-loading="listLoading" border>
+        <el-table :data="onsaleData" v-loading="listLoading" border height="550">
           <el-table-column prop="phone" label="医生编号" align="center"></el-table-column>
           <el-table-column prop="res_name" label="医生真实姓名" width="280" align='center'></el-table-column>
           <el-table-column prop="id" align="center" label="身份证号码">

@@ -3,31 +3,31 @@ import Layout from '@/layout'
 const organizationRouter = {
     path: '/organization',
     component: Layout,
-    redirect: '/organization/basicInfor',
+    redirect: '/organization/organizationInfor',
     name: 'tree',
     meta: {
       title: '养老机构管理',
       icon: '机构'
     },
     children: [{
-        path: 'audit',
-        name: 'audit',
+        path: 'org_audit',
+        name: 'OrgAudit',
         component: () => import('@/views/ky_organization/index'),
         meta: {
           title: '养老机构入驻审核',
         }
       },
       {
-        path: 'basicInfor',
-        name: 'basicInfor',
+        path: 'organizationInfor',
+        name: 'OrganizationInfor',
         component: () => import('@/views/ky_organization/organizationInfor/index'),
         meta: {
           title: '养老机构基本信息',
         }
       },
       {
-        path: 'message',
-        name: 'message',
+        path: 'org_message',
+        name: 'OrgMessage',
         component: () => import('@/views/ky_organization/organizationMessage/index'),
         meta: {
           title: '养老机构消息管理',
@@ -82,22 +82,22 @@ const organizationRouter = {
         }
       },
       {
-        path: 'ts',
+        path: 'org_complain',
         component: () => import('@/views/ky_merchant/merchantContent/index'),
-        name: 'merchantContent',
+        name: 'OrgComplain',
         meta: {
           title: '养老机构投诉管理'
         },
         children: [{
-          path: 'mer_pl',
-          name: 'mer_pl',
+          path: 'org_pl',
+          name: 'OrgPl',
           component: () => import('@/views/ky_organization/organizationContent/org_conment_audit'),
           meta: {
             title: '养老机构投诉管理',
           }
         }, {
-          path: 'mer_serve',
-          name: 'mer_serve',
+          path: 'org_serve',
+          name: 'OrgServe',
           component: () => import('@/views/ky_organization/organizationContent/org_conment_audit'),
           meta: {
             title: '消费者投诉管理',

@@ -1,46 +1,4 @@
 <template>
-  <!-- <div class="login-container" style="overflow:hidden">
-    <div class="m-logo">
-      <a href="http://localhost:8080/home" class="logo">
-        <i class="u-icon-CorpLogo3"></i>
-      </a>
-    </div>
-    <el-card header="请登录" class="login-card">
-      <el-form 
-        ref="loginForm"
-        :model="loginForm"
-        :rules="loginRules"
-        label-position="left"
-        auto-complete="on"
-      style="text-align:center">
-        <el-form-item label="用户名" prop="username">
-          <el-input 
-          ref="username"
-          v-model="loginForm.username"
-          name="username"
-          placeholder="请输入用户名" 
-          type="text"
-          tabindex="1"
-          auto-complete="on"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input 
-          :key="passwordType"
-          ref="password"
-          name="password"
-          tabindex="2"
-          auto-complete="on"
-          @keyup.enter.native="login"
-          placeholder="请输入密码" 
-          show-password 
-          v-model="loginForm.password"></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click.native.prevent="login">登录</el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
-  </div> -->
   <div class="login-container" style="overflow:hidden">
     <div class="m-logo">
     </div>
@@ -97,14 +55,19 @@ export default {
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
+      otherQuery: {}
     };
   },
   //  监听页面的路径
   watch: {
     $route: {
       handler: function (route) {
-        this.redirect = route.query && route.query.redirect
+        const query = route.query
+        if (query) {
+          this.redirect = query.redirect
+          this.otherQuery = this.getOtherQuery(query)
+        }
       },
       immediate: true
     }
@@ -112,13 +75,13 @@ export default {
   methods: {
     login () {
       // 使用封装好的方法
-    //   window.console.log('6666',this.redirect);
+      //   window.console.log('6666',this.redirect);
 
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
+            this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
             // console.log('redirect',this.redirect)
             // console.log('res',res)
             this.loading = false
@@ -130,6 +93,14 @@ export default {
           return false
         }
       })
+    },
+    getOtherQuery (query) {
+      return Object.keys(query).reduce((acc, cur) => {
+        if (cur !== 'redirect') {
+          acc[cur] = query[cur]
+        }
+        return acc
+      }, {})
     }
   }
 };

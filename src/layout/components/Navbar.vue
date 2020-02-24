@@ -3,46 +3,13 @@
     <!-- 导航收缩框 -->
     <!-- <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
 
-    <!-- <breadcrumb class="breadcrumb-container" /> -->
+    <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
       <div class="home" @click="gotohome">
         首页
       </div>
       <screenfull id="screenfull" class="right-menu-item hover-effect" />
-      <el-dropdown class="avatar-container" trigger="click">
-        <div class="avatar-wrapper">
-          <span style="vertical-align:middle;margin-right:10px">设置</span>
-          <i class="el-icon-caret-bottom" style="vertical-align:middle;" />
-        </div>
-        <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/">
-            <el-dropdown-item>
-              主题
-            </el-dropdown-item>
-          </router-link>
-          <el-dropdown-item divided>
-            <span style="display:block;" @click="logout">皮肤</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <!-- <el-dropdown class="avatar-container" trigger="click">
-        <div class="avatar-wrapper">
-          <img src='@/assets/kyuser.png' class="user-avatar">
-          <span>{{getUserName}}</span>
-          <i class="el-icon-caret-bottom" />
-        </div>
-        <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/">
-            <el-dropdown-item>
-              Home
-            </el-dropdown-item>
-          </router-link>
-          <el-dropdown-item divided>
-            <span style="display:block;" @click="logout">退出</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown> -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img src='@/assets/kyuser.png' style="width:36px;height:36px;vertical-align:middle;margin-right:3px">

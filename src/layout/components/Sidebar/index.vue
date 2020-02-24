@@ -1,9 +1,9 @@
 <template>
   <div :class="{'has-logo':showLogo}">
-    <logo :collapse="isCollapse" />
+    <logo :collapse="isCollapse" v-if="showLogo" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu :default-active="activeMenu" :collapse="false" :background-color="variables.menuBg" :text-color="variables.menuText" :unique-opened="false" :active-text-color="variables.menuActiveText" :collapse-transition="false" mode="vertical">
-        <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -22,11 +22,9 @@ export default {
       'permission_routes',
       'sidebar'
     ]),
-    // routes () {
-    //   console.log('routers', this.$router.options.routes);
-
-    //   return this.$router.options.routes
-    // },
+    routes () {
+      return this.$router.options.routes
+    },
     activeMenu () {
       const route = this.$route
       const { meta, path } = route
@@ -36,12 +34,14 @@ export default {
       return path
     },
     showLogo () {
+      console.log('sidebarLogo', this.$store.state.settings.sidebarLogo)
       return this.$store.state.settings.sidebarLogo
     },
     variables () {
       return variables
     },
     isCollapse () {
+      console.log('sidebar', this.sidebar.opened)
       return !this.sidebar.opened
     }
   }

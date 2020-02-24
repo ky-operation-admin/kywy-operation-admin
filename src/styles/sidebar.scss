@@ -34,12 +34,14 @@
     }
 
     .el-scrollbar {
-      height: calc(100% - 150px);
+      // height: calc(100% - 150px);
+      height: 100%;
     }
 
     &.has-logo {
       .el-scrollbar {
-        height: calc(100% - 50px);
+        height: calc(100% - 150px);
+        // height: 100%;
       }
     }
 

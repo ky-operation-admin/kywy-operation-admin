@@ -302,7 +302,7 @@ export default {
   &-container {
     margin: 30px;
     .content {
-      margin: 50px 50px;
+      // margin: 50px 50px;
       overflow: hidden;
       .wrapper {
         display: grid;
@@ -316,7 +316,7 @@ export default {
         overflow: hidden;
         .fl {
           height: 450px;
-          width: 54%;
+          width: 50%;
           background: #fff;
           float: left;
           .el-table .cell {

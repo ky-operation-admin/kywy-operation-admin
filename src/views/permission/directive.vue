@@ -80,7 +80,7 @@ export default {
     }
   },
   methods: {
-    checkPermission,
+    // checkPermission,
     handleRolesChange() {
       this.key++
     }

@@ -3,108 +3,107 @@
 @import './transition.scss';
 @import './element-ui.scss';
 @import './sidebar.scss';
-
 body {
-  height: 100%;
-  min-width: 1400px;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+    height: 100%;
+    min-width: 1180px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
 
 label {
-  font-weight: 700;
+    font-weight: 700;
 }
 
 html {
-  height: 100%;
-  box-sizing: border-box;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 #app {
-  height: 100%;
+    height: 100%;
 }
 
 *,
 *:before,
 *:after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 ul,
 li {
-  list-style: none;
+    list-style: none;
 }
 
 a:focus,
 a:active {
-  outline: none;
+    outline: none;
 }
 
 a,
 a:focus,
 a:hover {
-  cursor: pointer;
-  color: inherit;
-  text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
 }
 
 div:focus {
-  outline: none;
+    outline: none;
 }
 
 .clearfix {
-  &:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
-  }
+    &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
 }
 
 // main-container global css
 .app-container {
-  padding: 20px;
+    padding: 20px;
 }
 
 .el-dialog__wrapper+.el-botton {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .product-list .el-table .cell {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .product-list .has-gutter .el-table thead {
-  background-color: #f11;
+    background-color: #f11;
 }
 
 // 表单子项(详见消费者基本信息管理)
 .el-form-item {
-  .el-form-item__content {
-    text-align: left;
-  }
-
-  &:last-child {
     .el-form-item__content {
+        text-align: left;
     }
-  }
+    &:last-child {
+        .el-form-item__content {}
+    }
 }
+
 // 不通过全选
 .el-checkbox-group {
     display: inline-block;
 }
-.inline-block{
+
+.inline-block {
     position: absolute;
     top: 0;
     right: 0;
 }
-.el-dialog__footer {
-  text-align: center !important;
-}
 
+.el-dialog__footer {
+    text-align: center !important;
+}

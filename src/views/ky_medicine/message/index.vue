@@ -44,12 +44,12 @@
       </el-dialog>
     </el-row>
     <el-table :data="tableData" border>
-      <el-table-column prop="m_title" label="消息标题" width="260" align="center"></el-table-column>
-      <el-table-column prop="m_canten" label="消息内容" width="340" align="center"></el-table-column>
-      <el-table-column prop="m_type" label="消息类型" width="260" align="center"></el-table-column>
-      <el-table-column prop="m_name" label="消息发送人" width="250" align="center"></el-table-column>
+      <el-table-column prop="m_title" label="消息标题"  align="center"></el-table-column>
+      <el-table-column prop="m_canten" label="消息内容"  align="center"></el-table-column>
+      <el-table-column prop="m_type" label="消息类型"  align="center"></el-table-column>
+      <el-table-column prop="m_name" label="消息发送人"  align="center"></el-table-column>
       <el-table-column prop="m_porpose" label="目的" align="center"></el-table-column>
-      <el-table-column align="center" label="操作" width="220">
+      <el-table-column align="center" label="操作" >
         <template slot-scope="scope">
           <!-- <el-button size="mini" type="primary" @click="editPush(scope.$index, scope.row)">推送</el-button> -->
           <ky-button  label="编辑" perms="admin:editor" type="primary" @click="editPush(scope.$index, scope.row)"/>

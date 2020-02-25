@@ -76,7 +76,6 @@ export default {
     login () {
       // 使用封装好的方法
       //   window.console.log('6666',this.redirect);
-
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true

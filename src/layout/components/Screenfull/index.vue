@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     click() {
-        console.log('screenfull',screenfull);
+        // console.log('screenfull',screenfull);
         
       if (!screenfull.isEnabled) {
         this.$message({

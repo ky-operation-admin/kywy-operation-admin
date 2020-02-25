@@ -35,7 +35,7 @@ export function filterAsyncRoutes(routes, roles) {
       res.push(tmp)
     }
   })
-  console.log('res', res);
+//   console.log('res', res);
   return res
 }
 
@@ -59,12 +59,12 @@ const actions = {
       let accessedRoutes
       if (roles.includes('admin')) {
         accessedRoutes = asyncRoutes || []
-        console.log('asyncRoutes',asyncRoutes);
-        
+        // console.log('asyncRoutes', asyncRoutes);
+
       } else {
         accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-    }
-    console.log('accessedRoutes', accessedRoutes);
+      }
+    //   console.log('accessedRoutes', accessedRoutes);
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

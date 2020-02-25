@@ -16,9 +16,6 @@ import router, {
 } from '@/router'
 
 const state = {
-  //   token: getToken(),
-  //   name: getName(),
-  //   avatar: ''
   token: getToken(),
   name: '',
   avatar: '',
@@ -122,6 +119,7 @@ const actions = {
         if (!roles || roles.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
         }
+        setName(name)
         commit('SET_ROLES', roles)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)

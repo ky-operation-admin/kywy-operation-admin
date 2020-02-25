@@ -14,7 +14,7 @@
     </div>
     <el-tabs v-model="activeName">
       <el-tab-pane label="全部" name="first" class="onsale">
-        <el-table :data="onsaleData" v-loading="listLoading" border>
+        <el-table :data="onsaleData" v-loading="listLoading" height="500" border>
           <el-table-column prop="merchant_name" label="商家名称" width="280" align='center'></el-table-column>
           <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
           <el-table-column prop="pingji" label="评级" align='center'></el-table-column>
@@ -60,7 +60,7 @@
           <span>待审核</span>
           <el-badge v-if="onsaleData0length" :value="onsaleData0length" size="mini" class="item"></el-badge>
         </span> -->
-        <el-table :data="onsaleData0" border v-loading="listLoading">
+        <el-table :data="onsaleData0" border v-loading="listLoading" height="500">
           <el-table-column prop="merchant_name" label="商家名称" width="280" align='center'></el-table-column>
           <el-table-column prop="xinyong" label="信用" align='center'></el-table-column>
           <el-table-column prop="pingji" label="评级" align='center'></el-table-column>

@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <el-button type="primary" @click="handleAddRole">新建权限账号</el-button>
-
+    <!-- <el-button type="primary" @click="handleAddRole">新建权限账号</el-button> -->
+    <ky-button icon="fa fa-search" label="新建权限账号" perms="admin" type="primary" @click="handleAddRole"/>
     <el-table :data="rolesList" style="width: 100%;margin-top:30px;" border>
       <el-table-column align="center" label="账号秘钥" width="220">
         <template slot-scope="scope">
@@ -20,8 +20,8 @@
       </el-table-column>
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
-          <el-button type="primary" size="small" @click="handleEdit(scope)">修改</el-button>
-          <el-button type="danger" size="small" @click="handleDelete(scope)">删除</el-button>
+          <ky-button icon="fa fa-search" label="修改" perms="admin" type="primary" @click="handleEdit(scope)"/>
+          <ky-button icon="fa fa-search" label="删除" perms="admin" type="danger" @click="handleDelete(scope)"/>
         </template>
       </el-table-column>
     </el-table>
@@ -61,7 +61,10 @@
 
 <script>
 import path from 'path'
+import KyButton from "@/components/Core/KyButton"
+import { mapGetters } from 'vuex'
 import { deepClone } from '@/utils'
+import { getName} from '@/utils/auth'
 import { getRoutes, getRoles, addRole, deleteRole, updateRole } from '@/api/role'
 
 const defaultRole = {
@@ -89,10 +92,21 @@ export default {
   computed: {
     routesData() {
       return this.routes
+    },
+    ...mapGetters([
+      'name',
+    ]),
+    getUserName(){
+        return getName()
     }
+  },
+  components:{
+      KyButton
   },
   created() {
     // Mock: get all routes and roles list from server
+    console.log('this.name',this.$store.getters);
+    
     this.getRoutes()
     this.getRoles()
   },

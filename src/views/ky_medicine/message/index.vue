@@ -51,7 +51,8 @@
       <el-table-column prop="m_porpose" label="目的" align="center"></el-table-column>
       <el-table-column align="center" label="操作" width="220">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="editPush(scope.$index, scope.row)">推送</el-button>
+          <!-- <el-button size="mini" type="primary" @click="editPush(scope.$index, scope.row)">推送</el-button> -->
+          <ky-button  label="编辑" perms="admin:editor" type="primary" @click="editPush(scope.$index, scope.row)"/>
           <el-dialog title="编辑" :visible.sync="dialog2Visible" width="600px" :before-close="handle2Close" :modal-append-to-body="false">
             <el-form ref="form" :model="form2" :rules="rules" label-width="100px">
               <el-form-item label="消息标题" prop="title">
@@ -77,7 +78,8 @@
               <el-button type="primary" @click="on2Submit()">确定</el-button>
             </span>
           </el-dialog>
-          <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+          <!-- <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button> -->
+          <ky-button  label="删除" perms="admin:editor" type="danger" @click="handleDelete(scope.$index, scope.row)"/>
         </template>
       </el-table-column>
     </el-table>
@@ -86,6 +88,7 @@
 
 <script>
 import { deepClone } from '@/utils'
+import KyButton from "@/components/Core/KyButton"
 const defaultForm = {
   title: '',
   name: '',
@@ -181,7 +184,7 @@ export default {
     }
   },
   components: {
-
+      KyButton
   },
   methods: {
 

@@ -469,21 +469,22 @@ export const asyncRoutes = [{
       icon: 'role',
       role: ['admin', 'editor']
     }, //页面需要的权限
-    children: [{
-        path: 'page',
-        component: () => import('@/views/permission/page'),
-        name: 'PagePermission',
-        meta: {
-          title: '账号一览',
-          role: ['admin', 'editor']
-        } //页面需要的权限
-      },
+    children: [
+    //     {
+    //     path: 'page',
+    //     component: () => import('@/views/permission/page'),
+    //     name: 'PagePermission',
+    //     meta: {
+    //       title: '账号一览',
+    //       role: ['admin', 'editor']
+    //     } //页面需要的权限
+    //   },
       {
         path: 'directive',
         component: () => import('@/views/permission/directive'),
         name: 'DirectivePermission',
         meta: {
-          title: '权限指令'
+          title: '切换账号'
           // if do not set roles, means: this page does not require permission
         }
       },
@@ -501,171 +502,171 @@ export const asyncRoutes = [{
   // ........................寻医问药............................
   medicineRouter,
   // ........................商城商家管理............................
-  merchantRouter,
+  //   merchantRouter,
   // ........................酒店管理............................
-  hotelRouter,
+  //   hotelRouter,
 
   // ........................养老机构管理............................
-  organizationRouter,
+  //   organizationRouter,
   // ........................康养人才管理............................
-  {
-    path: '/talentMan',
-    component: Layout,
-    redirect: '/talentMan/talentPool',
-    name: 'TalentMan',
-    meta: {
-      title: '康养人才管理',
-      icon: '人才'
-    },
-    children: [{
-        path: 'talentPool',
-        name: 'TalentPool',
-        component: () => import('@/views/ky_talentsRecruitment/talentPool/index'),
-        meta: {
-          title: '简历/人才库',
-        }
-      },
-      {
-        path: 'talentRecomment',
-        name: 'TalentRecomment',
-        component: () => import('@/views/ky_talentsRecruitment/talentRecomment/index'),
-        meta: {
-          title: '猎头人才推荐',
-        }
-      },
-      {
-        path: 'mannReconmment',
-        name: 'mannReconmment',
-        hidden: true,
-        component: () => import('@/views/ky_talentsRecruitment/mannReconmment/index'),
-        meta: {
-          title: '手动推荐',
-        }
-      },
-      {
-        path: 'autoReconmment',
-        name: 'autoReconmment',
-        hidden: true,
-        component: () => import('@/views/ky_talentsRecruitment/autoReconmment/index'),
-        meta: {
-          title: '自动推荐',
-        }
-      },
+  //   {
+  //     path: '/talentMan',
+  //     component: Layout,
+  //     redirect: '/talentMan/talentPool',
+  //     name: 'TalentMan',
+  //     meta: {
+  //       title: '康养人才管理',
+  //       icon: '人才'
+  //     },
+  //     children: [{
+  //         path: 'talentPool',
+  //         name: 'TalentPool',
+  //         component: () => import('@/views/ky_talentsRecruitment/talentPool/index'),
+  //         meta: {
+  //           title: '简历/人才库',
+  //         }
+  //       },
+  //       {
+  //         path: 'talentRecomment',
+  //         name: 'TalentRecomment',
+  //         component: () => import('@/views/ky_talentsRecruitment/talentRecomment/index'),
+  //         meta: {
+  //           title: '猎头人才推荐',
+  //         }
+  //       },
+  //       {
+  //         path: 'mannReconmment',
+  //         name: 'mannReconmment',
+  //         hidden: true,
+  //         component: () => import('@/views/ky_talentsRecruitment/mannReconmment/index'),
+  //         meta: {
+  //           title: '手动推荐',
+  //         }
+  //       },
+  //       {
+  //         path: 'autoReconmment',
+  //         name: 'autoReconmment',
+  //         hidden: true,
+  //         component: () => import('@/views/ky_talentsRecruitment/autoReconmment/index'),
+  //         meta: {
+  //           title: '自动推荐',
+  //         }
+  //       },
 
-    ]
-  },
-  // ........................用户管理............................
-  {
-    path: '/user',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'user',
-      component: () => import('@/views/ky_user/index'),
-      meta: {
-        title: '用户管理',
-        icon: 'yonghu'
-      }
-    }]
-  },
-  // ........................用户反馈............................
-  {
-    path: '/userFeedback',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'userFeedback',
-      component: () => import('@/views/ky_userFeedback/index'),
-      meta: {
-        title: '用户反馈',
-        icon: 'fankui'
-      }
-    }]
-  },
-  // ........................版本管理............................
-  {
-    path: '/version',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'version',
-      component: () => import('@/views/ky_version/index'),
-      meta: {
-        title: '版本管理',
-        icon: 'banben'
-      }
-    }]
-  },
-  // ........................财务管理............................
-  {
-    path: '/finance',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'finance',
-      component: () => import('@/views/ky_version/index'),
-      meta: {
-        title: '财务管理',
-        icon: 'finance'
-      }
-    }]
-  },
-  // ........................广告管理............................
-  {
-    path: '/advertising',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'advertising',
-      component: () => import('@/views/ky_advertising/index'),
-      meta: {
-        title: '广告管理',
-        icon: 'guanggao'
-      }
-    }]
-  },
-  // ........................评论管理............................
-  {
-    path: '/conment',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'conment',
-      component: () => import('@/views/ky_conment/index'),
-      meta: {
-        title: '评论管理',
-        icon: 'pinglun'
-      }
-    }]
-  },
-  // ........................分销管理............................
-  {
-    path: '/distributor',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'Distributor',
-      component: () => import('@/views/ky_distributor/index'),
-      meta: {
-        title: '分销管理',
-        icon: '分销商'
-      }
-    }]
-  },
-  // ........................消息管理............................
-  {
-    path: '/message',
-    component: Layout,
-    children: [{
-      path: 'index',
-      name: 'Message',
-      component: () => import('@/views/ky_message/index'),
-      meta: {
-        title: '消息管理',
-        icon: 'message'
-      }
-    }]
-  },
+  //     ]
+  //   },
+  //   // ........................用户管理............................
+  //   {
+  //     path: '/user',
+  //     component: Layout,
+  //     children: [{
+  //       path: 'index',
+  //       name: 'user',
+  //       component: () => import('@/views/ky_user/index'),
+  //       meta: {
+  //         title: '用户管理',
+  //         icon: 'yonghu'
+  //       }
+  //     }]
+  //   },
+  //   // ........................用户反馈............................
+  //   {
+  //     path: '/userFeedback',
+  //     component: Layout,
+  //     children: [{
+  //       path: 'index',
+  //       name: 'userFeedback',
+  //       component: () => import('@/views/ky_userFeedback/index'),
+  //       meta: {
+  //         title: '用户反馈',
+  //         icon: 'fankui'
+  //       }
+  //     }]
+  //   },
+  //   // ........................版本管理............................
+  //   {
+  //     path: '/version',
+  //     component: Layout,
+  //     children: [{
+  //       path: 'index',
+  //       name: 'version',
+  //       component: () => import('@/views/ky_version/index'),
+  //       meta: {
+  //         title: '版本管理',
+  //         icon: 'banben'
+  //       }
+  //     }]
+  //   },
+  //   // ........................财务管理............................
+  //   {
+  //     path: '/finance',
+  //     component: Layout,
+  //     children: [{
+  //       path: 'index',
+  //       name: 'finance',
+  //       component: () => import('@/views/ky_version/index'),
+  //       meta: {
+  //         title: '财务管理',
+  //         icon: 'finance'
+  //       }
+  //     }]
+  //   },
+  //   // ........................广告管理............................
+  //   {
+  //     path: '/advertising',
+  //     component: Layout,
+  //     children: [{
+  //       path: 'index',
+  //       name: 'advertising',
+  //       component: () => import('@/views/ky_advertising/index'),
+  //       meta: {
+  //         title: '广告管理',
+  //         icon: 'guanggao'
+  //       }
+  //     }]
+  //   },
+  //   // ........................评论管理............................
+  //   {
+  //     path: '/conment',
+  //     component: Layout,
+  //     children: [{
+  //       path: 'index',
+  //       name: 'conment',
+  //       component: () => import('@/views/ky_conment/index'),
+  //       meta: {
+  //         title: '评论管理',
+  //         icon: 'pinglun'
+  //       }
+  //     }]
+  //   },
+  //   // ........................分销管理............................
+  //   {
+  //     path: '/distributor',
+  //     component: Layout,
+  //     children: [{
+  //       path: 'index',
+  //       name: 'Distributor',
+  //       component: () => import('@/views/ky_distributor/index'),
+  //       meta: {
+  //         title: '分销管理',
+  //         icon: '分销商'
+  //       }
+  //     }]
+  //   },
+  //   // ........................消息管理............................
+  //   {
+  //     path: '/message',
+  //     component: Layout,
+  //     children: [{
+  //       path: 'index',
+  //       name: 'Message',
+  //       component: () => import('@/views/ky_message/index'),
+  //       meta: {
+  //         title: '消息管理',
+  //         icon: 'message'
+  //       }
+  //     }]
+  //   },
 
   {
     path: '*',

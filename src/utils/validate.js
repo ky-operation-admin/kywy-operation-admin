@@ -36,8 +36,10 @@ export function isExternal(path) {
  * @returns {Boolean}
  */
 export function validUsername(str) {
-  const valid_map = ['admin', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
+    const valid_map = ['admin', 'editor','yc666','yq666']
+    return valid_map.indexOf(str.trim()) >= 0
+//   let reg_valid_map = /^(?![0-9]+$(?![a-zA-Z]+$)[0-9a-zA-Z]{4,})$/
+//   return reg_valid_map.test(str)
 }
 
 /**
@@ -106,4 +108,3 @@ export function isArray(arg) {
   }
   return Array.isArray(arg)
 }
-

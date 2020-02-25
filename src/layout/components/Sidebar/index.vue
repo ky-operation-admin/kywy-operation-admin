@@ -34,14 +34,12 @@ export default {
       return path
     },
     showLogo () {
-      console.log('sidebarLogo', this.$store.state.settings.sidebarLogo)
       return this.$store.state.settings.sidebarLogo
     },
     variables () {
       return variables
     },
     isCollapse () {
-      console.log('sidebar', this.sidebar.opened)
       return !this.sidebar.opened
     }
   }

@@ -42,7 +42,7 @@ export default {
       return this.$store.state.app.device
     },
     fixedHeader () {
-      console.log('fixedHeader', this.$store.state.settings.fixedHeader)
+    //   console.log('fixedHeader', this.$store.state.settings.fixedHeader)
       return this.$store.state.settings.fixedHeader
     },
     showSettings () {

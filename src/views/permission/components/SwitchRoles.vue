@@ -7,6 +7,8 @@
     <el-radio-group v-model="switchRoles">
       <el-radio-button label="editor" />
       <el-radio-button label="admin" />
+      <el-radio-button label="yc666" />
+      <el-radio-button label="yq666" />
     </el-radio-group>
   </div>
 </template>
@@ -16,6 +18,8 @@ export default {
   computed: {
     roles() {
       return this.$store.getters.roles
+      console.log('$store.getters.roles',$store.getters.roles);
+      
     },
     switchRoles: {
       get() {

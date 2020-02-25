@@ -24,7 +24,6 @@
 
       <div>
         <span v-permission="['admin','editor']" class="permission-alert">
-          Both
           <el-tag class="permission-tag" size="small">admin</el-tag> 和
           <el-tag class="permission-tag" size="small">editor</el-tag> 能看到这里
         </span>
@@ -34,7 +33,7 @@
       </div>
     </div>
 
-    <div :key="'checkPermission'+key" style="margin-top:60px;">
+    <!-- <div :key="'checkPermission'+key" style="margin-top:60px;">
       <aside>
         In some cases, using v-permission will have no effect. For example: Element-UI's Tab component or el-table-column and other scenes that dynamically render dom. You can only do this with v-if.
         <br> e.g.
@@ -62,7 +61,7 @@
           </el-tag>
         </el-tab-pane>
       </el-tabs>
-    </div>
+    </div> -->
   </div>
 </template>
 

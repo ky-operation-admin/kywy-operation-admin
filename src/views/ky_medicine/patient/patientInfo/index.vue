@@ -22,8 +22,12 @@
       <el-table-column align="center" label="操作" width="200">
         <template slot-scope="scope">
           <!-- <el-button size="mini" type="primary" @click="edti(scope.$index)">编辑</el-button> -->
-          <el-button size="mini" type="primary" disabled>编辑</el-button>
-          <el-button size="mini" type="danger" @click="del(scope.$index,scope.row)">删除</el-button>
+          <!-- <el-button size="mini" type="primary" disabled>编辑</el-button> -->
+          <ky-button icon="fa fa-search" label="编辑" :perms="getUserName" type="primary" />
+
+          <!-- <el-button size="mini" type="danger" @click="del(scope.$index,scope.row)">删除</el-button> -->
+          <ky-button icon="fa fa-search" label="删除" :perms="getUserName" type="danger" />
+
         </template>
       </el-table-column>
     </el-table>
@@ -32,12 +36,22 @@
 <script>
 import data from '@/assets/js/mock'
 let onsaleData = data.onsaleData
+import KyButton from "@/components/Core/KyButton"
+import { getName} from '@/utils/auth'
 export default {
   data () {
     return {
       listLoading: true,
       tableData: [],
       keyword: ''
+    }
+  },
+  components:{
+      KyButton
+  },
+  computed:{
+   getUserName(){
+        return getName()
     }
   },
   created () {

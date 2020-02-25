@@ -36,6 +36,7 @@ export default {
       }
 
       this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
+      console.log('levelList',this.levelList)
     },
     isDashboard (route) {
       const name = route && route.name
@@ -66,7 +67,7 @@ export default {
 .app-breadcrumb.el-breadcrumb {
   display: inline-block;
   font-size: 14px;
-  line-height: 50px;
+  line-height: 80px;
   margin-left: 8px;
 
   .no-redirect {

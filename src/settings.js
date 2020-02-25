@@ -10,7 +10,7 @@ module.exports = {
 
   /**
    * @type {boolean} true | false
-   * @description Whether need tagsView
+   * @description 是否需要tagsView
    */
   tagsView: true,
 
@@ -22,7 +22,7 @@ module.exports = {
 
   /**
    * @type {boolean} true | false
-   * @description Whether show the logo in sidebar
+   * @description 是否在侧边栏显示logo
    */
   sidebarLogo: true,
 

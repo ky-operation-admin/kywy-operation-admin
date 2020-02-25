@@ -44,33 +44,6 @@ const mutations = {
 
 const actions = {
   // 登陆
-  //   login({commit}, userInfo) {
-  //     const {
-  //       username,
-  //       password
-  //     } = userInfo
-  //     let fd = new FormData()
-  //     fd.append('username', username)
-  //     fd.append('password', password)
-  //     return new Promise((resolve, reject) => {
-  //       login(fd).then(response => {
-  //         // 设置保存token 
-  //         console.log('res', response);
-  //         console.log('response.token', response.token);
-  //         commit('SET_TOKEN', response.token)
-  //         // setToken(response.token)
-  //         // 设置保存用户名
-  //         commit('SET_TOKEN', response.token)
-  //         setToken(response.token)
-  //         // commit('SET_NAME', username)
-  //         // setName(username)
-  //         // commit('SET_AVATAR', response.token)
-  //         resolve()
-  //       }).catch(error => {
-  //         reject(error)
-  //       })
-  //     })
-  //   },
   login({
     commit
   }, userInfo) {
@@ -115,7 +88,7 @@ const actions = {
           introduction
         } = data
         // console.log('getInfodata', data);
-        // roles must be a non-empty array
+        // 角色必须是非空数组
         if (!roles || roles.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
         }

@@ -5,7 +5,7 @@ export default {
     }
   },
   mounted() {
-    // In order to fix the click on menu on the ios device will trigger the mouseleave bug
+    // 为了修复ios设备上的点击菜单会触发mouseleave错误
     // https://github.com/PanJiaChen/vue-element-admin/issues/1135
     this.fixBugIniOS()
   },

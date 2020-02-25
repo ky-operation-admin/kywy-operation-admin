@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
     <!-- 导航收缩框 -->
-    <!-- <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" /> -->
-
+    <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
+    <!-- 导航面包屑 -->
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
@@ -34,7 +34,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
-// import Hamburger from '@/components/Hamburger'
+import Hamburger from '@/components/Hamburger'
 import Screenfull from '@/layout/components/Screenfull/index'
 import { getName, setName, removeName } from '@/utils/auth'
 export default {
@@ -45,8 +45,8 @@ export default {
   },
   components: {
     Breadcrumb,
-    Screenfull
-    // Hamburger
+    Screenfull,
+    Hamburger
   },
   computed: {
     ...mapGetters([
@@ -65,7 +65,6 @@ export default {
     async logout () {
       removeName();
       await this.$store.dispatch('user/logout')
-      //   this.$store.commit('removeuserItem')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     },
     gotohome () {
@@ -98,7 +97,7 @@ export default {
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger-container {
-    line-height: 46px;
+    line-height: 80px;
     height: 100%;
     float: left;
     cursor: pointer;

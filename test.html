@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 生成四位数随机验证码 -->
+    <input type="text" id="inputID2">
+    <div>666</div>
+    <button id="buttonID">生成随机数</button>
+    <script>
+        // 获取标签
+        var oInp = document.getElementById("inputID");
+        var oBtn = document.getElementById("buttonID");
+        // 创建时间函数
+        // var arr = [4];
+        oBtn.onclick = function() {
+            var min = 1000;
+            var max = 10000 - 1;
+            /*-生成一个指定范围内的随机数*/
+            var index = parseInt(Math.random() * (max - min + 1)) + min;
+            oInp.value = index;
+        }
+    </script>
+
+</body>
+
+</html>
+</body>
+
+</html>

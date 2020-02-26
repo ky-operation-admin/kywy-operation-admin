@@ -2,7 +2,7 @@
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
+        <img v-if="elselogo" :src="elselogo" class="sidebar-logo">
         <!-- <h1 v-else class="sidebar-title">{{ title }} </h1> -->
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
@@ -25,7 +25,8 @@ export default {
   data () {
     return {
       title: '康养无忧后台管理系统',
-      logo: require('@/assets/logo1.png')
+      logo: require('@/assets/logo1.png'),
+      elselogo:require('@/assets/kywylogo.jpg'),
     }
   }
 }
@@ -44,7 +45,7 @@ export default {
 .sidebar-logo-container {
   position: relative;
   width: 100%;
-  height: 114px;
+  height: 80px;
   // height: 50px;
   line-height: 50px;
   background: #EDEEE2;
@@ -54,12 +55,11 @@ export default {
   & .sidebar-logo-link {
     height: 100%;
     width: 100%;
-    line-height: 114px;
+    line-height: 80px;
 
     & .sidebar-logo {
       width: 101px;
       height: 60px;
-
       vertical-align: middle;
       //   margin-right: 12px;
     }
@@ -83,8 +83,11 @@ export default {
   }
 
   &.collapse {
+      background: #fff;
     .sidebar-logo {
       margin-right: 0px;
+      width: 100%;
+      height: 60%;
     }
   }
 }

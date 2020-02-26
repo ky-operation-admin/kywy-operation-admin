@@ -1,6 +1,6 @@
 <template>
-  <!-- <div :class="classObj" class="app-wrapper"> -->
-  <div class="app-wrapper">
+  <div :class="classObj" class="app-wrapper">
+  <!-- <div class="app-wrapper"> -->
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" />
     <div class="main-container" :class="{hasTagsView:needTagsView}">
@@ -9,9 +9,9 @@
         <tags-view v-if="needTagsView"></tags-view>
       </div>
       <app-main :class="{'fixed':fixedHeader}" />
-      <right-panel v-if="showSettings">
+      <!-- <right-panel v-if="showSettings">
         <settings />
-      </right-panel>
+      </right-panel> -->
     </div>
   </div>
 </template>
@@ -102,9 +102,9 @@ export default {
   transition: width 0.28s;
 }
 
-// .hideSidebar .fixed-header {
-//   width: calc(100% - 54px);
-// }
+.hideSidebar .fixed-header {
+  width: calc(100% - 54px);
+}
 .fixed {
   padding-top: 113px;
 }

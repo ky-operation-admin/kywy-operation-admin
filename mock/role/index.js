@@ -8,13 +8,25 @@ const roles = [
   {
     key: 'admin',
     name: 'admin',
-    description: '超级管理员，可以查看所有页面。',
+    description: '超级管理员，可以查看所有页面,具有所有增删改权限',
     routes: routes
   },
   {
     key: 'editor',
     name: 'editor',
-    description: '正常的编辑器，可以看到除权限页以外的所有页面。',
+    description: '正常的编辑器，可以看到除权限页以外的所有页面,具有部分增删改权限',
+    routes: routes.filter(i => i.path !== '/permission')// just a mock
+  },
+  {
+    key: 'yc666',
+    name: 'yc666',
+    description: 'yc的编辑器，可以看到除权限页以外的所有页面,具有部分增删改权限',
+    routes: routes.filter(i => i.path !== '/permission')// just a mock
+  },
+  {
+    key: 'yq666',
+    name: 'yq666',
+    description: 'yq的编辑器，可以看到除权限页以外的所有页面,具有部分增删改权限',
     routes: routes.filter(i => i.path !== '/permission')// just a mock
   },
   {

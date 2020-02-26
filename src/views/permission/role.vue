@@ -1,35 +1,44 @@
 <template>
   <div class="app-container">
     <!-- <el-button type="primary" @click="handleAddRole">新建权限账号</el-button> -->
-    <ky-button icon="fa fa-search" label="新建权限账号" perms="admin" type="primary" @click="handleAddRole"/>
+    <!--工具栏-->
+	<div class="toolbar" style="float:left;padding-top:10px;padding-left:15px;">
+		<el-form :inline="true" :model="filters" :size="size">
+			<el-form-item>
+				<el-input v-model="filters.name" placeholder="角色名"></el-input>
+			</el-form-item>
+			<el-form-item>
+				<ky-button label="搜索" icon="fa fa-search"  perms="admin:editor" type="primary" />
+			</el-form-item>
+			<el-form-item>
+				<ky-button label="新增" icon="fa fa-plus"    perms="admin:editor" type="primary" @click="handleAddRole" />
+			</el-form-item>
+		</el-form>
+	</div>
+    <!-- <ky-button icon="fa fa-plus"  label="新建角色" perms="admin" type="primary" @click="handleAddRole"/> -->
     <el-table :data="rolesList" style="width: 100%;margin-top:30px;" border>
-      <el-table-column align="center" label="账号秘钥" width="220">
-        <template slot-scope="scope">
-          {{ scope.row.key }}
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="账号名" width="220">
+      <el-table-column align="center" label="角色名" width="220">
         <template slot-scope="scope">
           {{ scope.row.name }}
         </template>
       </el-table-column>
-      <el-table-column align="header-center" label="账号描述">
+      <el-table-column align="header-center" label="描述">
         <template slot-scope="scope">
           {{ scope.row.description }}
         </template>
       </el-table-column>
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
-          <ky-button icon="fa fa-search" label="修改" perms="admin" type="primary" @click="handleEdit(scope)"/>
-          <ky-button icon="fa fa-search" label="删除" perms="admin" type="danger" @click="handleDelete(scope)"/>
+          <ky-button  label="编辑" perms="admin" type="primary" @click="handleEdit(scope)"/>
+          <ky-button  label="删除" perms="admin" type="danger" @click="handleDelete(scope)"/>
         </template>
       </el-table-column>
     </el-table>
 
-    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'修改':'新建'">
+    <el-dialog :visible.sync="dialogVisible" :title="dialogType==='edit'?'编辑':'新建'">
       <el-form :model="role" label-width="80px" label-position="left">
-        <el-form-item label="账号名">
-          <el-input v-model="role.name" placeholder="账号名" />
+        <el-form-item label="角色名">
+          <el-input v-model="role.name" placeholder="角色名" />
         </el-form-item>
         <el-form-item label="描述">
           <el-input
@@ -86,7 +95,9 @@ export default {
       defaultProps: {
         children: 'children',
         label: 'title'
-      }
+      },
+      filters: {name: ''},
+      size: 'small',
     }
   },
   computed: {
@@ -238,11 +249,10 @@ export default {
       const { description, key, name } = this.role
       this.dialogVisible = false
       this.$notify({
-        title: '新建成功',
+        title: '成功',
         dangerouslyUseHTMLString: true,
         message: `
-            <div>账号秘钥: ${key}</div>
-            <div>账号名: ${name}</div>
+            <div>角色名: ${name}</div>
             <div>描述: ${description}</div>
           `,
         type: 'success'

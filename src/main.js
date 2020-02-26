@@ -9,6 +9,8 @@ import App from './App'
 import store from './store'
 import router from './router'
 import axios from 'axios'
+import 'font-awesome/css/font-awesome.min.css'
+import '@/assets/iconfont/iconfont.css'
 
 // 引入大图查看器
 import VueDirectiveImagePreviewer from 'vue-directive-image-previewer'

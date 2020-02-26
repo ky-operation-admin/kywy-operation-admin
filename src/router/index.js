@@ -465,26 +465,17 @@ export const asyncRoutes = [{
     alwaysShow: true, // 总是显示在根菜单
     redirect: '/permission/page',
     meta: {
-      title: '权限管理',
-      icon: 'role',
+      title: '系统管理',
+      icon: '系统管理',
       role: ['admin', 'editor']
     }, //页面需要的权限
     children: [
-    //     {
-    //     path: 'page',
-    //     component: () => import('@/views/permission/page'),
-    //     name: 'PagePermission',
-    //     meta: {
-    //       title: '账号一览',
-    //       role: ['admin', 'editor']
-    //     } //页面需要的权限
-    //   },
       {
         path: 'directive',
         component: () => import('@/views/permission/directive'),
         name: 'DirectivePermission',
         meta: {
-          title: '切换账号'
+          title: '切换角色'
           // if do not set roles, means: this page does not require permission
         }
       },
@@ -493,8 +484,8 @@ export const asyncRoutes = [{
         component: () => import('@/views/permission/role'),
         name: 'Role',
         meta: {
-          title: '账号权限设置',
-          roles: ['admin', 'yc666']
+          title: '角色管理',
+          roles: ['admin', 'yc666','yq666']
         }
       }
     ]

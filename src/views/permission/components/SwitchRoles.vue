@@ -5,8 +5,8 @@
     </div>
     切换账号:
     <el-radio-group v-model="switchRoles">
-      <el-radio-button label="editor" />
       <el-radio-button label="admin" />
+      <el-radio-button label="editor" />
       <el-radio-button label="yc666" />
       <el-radio-button label="yq666" />
     </el-radio-group>

@@ -44,11 +44,12 @@
         <div class="other-operation-item">
           <li class="fa fa-undo"></li>
           备份还原
-        </div>    
+        </div>   
+        <!-- 个性设置 -->
+        <settings /> 
     </div>
     <div class="personal-footer" @click="logout">
-      <li class="fa fa-sign-out"></li>
-      退出登录
+      <el-button style="width:100%" size="small" type='danger' icon="fa fa-sign-out"> 退出登录</el-button>
     </div>
     <!--备份还原界面-->
     <!-- <backup ref="backupDialog" @afterRestore="afterRestore"></backup> -->
@@ -58,10 +59,13 @@
 <script>
 import Cookies from "js-cookie"
 // import Backup from "@/views/Backup/Backup"
+import Settings from '@/layout/components/Settings'
+import { getName, setName, removeName } from '@/utils/auth'
 export default {
   name: 'PersonalPanel',
   components:{
     // Backup
+    Settings
   },
   props: {
     user: {
@@ -70,7 +74,7 @@ export default {
         name: "admin",
         avatar: "@/assets/user.png",
         role: "超级管理员",
-        registeInfo: "注册时间：2018-12-25 "
+        registeInfo: "注册时间：2020-2-25 "
       }
     }
   },
@@ -80,17 +84,14 @@ export default {
   },
   methods: {
     // 退出登录
-    logout: function() {
+     logout() {
       this.$confirm("确认退出吗?", "提示", {
         type: "warning"
       })
       .then(() => {
-        sessionStorage.removeItem("user")
-        this.deleteCookie("token")
-        this.$router.push("/login")
-        this.$api.login.logout().then((res) => {
-          }).catch(function(res) {
-        })
+      removeName();
+      this.$store.dispatch('user/logout')
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
       })
       .catch(() => {})
     },
@@ -186,8 +187,8 @@ export default {
   margin-right: 1px;
   font-size: 14px;
   text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  /* padding-top: 10px; */
+  /* padding-bottom: 10px; */
   border-color: rgba(180, 190, 190, 0.2);
   border-top-width: 1px;
   border-top-style: solid;

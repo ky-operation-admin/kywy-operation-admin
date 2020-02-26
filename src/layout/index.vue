@@ -8,8 +8,9 @@
         <navbar />
         <tags-view v-if="needTagsView"></tags-view>
       </div>
-      <app-main :class="{'fixed':fixedHeader}" />
-      <!-- <right-panel v-if="showSettings">
+      <app-main />
+      <!-- 个性设置 -->
+      <!-- <right-panel v-if="showSettings" :buttonTop=15>
         <settings />
       </right-panel> -->
     </div>
@@ -30,8 +31,8 @@ export default {
     Sidebar,
     AppMain,
     tagsView,
-    RightPanel,
-    Settings
+    // RightPanel,
+    // Settings
   },
   mixins: [ResizeMixin],
   computed: {

@@ -463,7 +463,7 @@ export const asyncRoutes = [{
     component: Layout,
     name: 'Permission',
     alwaysShow: true, // 总是显示在根菜单
-    redirect: '/permission/page',
+    redirect: '/permission/directive',
     meta: {
       title: '系统管理',
       icon: '系统管理',

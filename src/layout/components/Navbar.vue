@@ -5,50 +5,40 @@
     <!-- 导航面包屑 -->
     <breadcrumb class="breadcrumb-container" />
 
-    <div class="right-menu">
-        <!-- 头部搜索 -->
+    <!-- <div class="right-menu">
       <search id="header-search" class="right-menu-item" />
       <div class="home" @click="gotohome">
         首页
       </div>
-      <!-- 全屏工具 -->
       <screenfull id="screenfull" class="right-menu-item hover-effect" />
-      <!-- <el-dropdown class="avatar-container" trigger="click">
-        <div class="avatar-wrapper">
-          <img src='@/assets/kyuser.png' style="width:36px;height:36px;vertical-align:middle;margin-right:3px">
-          <i class="el-icon-caret-bottom" style="vertical-align:middle;" />
-        </div>
-        <el-dropdown-menu slot="dropdown" class="user-dropdown">
-          <router-link to="/">
-            <el-dropdown-item>
-              账户
-            </el-dropdown-item>
-          </router-link>
-          <el-dropdown-item divided>
-            <span style="display:block;" @click="logout">退出</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown> -->
-      <div class="right-menu-item" v-popover:popover-personal>
-      <span class="user-info"><img :src="user.avatar" />{{user.name}}</span>
-          <el-popover ref="popover-personal" placement="bottom-end" trigger="click" :visible-arrow="false">
+      <div class="right-menu-item"  v-popover:popover-personal>
+      <span class="user-info"><img :src="user.avatar" />{{getUserName}}</span>
+          <el-popover ref="popover-personal"  offset=80 placement="bottom-end" trigger="click" :visible-arrow="false">
             <personal-panel :user="user"></personal-panel>
           </el-popover>
       </div>
-      <div class="right-menu-item">
-          <right-panel v-if="showSettings" :buttonTop=15>
-        <settings />
-      </right-panel>
-      </div>
-    </div>
+    </div> -->
+    <span class="toolbar">
+      <el-menu class="el-menu-demo" mode="horizontal" background-color="#1890FF" text-color="#fff" active-text-color="#1890FF">
+        <!-- 首页 -->
+        <el-menu-item index="1" @click="$router.push('/')"><i style="color:#fff" class="fa fa-home fa-lg"></i>  </el-menu-item>
+        <el-menu-item index="2"><search style="color:#fff;" id="header-search"/></el-menu-item>
+        <el-menu-item index="3"><screenfull style="color:#fff;" id="screenfull" /></el-menu-item>
+        <el-menu-item index="4" v-popover:popover-personal>
+          <!-- 用户信息 -->
+          <span style="color:#fff;" class="user-info"><img :src="user.avatar" />{{getUserName}}</span>
+          <el-popover ref="popover-personal"   placement="bottom-end" trigger="click" :visible-arrow="false">
+            <personal-panel :user="user"></personal-panel>
+          </el-popover>
+        </el-menu-item>
+      </el-menu>
+    </span>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import RightPanel from '@/components/RightPanel'
 import Breadcrumb from '@/components/Breadcrumb'
-import Settings from '@/layout/components/Settings'
 import Hamburger from '@/components/Hamburger'
 import Search from '@/components/HeaderSearch'
 import PersonalPanel from "@/components/Core/PersonalPanel"
@@ -62,8 +52,9 @@ export default {
         name: "Louis",
         avatar: "",
         role: "超级管理员",
-        registeInfo: "注册时间：2018-12-20 "
+        registeInfo: "注册时间：2020-2-25 "
       },
+      activeIndex: '1',
     }
   },
   components: {
@@ -71,8 +62,6 @@ export default {
     Screenfull,
     Hamburger,
     Search,
-    Settings,
-    RightPanel,
     PersonalPanel
   },
   computed: {
@@ -85,16 +74,15 @@ export default {
       return this.$store.state.settings.showSettings
     },
     getUserName () {
-      return getName()
+      return this.$store.getters.roles[0]
+      console.log('$store.getters.roles',$store.getters.roles);
     }
   },
     mounted() {
     // 先用模拟头像
+    this.user.name = this.getUserName
     if (this.avatar) {
       this.user.avatar = require("@/assets/user1.png")
-      let a =this.getUserName
-    //   this.user.name = a.split('-')[0]
-      this.user.name = a.substring(0,a.indexOf("-")).trim();//-号前面
     }
   },
   methods: {
@@ -128,15 +116,24 @@ export default {
     background: #ccc;
   }
 }
+.toolbar {
+  float: right;
+}
 .navbar {
-  height: 80px;
+  height: 60px;
   overflow: hidden;
   position: relative;
-  background: #fff;
+  background: #1890FF;
   box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-
+//   禁止选中文本
+   -o-user-select: none;
+  -moz-user-select: none; /*火狐 firefox*/
+  -webkit-user-select: none; /*webkit浏览器*/
+  -ms-user-select: none; /*IE10+*/
+  -khtml-user-select :none; /*早期的浏览器*/
+  user-select: none; 
   .hamburger-container {
-    line-height: 80px;
+    line-height: 60px;
     height: 100%;
     float: left;
     cursor: pointer;
@@ -144,7 +141,7 @@ export default {
     -webkit-tap-highlight-color: transparent;
 
     &:hover {
-      background: rgba(0, 0, 0, 0.025);
+      background: rgb(19,115,204);
     }
   }
 
@@ -152,10 +149,10 @@ export default {
     float: left;
   }
 
-  .right-menu {
+  .toolbar {
     float: right;
     height: 100%;
-    line-height: 80px;
+    line-height: 60px;
     .user-info {
     font-size: 20px;
     cursor: pointer;
@@ -163,7 +160,7 @@ export default {
     width: 40px;
     height: 40px;
     border-radius: 10px;
-    margin: 20px 0px 20px 10px;
+    margin: 10px 0px 10px 10px;
     float: right;
 }
 }
@@ -173,10 +170,10 @@ export default {
 
     .right-menu-item {
       display: inline-block;
-      padding: 0 8px;
+      padding: 0 15px;
       height: 100%;
       float: left;
-      margin-right: 30px;
+    //   margin-right: 30px;
       font-size: 18px;
       color: #5a5e66;
       vertical-align: text-bottom;

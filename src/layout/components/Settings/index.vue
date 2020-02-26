@@ -1,15 +1,15 @@
 <template>
   <div class="drawer-container">
     <div>
-      <h3 class="drawer-title">页面样式设置</h3>
+      <h3 class="drawer-title">个性设置</h3>
 
       <div class="drawer-item">
-        <span>主题色</span>
+        <span>主题颜色</span>
         <theme-picker style="float: right;height: 26px;margin: -3px 8px 0 0;" @change="themeChange" />
       </div>
 
       <div class="drawer-item">
-        <span>打开标签-查看</span>
+        <span>浏览标签</span>
         <el-switch v-model="tagsView" class="drawer-switch" />
       </div>
 
@@ -19,7 +19,7 @@
       </div>
 
       <div class="drawer-item">
-        <span>侧边栏logo</span>
+        <span>显示logo</span>
         <el-switch v-model="sidebarLogo" class="drawer-switch" />
       </div>
 

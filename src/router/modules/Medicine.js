@@ -4,7 +4,7 @@ import Layout from '@/layout'
 const medicineRouter = {
   path: '/medicine',
   component: Layout,
-  redirect: '/medicine/index',
+  redirect: '/medicine/patient/patientInfo',
   name: 'Medicine',
   meta: {
     title: '寻医问药',
@@ -14,6 +14,7 @@ const medicineRouter = {
       path: 'patient',
       name: 'Patient',
       component: () => import('@/views/ky_medicine/patient/index'),
+      redirect: '/medicine/patient/patientInfo',
       meta: {
         title: '患者管理',
       },
@@ -37,6 +38,7 @@ const medicineRouter = {
       path: 'doctor',
       name: 'Doctor',
       component: () => import('@/views/ky_medicine/doctor/index'),
+      redirect: '/medicine/doctor/doctorAudit',
       meta: {
         title: '医生管理',
       },

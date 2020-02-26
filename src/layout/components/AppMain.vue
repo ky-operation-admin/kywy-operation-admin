@@ -27,7 +27,7 @@ export default {
   background: #e3e3e3;
 }
 .fixed-header + .app-main {
-  padding-top: 50px;
+  padding-top: 60px;
 }
 .hasTagsView {
   .app-main {
@@ -45,7 +45,7 @@ export default {
 // fix css style bug in open el-dialog
 .el-popup-parent--hidden {
   .fixed-header {
-    padding-right: 15px;
+    // padding-right: 15px;
   }
 }
 </style>

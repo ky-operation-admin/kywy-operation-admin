@@ -45,7 +45,7 @@ export default {
 .sidebar-logo-container {
   position: relative;
   width: 100%;
-  height: 80px;
+  height: 60px;
   // height: 50px;
   line-height: 50px;
   background: #EDEEE2;
@@ -55,7 +55,7 @@ export default {
   & .sidebar-logo-link {
     height: 100%;
     width: 100%;
-    line-height: 80px;
+    line-height: 60px;
 
     & .sidebar-logo {
       width: 101px;

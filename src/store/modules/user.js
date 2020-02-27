@@ -1,3 +1,4 @@
+
 import {
   login,
   logout,
@@ -107,26 +108,33 @@ const actions = {
   // 登出
   logout({
     commit,
-    state
+    state,
+    dispatch
   }) {
-    // return new Promise((resolve, reject) => {
-    //   logout(state.token).then(() => {
-    //     commit('SET_TOKEN', '')
-    //     removeToken()
-    //     resetRouter()
-    //     resolve()
-    //   }).catch(error => {
-    //     reject(error)
-    //   })
-    // })
     return new Promise((resolve, reject) => {
-      commit('SET_TOKEN', '')
-      commit('SET_NAME', '')
-      removeToken()
-      removeName()
-      resetRouter()
-      resolve()
+      logout(state.token).then(() => {
+        commit('SET_TOKEN', '')
+        commit('SET_ROLES', [])
+        commit('SET_NAME', '')
+        removeToken()
+        resetRouter()
+        removeName()
+        dispatch('tagsView/delAllViews', null, {
+          root: true
+        })
+        resolve()
+      }).catch(error => {
+        reject(error)
+      })
     })
+        // return new Promise((resolve, reject) => {
+        //   commit('SET_TOKEN', '')
+        //   commit('SET_NAME', '')
+        //   removeToken()
+        //   removeName()
+        //   resetRouter()
+        //   resolve()
+        // })
   },
 
   // remove token

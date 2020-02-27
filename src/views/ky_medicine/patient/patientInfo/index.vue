@@ -23,10 +23,10 @@
         <template slot-scope="scope">
           <!-- <el-button size="mini" type="primary" @click="edti(scope.$index)">编辑</el-button> -->
           <!-- <el-button size="mini" type="primary" disabled>编辑</el-button> -->
-          <ky-button icon="fa fa-search" label="编辑" :perms="getUserName" type="primary" />
+          <ky-button icon="fa fa-edit" perms="admin:editor" label="编辑"  type="primary" />
 
           <!-- <el-button size="mini" type="danger" @click="del(scope.$index,scope.row)">删除</el-button> -->
-          <ky-button icon="fa fa-search" label="删除" :perms="getUserName" type="danger" />
+          <ky-button icon="fa fa-trash" perms="admin:editor" label="删除"  type="danger" />
 
         </template>
       </el-table-column>

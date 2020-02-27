@@ -1,28 +1,16 @@
 <template>
-  <div class="navbar">
+  <div class="navbar" :style="{'background':theme}">
     <!-- 导航收缩框 -->
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
     <!-- 导航面包屑 -->
     <breadcrumb class="breadcrumb-container" />
-
-    <!-- <div class="right-menu">
-      <search id="header-search" class="right-menu-item" />
-      <div class="home" @click="gotohome">
-        首页
-      </div>
-      <screenfull id="screenfull" class="right-menu-item hover-effect" />
-      <div class="right-menu-item"  v-popover:popover-personal>
-      <span class="user-info"><img :src="user.avatar" />{{getUserName}}</span>
-          <el-popover ref="popover-personal"  offset=80 placement="bottom-end" trigger="click" :visible-arrow="false">
-            <personal-panel :user="user"></personal-panel>
-          </el-popover>
-      </div>
-    </div> -->
     <span class="toolbar">
-      <el-menu class="el-menu-demo" mode="horizontal" background-color="#1890FF" text-color="#fff" active-text-color="#1890FF">
+      <el-menu class="el-menu-demo" mode="horizontal" :background-color='theme' text-color="#fff" :active-text-color="theme">
         <!-- 首页 -->
         <el-menu-item index="1" @click="$router.push('/')"><i style="color:#fff" class="fa fa-home fa-lg"></i>  </el-menu-item>
+        <!-- 导航搜索 -->
         <el-menu-item index="2"><search style="color:#fff;" id="header-search"/></el-menu-item>
+        <!-- 全屏工具 -->
         <el-menu-item index="3"><screenfull style="color:#fff;" id="screenfull" /></el-menu-item>
         <el-menu-item index="4" v-popover:popover-personal>
           <!-- 用户信息 -->
@@ -69,7 +57,11 @@ export default {
       'name',
       'sidebar',
       'avatar'
-    ]),    
+    ]),
+    // 动态获取设置的主题颜色
+    theme() {
+      return this.$store.state.settings.theme
+    },
     showSettings () {
       return this.$store.state.settings.showSettings
     },
@@ -136,6 +128,7 @@ export default {
     line-height: 60px;
     height: 100%;
     float: left;
+    color: #fff;
     cursor: pointer;
     transition: background 0.3s;
     -webkit-tap-highlight-color: transparent;

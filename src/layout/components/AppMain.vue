@@ -28,6 +28,8 @@ export default {
 }
 .fixed-header + .app-main {
   padding-top: 60px;
+    height: 100vh;
+
 }
 .hasTagsView {
   .app-main {

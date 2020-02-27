@@ -1,4 +1,5 @@
 <template>
+<!-- 个人信息和个性设置 -->
   <div class="personal-panel">
     <div class="personal-desc" :style="{'background':this.$store.state.app.themeColor}">
         <div class="avatar-container">
@@ -84,21 +85,25 @@ export default {
   },
   methods: {
     // 退出登录
-     logout() {
-      this.$confirm("确认退出吗?", "提示", {
-        type: "warning"
-      })
-      .then(() => {
+    async logout() {
       removeName();
-      this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
-      })
-      .catch(() => {})
+    //   console.log(this.$route.fullPath);
+     await this.$store.dispatch('user/logout')
+     this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     },
+    // api中的logout为promiss对象,需要异步处理,如果不使用async/await,退出登录会有视图延迟,如下错误示范
+    // logout(){
+    //     this.$confirm('确认退出吗?','提示',{
+    //         type:'warning'
+    //     }).then(()=>{
+    //         this.$store.dispatch('user/logout')
+    //         this.$router.push(`/login?redirect=${this.$route.pullPath}`)
+    //     }).catch(()=>{})
+    // }
     // 删除cookie
-    deleteCookie: function(name) { 
-        Cookies.remove(name)
-    },
+    // deleteCookie: function(name) { 
+    //     Cookies.remove(name)
+    // },
     // 打开备份还原界面
     // showBackupDialog: function() {
     //   this.$refs.backupDialog.setBackupVisible(true)

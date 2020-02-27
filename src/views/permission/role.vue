@@ -8,7 +8,8 @@
 				<el-input v-model="filters.name" placeholder="角色名"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<ky-button label="搜索" icon="fa fa-search"  perms="admin:editor" type="primary" />
+				<!-- <ky-button label="搜索" icon="fa fa-search"  perms="" type="primary" /> -->
+				<el-button  icon="fa fa-search"  size="mini" type="primary" >搜索</el-button>
 			</el-form-item>
 			<el-form-item>
 				<ky-button label="新增" icon="fa fa-plus"    perms="admin:editor" type="primary" @click="handleAddRole" />
@@ -29,8 +30,8 @@
       </el-table-column>
       <el-table-column align="center" label="操作">
         <template slot-scope="scope">
-          <ky-button  label="编辑" perms="admin" type="primary" @click="handleEdit(scope)"/>
-          <ky-button  label="删除" perms="admin" type="danger" @click="handleDelete(scope)"/>
+          <ky-button  label="编辑" icon="fa fa-edit" perms="admin" type="primary" @click="handleEdit(scope)"/>
+          <ky-button  label="删除" icon="fa fa-trash" perms="admin" type="danger" @click="handleDelete(scope)"/>
         </template>
       </el-table-column>
     </el-table>

@@ -135,7 +135,20 @@ export const constantRoutes = [
   //       },
   //     ]
   //   },
-
+  // ........................接口文档............................
+  {
+    path: '/swagger',
+    component: Layout,
+    children: [{
+      path: '8081/swagger-ui.html',
+      name: 'swagger',
+      component:()=>import('@/views/IFrame/IFrame'),
+      meta: {
+        title: '接口文档',
+        icon: '接口文档'
+      }
+    }]
+  },
   // ........................平台规则............................
   {
     path: '/platform_rule',
@@ -469,8 +482,7 @@ export const asyncRoutes = [{
       icon: '系统管理',
       role: ['admin', 'editor']
     }, //页面需要的权限
-    children: [
-      {
+    children: [{
         path: 'directive',
         component: () => import('@/views/permission/directive'),
         name: 'DirectivePermission',
@@ -485,7 +497,7 @@ export const asyncRoutes = [{
         name: 'Role',
         meta: {
           title: '角色管理',
-          roles: ['admin', 'yc666','yq666']
+          roles: ['admin', 'yc666', 'yq666']
         }
       }
     ]

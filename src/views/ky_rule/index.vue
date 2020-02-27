@@ -4,9 +4,7 @@
       <el-button v-if="data.edit" type="success" size="small" icon="el-icon-circle-check-outline" @click="confirmEdit()">
         确定
       </el-button>
-      <el-button v-else type="primary" size="small" icon="el-icon-edit" @click="data.edit=!data.edit">
-        编辑
-      </el-button>
+      <ky-button label="编辑" icon="fa fa-edit"    perms="admin:editor" type="primary" @click="data.edit=!data.edit" />
       <el-button v-if="data.edit" class="cancel-btn" size="small" icon="el-icon-refresh" type="warning" @click="cancelEdit()">
         取消
       </el-button>
@@ -64,6 +62,7 @@
 </template>
 
 <script>
+import KyButton from "@/components/Core/KyButton"
 export default {
   data () {
     return {
@@ -101,7 +100,7 @@ export default {
     }
   },
   components: {
-
+    KyButton
   }
 }
 </script>

@@ -85,21 +85,23 @@ export default {
   },
   methods: {
     // 退出登录
-    async logout() {
-      removeName();
-    //   console.log(this.$route.fullPath);
-     await this.$store.dispatch('user/logout')
-     this.$router.push(`/login?redirect=${this.$route.fullPath}`)
-    },
-    // api中的logout为promiss对象,需要异步处理,如果不使用async/await,退出登录会有视图延迟,如下错误示范
-    // logout(){
-    //     this.$confirm('确认退出吗?','提示',{
-    //         type:'warning'
-    //     }).then(()=>{
-    //         this.$store.dispatch('user/logout')
-    //         this.$router.push(`/login?redirect=${this.$route.pullPath}`)
-    //     }).catch(()=>{})
-    // }
+    // async logout() {
+    //   removeName();
+    // //   console.log(this.$route.fullPath);
+    //  await this.$store.dispatch('user/logout')
+    //  this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    // },
+    // api中的logout为promiss对象,需要异步处理,如果不使用async/await,退出登录会有视图延迟
+    logout(){
+        // removeName();
+        this.$confirm('确认退出吗?','提示',{
+            type:'warning'
+        }).then(async ()=>{
+            removeName();
+            await this.$store.dispatch('user/logout')
+            this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+        })
+    }
     // 删除cookie
     // deleteCookie: function(name) { 
     //     Cookies.remove(name)

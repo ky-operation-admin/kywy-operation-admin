@@ -8,7 +8,7 @@ import Layout from '@/layout'
 /* 引入模块路由*/
 import merchantRouter from './modules/merchant'
 import medicineRouter from './modules/Medicine'
-import hotelRouter from './modules/hotel'
+import homeCareRouter from './modules/homeCare'
 import organizationRouter from './modules/organization'
 /**
  * 注意: 子菜单只在路由子菜单时出现。 长度 > = 1
@@ -506,58 +506,59 @@ export const asyncRoutes = [{
   medicineRouter,
   // ........................商城商家管理............................
   //   merchantRouter,
-  // ........................酒店管理............................
-  //   hotelRouter,
+
 
   // ........................养老机构管理............................
-  //   organizationRouter,
-  // ........................康养人才管理............................
-  //   {
-  //     path: '/talentMan',
-  //     component: Layout,
-  //     redirect: '/talentMan/talentPool',
-  //     name: 'TalentMan',
-  //     meta: {
-  //       title: '康养人才管理',
-  //       icon: '人才'
-  //     },
-  //     children: [{
-  //         path: 'talentPool',
-  //         name: 'TalentPool',
-  //         component: () => import('@/views/ky_talentsRecruitment/talentPool/index'),
-  //         meta: {
-  //           title: '简历/人才库',
-  //         }
-  //       },
-  //       {
-  //         path: 'talentRecomment',
-  //         name: 'TalentRecomment',
-  //         component: () => import('@/views/ky_talentsRecruitment/talentRecomment/index'),
-  //         meta: {
-  //           title: '猎头人才推荐',
-  //         }
-  //       },
-  //       {
-  //         path: 'mannReconmment',
-  //         name: 'mannReconmment',
-  //         hidden: true,
-  //         component: () => import('@/views/ky_talentsRecruitment/mannReconmment/index'),
-  //         meta: {
-  //           title: '手动推荐',
-  //         }
-  //       },
-  //       {
-  //         path: 'autoReconmment',
-  //         name: 'autoReconmment',
-  //         hidden: true,
-  //         component: () => import('@/views/ky_talentsRecruitment/autoReconmment/index'),
-  //         meta: {
-  //           title: '自动推荐',
-  //         }
-  //       },
+    organizationRouter,
+      // ........................居家护理............................
+      homeCareRouter,
+  // ........................人才招聘............................
+    {
+      path: '/talentMan',
+      component: Layout,
+      redirect: '/talentMan/talentPool',
+      name: 'TalentMan',
+      meta: {
+        title: '人才招聘',
+        icon: '人才'
+      },
+      children: [{
+          path: 'talentPool',
+          name: 'TalentPool',
+          component: () => import('@/views/ky_talentsRecruitment/talentPool/index'),
+          meta: {
+            title: '简历/人才库',
+          }
+        },
+        {
+          path: 'talentRecomment',
+          name: 'TalentRecomment',
+          component: () => import('@/views/ky_talentsRecruitment/talentRecomment/index'),
+          meta: {
+            title: '猎头人才推荐',
+          }
+        },
+        {
+          path: 'mannReconmment',
+          name: 'mannReconmment',
+          hidden: true,
+          component: () => import('@/views/ky_talentsRecruitment/mannReconmment/index'),
+          meta: {
+            title: '手动推荐',
+          }
+        },
+        {
+          path: 'autoReconmment',
+          name: 'autoReconmment',
+          hidden: true,
+          component: () => import('@/views/ky_talentsRecruitment/autoReconmment/index'),
+          meta: {
+            title: '自动推荐',
+          }
+        },
 
-  //     ]
-  //   },
+      ]
+    },
   //   // ........................用户管理............................
   //   {
   //     path: '/user',

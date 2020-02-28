@@ -10,13 +10,14 @@ const medicineRouter = {
     title: '寻医问药',
     icon: 'medicine'
   },
-  children: [{
+  children: [
+      {
       path: 'patient',
       name: 'Patient',
       component: () => import('@/views/ky_medicine/patient/index'),
       redirect: '/medicine/patient/patientInfo',
       meta: {
-        title: '患者管理',
+        title: '用户统计',
       },
       children: [{
         path: 'patientInfo',
@@ -40,7 +41,7 @@ const medicineRouter = {
       component: () => import('@/views/ky_medicine/doctor/index'),
       redirect: '/medicine/doctor/doctorAudit',
       meta: {
-        title: '医生管理',
+        title: '医生服务管理',
       },
       children: [{
           path: 'doctorAudit',
@@ -69,21 +70,54 @@ const medicineRouter = {
       ]
     },
     {
-      path: 'medicine_message',
-      name: 'MedicineMessage',
-      component: () => import('@/views/ky_medicine/message/index'),
+      path: 'need_order',
+      name: 'NeedOrder',
+      component: () => import('@/views/ky_medicine/medicineOrder/index'),
       meta: {
-        title: '消息管理',
+        title: '需求订单统计',
       }
     },
     {
-      path: 'medicineOrder',
-      name: 'MedicineOrder',
+      path: 'buy_order',
+      name: 'BuyOrder',
       component: () => import('@/views/ky_medicine/medicineOrder/index'),
       meta: {
-        title: '订单管理',
+        title: '购买订单统计',
       }
-    }
+    },
+    {
+      path: 'comment_statistics',
+      name: 'CommentStatistics',
+      component: () => import('@/views/ky_medicine/message/index'),
+      meta: {
+        title: '评价统计',
+      }
+    },
+    {
+      path: 'attention',
+      name: 'Attention',
+      component: () => import('@/views/ky_medicine/message/index'),
+      meta: {
+        title: '关注统计',
+      }
+    },
+    {
+      path: 'attestation',
+      name: 'Attestation',
+      component: () => import('@/views/ky_medicine/message/index'),
+      meta: {
+        title: '认证管理',
+      }
+    },
+    {
+      path: 'configuration',
+      name: 'Configuration',
+      component: () => import('@/views/ky_medicine/message/index'),
+      meta: {
+        title: '配置信息',
+      }
+    },
+    
 
   ]
 }

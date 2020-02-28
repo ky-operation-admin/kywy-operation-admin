@@ -13,9 +13,25 @@ const organizationRouter = {
       path: 'userStatistics',
       name: 'userStatistics',
       component: () => import('@/views/ky_organization/userStatistics'),
+      redirect:'',
       meta: {
         title: '用户统计',
-      }
+      },
+      children: [{
+        path: 'user',
+        name: 'user',
+        component: () => import('@/views/ky_organization/userStatistics/user'),
+        meta: {
+          title: '用户',
+        }
+      }, {
+        path: 'yanglaoOrganization',
+        name: 'yanglaoOrganization',
+        component: () => import('@/views/ky_organization/userStatistics/yanglaoOrganization'),
+        meta: {
+          title: '养老机构',
+        }
+      }]
     },
     {
       path: 'organizationManage',

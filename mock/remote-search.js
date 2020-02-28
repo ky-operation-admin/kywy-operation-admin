@@ -12,6 +12,7 @@ NameList.push({
   name: 'mock-Pan'
 })
 
+// console.log('NameList',NameList)
 export default [
   // username search
   {

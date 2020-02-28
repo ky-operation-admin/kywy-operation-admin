@@ -1,19 +1,19 @@
 <template>
-<!-- 个人信息和个性设置 -->
+  <!-- 个人信息和个性设置 -->
   <div class="personal-panel">
     <div class="personal-desc" :style="{'background':this.$store.state.app.themeColor}">
-        <div class="avatar-container">
-          <img class="avatar" :src="require('@/assets/user1.png')" />
-        </div>  
-        <div class="name-role">
-          <span class="sender">{{ user.name }} - {{ user.role }}</span>  
-        </div>  
-        <div class="registe-info">
-          <span class="registe-info">
-            <li class="fa fa-clock-o"></li>
-            {{ user.registeInfo }}
-          </span>
-        </div>  
+      <div class="avatar-container">
+        <img class="avatar" :src="require('@/assets/user1.png')" />
+      </div>
+      <div class="name-role">
+        <span class="sender">{{ user.name }} - {{ user.role }}</span>
+      </div>
+      <div class="registe-info">
+        <span class="registe-info">
+          <li class="fa fa-clock-o"></li>
+          {{ user.registeInfo }}
+        </span>
+      </div>
     </div>
     <!-- <div class="personal-relation">
         <span class="relation-item">followers</span>  
@@ -21,33 +21,33 @@
         <span class="relation-item">friends</span>
     </div> -->
     <div class="main-operation">
-        <span class="main-operation-item">
-          <el-button size="small" icon="fa fa-male"> 个人中心</el-button>
-        </span>    
-        <span class="main-operation-item">
-          <el-button size="small" icon="fa fa-key"> 修改密码</el-button>
-        </span>    
+      <span class="main-operation-item">
+        <el-button size="small" icon="fa fa-male"> 个人中心</el-button>
+      </span>
+      <span class="main-operation-item">
+        <el-button size="small" icon="fa fa-key"> 修改密码</el-button>
+      </span>
     </div>
     <div class="other-operation">
-        <div class="other-operation-item">
-          <li class="fa fa-eraser"></li>
-          清除缓存
-        </div>    
-        <div class="other-operation-item">
-          <li class="fa fa-user"></li>
-          在线人数
-        </div>    
-        <div class="other-operation-item">
-          <li class="fa fa-bell"></li>
-          访问次数
-        </div>    
-        <!-- <div class="other-operation-item" @click="showBackupDialog"> -->
-        <div class="other-operation-item">
-          <li class="fa fa-undo"></li>
-          备份还原
-        </div>   
-        <!-- 个性设置 -->
-        <settings /> 
+      <div class="other-operation-item">
+        <li class="fa fa-eraser"></li>
+        清除缓存
+      </div>
+      <div class="other-operation-item">
+        <li class="fa fa-user"></li>
+        在线人数
+      </div>
+      <div class="other-operation-item">
+        <li class="fa fa-bell"></li>
+        访问次数
+      </div>
+      <!-- <div class="other-operation-item" @click="showBackupDialog"> -->
+      <div class="other-operation-item">
+        <li class="fa fa-undo"></li>
+        备份还原
+      </div>
+      <!-- 个性设置 -->
+      <settings />
     </div>
     <div class="personal-footer" @click="logout">
       <el-button style="width:100%" size="small" type='danger' icon="fa fa-sign-out"> 退出登录</el-button>
@@ -64,7 +64,7 @@ import Settings from '@/layout/components/Settings'
 import { getName, setName, removeName } from '@/utils/auth'
 export default {
   name: 'PersonalPanel',
-  components:{
+  components: {
     // Backup
     Settings
   },
@@ -79,7 +79,7 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
     }
   },
@@ -121,7 +121,7 @@ export default {
     //     })
     // }
   },
-  mounted() {
+  mounted () {
   }
 }
 </script>

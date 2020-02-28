@@ -50,6 +50,7 @@ export default [
         username
       } = config.body
       const token = tokens[username]
+      console.log('token',token)
 
       // mock error
       if (!token) {

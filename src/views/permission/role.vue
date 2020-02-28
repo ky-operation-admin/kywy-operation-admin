@@ -8,7 +8,6 @@
 				<el-input v-model="filters.name" placeholder="角色名"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<!-- <ky-button label="搜索" icon="fa fa-search"  perms="" type="primary" /> -->
 				<el-button  icon="fa fa-search"  size="mini" type="primary" >搜索</el-button>
 			</el-form-item>
 			<el-form-item>

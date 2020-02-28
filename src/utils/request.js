@@ -27,7 +27,7 @@ baseURL: process.env.VUE_APP_BASE_API,
 service.interceptors.request.use(
   config => {
     if (store.getters.token) {
-      config.headers['X-Token'] = getToken()
+      config.headers['token'] = getToken()
     }
     return config
   },

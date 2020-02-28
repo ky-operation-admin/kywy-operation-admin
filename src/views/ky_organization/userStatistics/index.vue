@@ -1,11 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="title" style="text-align:left;padding:20px">
-      <el-input v-model="keyword" @keyup.enter.native="handleFilter" placeholder="请输入账号/昵称/真实姓名" style="width: 300px;margin-right:-10px;" clearable class="filter-item" />
-      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
-        查询
-      </el-button>
-    </div>
+    <searchForm :formOptions="formOptions" @onSearch="onSearch" />
     <el-table :data="tableData" style="width: 100%" border>
       <el-table-column prop="name" label="真实姓名" align="center"></el-table-column>
       <el-table-column prop="alias" label="昵称" align="center"></el-table-column>
@@ -60,6 +55,7 @@
 // 用户管理
 import { deepClone } from '@/utils'
 import data from '@/assets/js/mock'
+import searchForm from '@/components/SearchForm'
 const defaultForm = {
   username: '',
   name: '',
@@ -76,7 +72,45 @@ export default {
       form: Object.assign({}, defaultForm),
       tableData: [],
       keyword: '',
+      formOptions: [
+        {
+          label: '意见内容',
+          prop: 'content',
+          element: 'el-input'
+        },
+        {
+          label: '类型',
+          prop: 'type',
+          element: 'el-select',
+          options: [
+            { label: '给点意见', value: '1' },
+            { label: '售后问题', value: '2' }
+          ]
+        },
+        {
+          label: '状态',
+          prop: 'status',
+          element: 'el-select',
+          // options: getFeedbackStatus()
+        },
+        {
+          label: '提交时间',
+          prop: 'timeRange',
+          element: 'el-date-picker'
+        },
+
+      ],
+      // formOptions: [
+      //   {
+      //     label: '意见内容',
+      //     prop: 'content',
+      //     element: 'el-input'
+      //   }
+      // ],
     }
+  },
+  components: {
+    searchForm
   },
   created () {
     this.init()
@@ -84,6 +118,9 @@ export default {
   methods: {
     handleClose (done) {
       done();
+    },
+    onSearch (val) {
+      console.log(val)
     },
     init () {
       let tempData1 = data.userData.filter(item => {

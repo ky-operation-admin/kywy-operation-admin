@@ -26,14 +26,6 @@ const merchantRouter = {
       }
     },
     {
-      path: 'mer_message',
-      name: 'MerMessage',
-      component: () => import('@/views/ky_organization/organizationMessage/index'),
-      meta: {
-        title: '商家消息管理',
-      }
-    },
-    {
       path: 'bigdata',
       name: 'bigdata',
       component: () => import('@/views/ky_merchant/merchantData/index'),

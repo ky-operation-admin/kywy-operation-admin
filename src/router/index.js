@@ -142,7 +142,7 @@ export const constantRoutes = [
     children: [{
       path: '8081/swagger-ui.html',
       name: 'swagger',
-      component:()=>import('@/views/IFrame/IFrame'),
+      component: () => import('@/views/IFrame/IFrame'),
       meta: {
         title: '接口文档',
         icon: '接口文档'
@@ -510,7 +510,7 @@ export const asyncRoutes = [{
   //   hotelRouter,
 
   // ........................养老机构管理............................
-  //   organizationRouter,
+  organizationRouter,
   // ........................康养人才管理............................
   //   {
   //     path: '/talentMan',

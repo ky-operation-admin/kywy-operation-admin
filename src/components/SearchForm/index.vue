@@ -118,7 +118,7 @@ export default {
 }
 </script>
  
-<style lang='less' scoped>
+<style lang='scss' scoped>
 .search-form-box {
   display: flex;
   margin-bottom: 15px;

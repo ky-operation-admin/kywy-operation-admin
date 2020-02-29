@@ -4,11 +4,13 @@ import {
 } from '../src/utils'
 
 import user from './user'
+import searchHistory from './searchHistory'
 import role from './role'
 import article from './article'
 import search from './remote-search'
 
 const mocks = [
+  ...searchHistory,
   ...user,
   ...role,
   ...article,

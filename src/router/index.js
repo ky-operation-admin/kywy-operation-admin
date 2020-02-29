@@ -7,6 +7,7 @@ Vue.use(Router)
 import Layout from '@/layout'
 /* 引入模块路由*/
 import merchantRouter from './modules/merchant'
+import statisticsRouter from './modules/statistics'
 import medicineRouter from './modules/Medicine'
 import homeCareRouter from './modules/homeCare'
 import organizationRouter from './modules/organization'
@@ -502,6 +503,9 @@ export const asyncRoutes = [{
       }
     ]
   },
+
+  // ........................数据统计............................
+  statisticsRouter,
   // ........................寻医问药............................
   medicineRouter,
   // ........................商城商家管理............................

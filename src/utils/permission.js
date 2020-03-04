@@ -23,15 +23,17 @@ export  function checkPermission(value) {
     return false
   }
 }
+// 根据role判断当前账号是否有权限
 export  function hasPermission(value) {
     const roles = store.getters && store.getters.roles
+    console.log('roles', roles);
     const permissionRoles = value
     const hasPermission = roles.some(role => {
       return permissionRoles.includes(role)
     })
-    // console.log('roles', roles);
+
     // console.log('value', value);
-    // console.log('hasPermission', hasPermission);
+    console.log('hasPermission', hasPermission);
     
     return hasPermission
 }

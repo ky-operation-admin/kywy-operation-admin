@@ -13,13 +13,13 @@ export const constantRoutes = [
   },
   {
     path: '/login',
-    component:'views/ky_login/index',
+    component: 'views/ky_login/index',
     hidden: true
   },
 
   {
     path: '/404',
-    component:'views/404',
+    component: 'views/404',
     hidden: true
   },
 
@@ -30,7 +30,7 @@ export const constantRoutes = [
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
-      component:'views/dashboard/index',
+      component: 'views/dashboard/index',
       meta: {
         title: '管理首页',
         icon: '首页',
@@ -45,7 +45,7 @@ export const constantRoutes = [
     children: [{
       path: 'index',
       name: 'Platform_rule',
-      component:'views/ky_rule/index',
+      component: 'views/ky_rule/index',
       meta: {
         title: '平台规则',
         icon: 'rule'
@@ -67,41 +67,42 @@ export const asyncRoutes = [{
       role: ['admin', 'yc666']
     }, //页面需要的权限
     children: [{
-      path: 'page',
-      component: 'views/permission/page',
-      name: 'Page',
-      meta: {
-        title: '账号一览',
-        role: ['admin', 'yc666']
-      } //页面需要的权限
-    }, 
-    {
-      path: 'directive',
-      component: 'views/permission/directive',
-      name: 'DirectivePermission',
-      meta: {
-        title: '权限指令'
+        path: 'page',
+        component: 'views/permission/page',
+        name: 'Page',
+        meta: {
+          title: '账号一览',
+          role: ['admin', 'yc666']
+        } //页面需要的权限
+      },
+      {
+        path: 'directive',
+        component: 'views/permission/directive',
+        name: 'DirectivePermission',
+        meta: {
+          title: '权限指令'
+        }
+      },
+      {
+        path: 'role',
+        component: 'views/permission/role',
+        name: 'Role',
+        meta: {
+          title: '账号权限设置',
+          roles: ['admin', 'yc666']
+        }
       }
-    },
-    {
-      path: 'role',
-      component:'views/permission/role',
-      name: 'Role',
-      meta: {
-        title: '账号权限设置',
-        roles: ['admin', 'yc666']
-      }
-    }]
+    ]
   },
   // ........................寻医问药............................
-//   medicineRouter,
+  //   medicineRouter,
   // ........................商城商家管理............................
-//   merchantRouter,
+  //   merchantRouter,
   // ........................酒店管理............................
-//   hotelRouter,
+  //   hotelRouter,
 
   // ........................养老机构管理............................
-//   organizationRouter,
+  //   organizationRouter,
   // ........................康养人才管理............................
   {
     path: '/talentMan',
@@ -115,7 +116,7 @@ export const asyncRoutes = [{
     children: [{
         path: 'talentPool',
         name: 'TalentPool',
-        component:'views/ky_talentsRecruitment/talentPool/index',
+        component: 'views/ky_talentsRecruitment/talentPool/index',
         meta: {
           title: '简历/人才库',
         }
@@ -123,7 +124,7 @@ export const asyncRoutes = [{
       {
         path: 'talentRecomment',
         name: 'TalentRecomment',
-        component:'views/ky_talentsRecruitment/talentRecomment/index',
+        component: 'views/ky_talentsRecruitment/talentRecomment/index',
         meta: {
           title: '猎头人才推荐',
         }
@@ -132,7 +133,7 @@ export const asyncRoutes = [{
         path: 'mannReconmment',
         name: 'mannReconmment',
         hidden: true,
-        component:'views/ky_talentsRecruitment/mannReconmment/index',
+        component: 'views/ky_talentsRecruitment/mannReconmment/index',
         meta: {
           title: '手动推荐',
         }
@@ -141,7 +142,7 @@ export const asyncRoutes = [{
         path: 'autoReconmment',
         name: 'autoReconmment',
         hidden: true,
-        component:'views/ky_talentsRecruitment/autoReconmment/index',
+        component: 'views/ky_talentsRecruitment/autoReconmment/index',
         meta: {
           title: '自动推荐',
         }
@@ -156,7 +157,7 @@ export const asyncRoutes = [{
     children: [{
       path: 'index',
       name: 'user',
-      component:'views/ky_user/index',
+      component: 'views/ky_user/index',
       meta: {
         title: '用户管理',
         icon: 'yonghu'
@@ -170,7 +171,7 @@ export const asyncRoutes = [{
     children: [{
       path: 'index',
       name: 'userFeedback',
-      component:'views/ky_userFeedback/index',
+      component: 'views/ky_userFeedback/index',
       meta: {
         title: '用户反馈',
         icon: 'fankui'
@@ -184,7 +185,7 @@ export const asyncRoutes = [{
     children: [{
       path: 'index',
       name: 'version',
-      component:'views/ky_version/index',
+      component: 'views/ky_version/index',
       meta: {
         title: '版本管理',
         icon: 'banben'
@@ -198,7 +199,7 @@ export const asyncRoutes = [{
     children: [{
       path: 'index',
       name: 'finance',
-      component:'views/ky_version/index',
+      component: 'views/ky_version/index',
       meta: {
         title: '财务管理',
         icon: 'finance'
@@ -212,7 +213,7 @@ export const asyncRoutes = [{
     children: [{
       path: 'index',
       name: 'advertising',
-      component:'views/ky_advertising/index',
+      component: 'views/ky_advertising/index',
       meta: {
         title: '广告管理',
         icon: 'guanggao'
@@ -226,7 +227,7 @@ export const asyncRoutes = [{
     children: [{
       path: 'index',
       name: 'conment',
-      component:'views/ky_conment/index',
+      component: 'views/ky_conment/index',
       meta: {
         title: '评论管理',
         icon: 'pinglun'
@@ -240,7 +241,7 @@ export const asyncRoutes = [{
     children: [{
       path: 'index',
       name: 'Distributor',
-      component:'views/ky_distributor/index',
+      component: 'views/ky_distributor/index',
       meta: {
         title: '分销管理',
         icon: '分销商'
@@ -254,7 +255,7 @@ export const asyncRoutes = [{
     children: [{
       path: 'index',
       name: 'Message',
-      component:'views/ky_message/index',
+      component: 'views/ky_message/index',
       meta: {
         title: '消息管理',
         icon: 'message'

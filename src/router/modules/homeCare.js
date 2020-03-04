@@ -13,7 +13,7 @@ const homeCareRouter = {
     [
         {
         path: 'user_stat',
-        name: 'UserStat',
+        name: 'J-UserStat',
         component: () => import('@/views/ky_homeCare/userStat'),
         meta: {
           title: '用户统计',

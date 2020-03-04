@@ -1,4 +1,3 @@
-
 import {
   login,
   logout,
@@ -127,14 +126,14 @@ const actions = {
         reject(error)
       })
     })
-        // return new Promise((resolve, reject) => {
-        //   commit('SET_TOKEN', '')
-        //   commit('SET_NAME', '')
-        //   removeToken()
-        //   removeName()
-        //   resetRouter()
-        //   resolve()
-        // })
+    // return new Promise((resolve, reject) => {
+    //   commit('SET_TOKEN', '')
+    //   commit('SET_NAME', '')
+    //   removeToken()
+    //   removeName()
+    //   resetRouter()
+    //   resolve()
+    // })
   },
 
   // remove token

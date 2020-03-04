@@ -11,14 +11,14 @@ import {
 // create an axios instance
 // 设置默认请求地址，所有请求从这里发起
 const service = axios.create({
-// 模拟接口
-baseURL: process.env.VUE_APP_BASE_API,
-//   本地接口
-//   baseURL: 'http://192.168.1.171:8081',
-// 测试环境接口
-//   baseURL: 'http://120.25.214.5:8081',
-// //   生产环境接口
-//   baseURL: 'http://39.107.33.189:8081',
+  // 模拟接口
+  baseURL: process.env.VUE_APP_BASE_API,
+  //   本地接口
+  //   baseURL: 'http://192.168.1.171:8081',
+  // 测试环境接口
+  //   baseURL: 'http://120.25.214.5:8081',
+  // //   生产环境接口
+  //   baseURL: 'http://39.107.33.189:8081',
 
   timeout: 3000 // request timeout
 })
@@ -26,16 +26,18 @@ baseURL: process.env.VUE_APP_BASE_API,
 // 请求拦截
 service.interceptors.request.use(
   config => {
+    
     if (store.getters.token) {
       config.headers['token'] = getToken()
     }
+
     return config
   },
   error => {
     // do something with request error
     console.log('111', error) // for debug
     return Promise.reject(error)
-  }
+  },
 )
 
 // 响应拦截
@@ -53,8 +55,8 @@ service.interceptors.response.use(
     const res = response.data
     // 如果返回的不是1，就提示error
     // window.console.log('res', res, 'res.code', res.code);
-    if (!res.code){
-        return res
+    if (!res.code) {
+      return res
     }
     if (res.code != 20000) {
       Message({
@@ -62,8 +64,6 @@ service.interceptors.response.use(
         type: 'error',
         duration: 5 * 1000
       })
-
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code == 401 || res.code == 403 || res.code == 404) {
         // to re-login
         MessageBox.confirm('You have been logged out, you can cancel to stay on this page, or log in again', 'Confirm logout', {
@@ -79,11 +79,6 @@ service.interceptors.response.use(
 
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
-    //   Message({
-    //     message: '登陆成功！',
-    //     type: 'success',
-    //     duration: 2 * 1000
-    //   })
       return res
     }
   },

@@ -1,25 +1,14 @@
 <template>
   <div class="app-container">
-    <searchForm
-      :formOptions="formOptions"
-      @onSearch="onSearch"
-    />
+    <searchForm :formOptions="formOptions" @onSearch="onSearch" />
     <!--表格内容栏-->
-        <el-table
-      :key="tableKey"
-      max-height="600"
-      v-loading="listLoading"
-      :data="list"
-      fit
-      highlight-current-row
-      style="width: 100%;"
-    >
-      <el-table-column label="序号" prop="id"  sortable align="center" min-width="80" >
+    <el-table :data="list" :key="tableKey" fit highlight-current-row max-height="600" style="width: 100%;" v-loading="listLoading">
+      <el-table-column align="center" label="序号" min-width="80" prop="id" sortable>
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="用户ID"   min-width="80px" align="center">
+      <el-table-column align="center" label="用户ID" min-width="80px">
         <template slot-scope="scope">
           <span>{{ scope.row.phone }}</span>
         </template>
@@ -40,7 +29,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <pagination :limit.sync="listQuery.limit" :page.sync="listQuery.page" :total="total" @pagination="getList" v-show="total>0" />
   </div>
 </template>
 <script>
@@ -54,7 +43,7 @@ import {
 } from "@/api/searchHistory";
 import KyTable from "@/components/Core/KyTable";
 import searchForm from "@/components/SearchForm";
-import Pagination from '@/components/Pagination'
+import Pagination from "@/components/Pagination";
 export default {
   data() {
     return {
@@ -69,14 +58,14 @@ export default {
       list: null,
       total: 0,
       listLoading: true,
-      listQuery: { 
-          page: 1, 
-          limit: 20,
-          value: undefined,
-          project:undefined,
-          ifHot:undefined,
-          createTime:undefined
-          },
+      listQuery: {
+        page: 1,
+        limit: 20,
+        value: undefined,
+        project: undefined,
+        ifHot: undefined,
+        createTime: undefined
+      },
       pageResult: {}
     };
   },
@@ -86,45 +75,45 @@ export default {
     Pagination
   },
   created() {
-      this.getList()
+    this.getList();
   },
   methods: {
     //   搜索
     onSearch(val) {
       console.log(val);
-      this.listQuery.page = 1
-      this.listQuery.value = val.value
-      this.listQuery.project = val.project
-      this.listQuery.ifHot = val.ifHot
-      this.listQuery.createTime = val.createTime
-      this.getList()
+      this.listQuery.page = 1;
+      this.listQuery.value = val.value;
+      this.listQuery.project = val.project;
+      this.listQuery.ifHot = val.ifHot;
+      this.listQuery.createTime = val.createTime;
+      this.getList();
     },
     // 获取分页数据
-      getList() {
-      this.listLoading = true
+    getList() {
+      this.listLoading = true;
       fetchList(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.total = response.data.total
-        console.log('666',response.data.items);
-        
+        this.list = response.data.items;
+        this.total = response.data.total;
+        console.log("666", response.data.items);
+
         // Just to simulate the time of the request
         setTimeout(() => {
-          this.listLoading = false
-        }, 1.5 * 1000)
-      })
+          this.listLoading = false;
+        }, 1.5 * 1000);
+      });
     },
     // 切换热门和非热门状态
     handleModifyStatus(row, ifHot) {
       this.$message({
-        message: '操作成功',
-        type: 'success'
-      })
-      row.ifHot = ifHot
+        message: "操作成功",
+        type: "success"
+      });
+      row.ifHot = ifHot;
     },
     // 时间格式化
-      	dateFormat(row){
-          	return parseTime(row)
-      	}
+    dateFormat(row) {
+      return parseTime(row);
+    }
   }
 };
 </script>

@@ -10,6 +10,11 @@ for (let i = 0; i < count; i++) {
     userID: '@cname',
     ip: +Mock.Random.date('T'),
     'project|1': ['养老机构', '寻医问药', '居家护理', '人才招聘'],
+    'terminal|1': ['安卓', 'IOS', '微信小程序', 'PC端','H5'],
+    phone: /^1(5|3|7|8)[0-9]{9}$/,
+    'gender|1':['男','女'],
+    'source|1': ['微信推广', '百度广告','好友推荐'],
+    "age|12-80": 12, 
     // createTime: '@now(yyyy-MM-dd)',
     'now|+1': '@now("yyyy-MM-dd")',
     createTime: function () {
@@ -24,6 +29,7 @@ for (let i = 0; i < count; i++) {
     importance: '@integer(1, 3)',
     value: '@title(1, 5)',
     'ifHot|1': ['1','2'],
+    'status|1': ['1','2'],
   }))
 }
 export default [{

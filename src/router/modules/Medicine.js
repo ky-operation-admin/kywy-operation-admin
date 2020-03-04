@@ -4,7 +4,7 @@ import Layout from '@/layout'
 const medicineRouter = {
   path: '/medicine',
   component: Layout,
-  redirect: '/medicine/patient/patientInfo',
+  redirect: '/medicine/user_stat/personal_user',
   name: 'Medicine',
   meta: {
     title: '寻医问药',
@@ -12,62 +12,37 @@ const medicineRouter = {
   },
   children: [
       {
-      path: 'patient',
-      name: 'Patient',
-      component: () => import('@/views/ky_medicine/patient/index'),
-      redirect: '/medicine/patient/patientInfo',
+      path: 'user_stat',
+      name: 'X-UserStat',
+      component: () => import('@/views/ky_medicine/userStat'),
+        redirect: '/medicine/user_stat/personal_user',
       meta: {
         title: '用户统计',
       },
       children: [{
-        path: 'patientInfo',
-        name: 'PatientInfo',
-        component: () => import('@/views/ky_medicine/patient/patientInfo'),
+        path: 'personal_user',
+        name: 'PersonalUser',
+        component: () => import('@/views/ky_medicine/userStat/personalUser'),
         meta: {
-          title: '患者基本信息',
+          title: '个人用户',
         }
       }, {
-        path: 'patientOrder',
-        name: 'PatientOrder',
-        component: () => import('@/views/ky_medicine/doctor/doctorInfo/index'),
+        path: 'doctor_user',
+        name: 'DoctorUser',
+        component: () => import('@/views/ky_medicine/userStat/doctorUser'),
         meta: {
-          title: '患者下单信息',
+          title: '医生用户',
         }
       }, ]
     },
     {
-      path: 'doctor',
-      name: 'Doctor',
-      component: () => import('@/views/ky_medicine/doctor/index'),
-      redirect: '/medicine/doctor/doctorAudit',
+      path: 'doctor_serve',
+      name: 'DoctorServe',
+      component: () => import('@/views/ky_medicine/doctor/doctor_serve'),
       meta: {
         title: '医生服务管理',
       },
-      children: [{
-          path: 'doctorAudit',
-          name: 'DoctorAudit',
-          component: () => import('@/views/ky_medicine/doctor/doctorAudit'),
-          meta: {
-            title: '医生入驻审核',
-          }
-        },
-        {
-          path: 'doctorInfo',
-          name: 'DoctorInfo',
-          component: () => import('@/views/ky_medicine/doctor/doctorInfo/index'),
-          meta: {
-            title: '医生基本信息',
-          }
-        },
-        {
-          path: 'docReorder',
-          name: 'DocReorder',
-          component: () => import('@/views/ky_medicine/message/index'),
-          meta: {
-            title: '医生接单',
-          }
-        }
-      ]
+      
     },
     {
       path: 'need_order',
@@ -115,9 +90,42 @@ const medicineRouter = {
       component: () => import('@/views/ky_medicine/message/index'),
       meta: {
         title: '配置信息',
-      }
+      },
+      children: [{
+        path: 'hospital_config',
+        name: 'HospitalConfig',
+        component: () => import('@/views/ky_medicine/patient/patientInfo'),
+        meta: {
+          title: '医院配置',
+        }
+      },
+       {
+        path: 'unit_config',
+        name: 'UnitConfig',
+        component: () => import('@/views/ky_medicine/doctor/doctorInfo/index'),
+        meta: {
+          title: '科室配置',
+        }
+      }, 
+       {
+        path: 'doctor_title_config',
+        name: 'DoctorTitleConfig',
+        component: () => import('@/views/ky_medicine/doctor/doctorInfo/index'),
+        meta: {
+          title: '医生职称配置',
+        }
+      }, 
+       {
+        path: 'doctor_experience_config',
+        name: 'doctorExperienceConfig',
+        component: () => import('@/views/ky_medicine/doctor/doctorInfo/index'),
+        meta: {
+          title: '医生经验配置',
+        }
+      }, 
+    ]
     },
-    
+
 
   ]
 }

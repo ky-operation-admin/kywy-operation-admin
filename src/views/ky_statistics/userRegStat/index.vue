@@ -1,9 +1,6 @@
 <template>
   <div class="app-container">
-    <searchForm
-      :formOptions="formOptions"
-      @onSearch="onSearch"
-    />
+    <searchForm :formOptions="formOptions" @onSearch="onSearch" />
     <!--表格内容栏-->
     <el-table
       :data="list"
@@ -14,55 +11,19 @@
       style="width: 100%;"
       v-loading="listLoading"
     >
-      <el-table-column
-        align="center"
-        label="用户ID"
-        min-width="80"
-        prop="id"
-        sortable
-      >
+      <el-table-column align="center" label="用户ID" min-width="80" prop="phone" sortable>
         <template slot-scope="scope">
-          <span>{{ scope.row.id }}</span>
+          <span>{{ scope.row.phone }}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        align="center"
-        label="姓名"
-        min-width="80px"
-      >
+      <el-table-column align="center" label="姓名" min-width="80px">
         <template slot-scope="scope">
           <span>{{ scope.row.userID }}</span>
         </template>
       </el-table-column>
-      <el-table-column
-        align="center"
-        label="搜索时间"
-        min-width="100px"
-        prop="createTime"
-        sortable
-      >
+      <el-table-column align="center" label="性别" min-width="100px">
         <template slot-scope="scope">
-          <span>{{dateFormat(scope.row.createTime)}}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        align="center"
-        label="注册终端"
-        min-width="100px"
-        prop="project"
-        sortable
-      >
-        <template slot-scope="scope">
-          <span>{{ scope.row.project }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        align="center"
-        label="性别"
-        min-width="100px"
-      >
-        <template slot-scope="scope">
-          <span>{{ scope.row.value }}</span>
+          <span>{{ scope.row.gender }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -70,49 +31,84 @@
         class-name="status-col"
         label="年龄"
         min-width="100"
-        prop="ifHot"
+        prop="age"
         sortable
       >
-        <template slot-scope="{row}">
-          <el-tag :type="row.ifHot =='1'? 'danger':'info'">
-            <svg-icon
-              icon-class="hot"
-              v-if="row.ifHot=='1'"
-            />
-            {{ row.ifHot=='1'?'热门':'非热门' }}
-          </el-tag>
+        <template slot-scope="scope">
+          <span>{{ scope.row.age }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="注册时间" min-width="100px" prop="createTime" sortable>
+        <template slot-scope="scope">
+          <span>{{dateFormat(scope.row.createTime)}}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="注册终端" min-width="100px" prop="terminal" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.terminal }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="注册来源" min-width="100px" prop="source" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.source }}</span>
         </template>
       </el-table-column>
       <el-table-column
         align="center"
-        label="IP地址"
-        min-width="100px"
-        prop="ip"
+        class-name="status-col"
+        label="实名认证"
+        min-width="100"
+        prop="ifHot"
         sortable
       >
+        <template slot-scope="{row}">
+          <el-tag :type="row.ifHot =='1'? 'success':'info'">
+            <!-- <svg-icon
+              icon-class="hot"
+              v-if="row.ifHot=='1'"
+            />-->
+            {{ row.ifHot=='1'?'已认证':'未认证' }}
+          </el-tag>
+        </template>
+      </el-table-column>
+
+      <el-table-column align="center" label="IP地址" min-width="100px" prop="ip" sortable>
+        <template slot-scope="scope">
+          <span>{{ scope.row.ip }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column align="center" label="头像" min-width="100px" prop="ip" sortable >
         <template slot-scope="scope">
           <span>{{ scope.row.ip }}</span>
         </template>
       </el-table-column>
       <el-table-column
         align="center"
+        class-name="status-col"
+        label="用户状态"
+        min-width="100"
+        prop="status"
+        sortable
+      >
+        <template slot-scope="{row}">
+          <el-tag :type="row.status =='1'? 'success':'danger'">{{ row.status=='1'?'正常':'封禁' }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
         class-name="small-padding fixed-width"
         label="操作"
-        min-width="100"
+        min-width="150"
       >
         <template slot-scope="{row}">
           <el-button
             @click="handleModifyStatus(row,'1')"
             size="mini"
             type="success"
-            v-if="row.ifHot!='1'"
-          >标记热门</el-button>
-          <el-button
-            @click="handleModifyStatus(row,'2')"
-            size="mini"
-            type="danger"
-            v-else
-          >取消热门</el-button>
+            v-if="row.status!='1'"
+          >解封</el-button>
+          <el-button @click="handleModifyStatus(row,'2')" size="mini" type="danger" v-else>封禁</el-button>
+          <el-button size="mini" type="info">查看</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -146,29 +142,30 @@ export default {
           prop: "value",
           element: "el-input"
         },
+
         {
-          label: "所属项目",
-          prop: "project",
-          element: "el-select",
-          options: [
-            { label: "养老机构", value: "养老机构" },
-            { label: "寻医问药", value: "寻医问药" },
-            { label: "居家护理", value: "居家护理" },
-            { label: "人才招聘", value: "人才招聘" }
-          ]
-        },
-        {
-          label: "是否热门",
+          label: "性别",
           prop: "ifHot",
           element: "el-select",
           options: [
-            { label: "是", value: "1" },
-            { label: "否", value: "2" }
+            { label: "男", value: "1" },
+            { label: "女", value: "2" }
+          ]
+        },
+        {
+          label: "年龄",
+          prop: "project",
+          element: "el-select",
+          options: [
+            { label: "12-22", value: "12-22" },
+            { label: "23-35", value: "23-35" },
+            { label: "35-60", value: "35-60" },
+            { label: "60以上", value: "60以上" }
           ]
         },
 
         {
-          label: "提交时间",
+          label: "注册时间",
           prop: "createTime",
           element: "el-date-picker"
         }
